@@ -15,10 +15,18 @@ const videos = [
 ]
 
 export default function HeroVideo() {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(() => 
-    Math.floor(Math.random() * videos.length)
-  )
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [isInitialized, setIsInitialized] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Randomize video on client-side mount
+  useEffect(() => {
+    if (!isInitialized) {
+      const randomIndex = Math.floor(Math.random() * videos.length)
+      setCurrentVideoIndex(randomIndex)
+      setIsInitialized(true)
+    }
+  }, [isInitialized])
 
   const handlePrev = () => {
     setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
@@ -30,11 +38,11 @@ export default function HeroVideo() {
 
   // Reload video when source changes
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && isInitialized) {
       videoRef.current.load()
       videoRef.current.play()
     }
-  }, [currentVideoIndex])
+  }, [currentVideoIndex, isInitialized])
 
   return (
     <section className="min-h-screen relative overflow-hidden">
