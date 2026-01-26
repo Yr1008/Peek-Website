@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import Button from './ui/Button'
 import ProductHuntBadge from './ui/ProductHuntBadge'
@@ -15,22 +15,37 @@ const videos = [
 ]
 
 export default function HeroVideo() {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(() => 
+    Math.floor(Math.random() * videos.length)
+  )
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const handlePrev = () => {
-    setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
+    if (isTransitioning) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
+    }, 150)
   }
 
   const handleNext = () => {
-    setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
+    if (isTransitioning) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
+    }, 150)
   }
 
   // Reload video when source changes
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load()
-      videoRef.current.play()
+      videoRef.current.play().then(() => {
+        setTimeout(() => setIsTransitioning(false), 100)
+      }).catch(() => {
+        setIsTransitioning(false)
+      })
     }
   }, [currentVideoIndex])
 
@@ -38,17 +53,23 @@ export default function HeroVideo() {
     <section className="min-h-screen relative overflow-hidden">
       {/* Background video/gif */}
       <div className="absolute inset-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="/images/hero-street-bg.png"
-        >
-          <source src={videos[currentVideoIndex].src} type="video/mp4" />
-        </video>
+        <AnimatePresence mode="wait">
+          <motion.video
+            key={currentVideoIndex}
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <source src={videos[currentVideoIndex].src} type="video/mp4" />
+          </motion.video>
+        </AnimatePresence>
         
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30" />
       </div>
@@ -72,7 +93,11 @@ export default function HeroVideo() {
             {videos.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentVideoIndex(index)}
+                onClick={() => {
+                  if (isTransitioning || index === currentVideoIndex) return
+                  setIsTransitioning(true)
+                  setTimeout(() => setCurrentVideoIndex(index), 150)
+                }}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentVideoIndex 
                     ? 'bg-peek-orange w-4' 
