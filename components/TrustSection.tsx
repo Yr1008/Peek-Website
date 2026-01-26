@@ -54,7 +54,7 @@ export default function TrustSection() {
           >
             <p className="text-xs font-bold whitespace-nowrap">*blushes* 🥹</p>
           </motion.div>
-          <PeekCharacter size="lg" variant="detective" />
+          <PeekCharacter size="lg" variant="eyes" />
         </div>
       </motion.div>
       
