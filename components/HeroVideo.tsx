@@ -96,9 +96,9 @@ export default function HeroVideo() {
         </div>
       </div>
       
-      <div className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-12 px-6 md:px-8 lg:px-12">
-        <div className="max-w-6xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-12 px-6 md:px-8 lg:px-16">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-28 items-center">
             
             {/* Left side - Content */}
             <motion.div 
