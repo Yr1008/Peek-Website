@@ -196,14 +196,14 @@ export default function HeroVideo() {
                 </span>
               </motion.div>
               
-              {/* Built with love tagline */}
+              {/* Tagline */}
               <motion.p 
                 className="text-xs text-white/50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: 0.36 }}
               >
-                Built with love for people who want to understand their money
+                The difference between tracking your money and understanding yourself
               </motion.p>
               
             </motion.div>

@@ -104,14 +104,14 @@ export default function ImpactSection() {
               </motion.div>
             </motion.div>
             
-            <p className="text-sm md:text-base text-text-muted uppercase tracking-widest mb-4">Real savings</p>
+            <p className="text-sm md:text-base text-text-muted uppercase tracking-widest mb-4">Real clarity</p>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl text-text-primary mb-5">
-              Small changes,
+              When you understand,
               <br />
-              <span className="text-peek-orange">big wins.</span>
+              <span className="text-peek-orange">change follows naturally.</span>
             </h2>
             <p className="text-sm md:text-base text-text-secondary mb-8 leading-relaxed max-w-md">
-              Understanding where your money goes makes saving feel natural.
+              You don't need to spend less to feel better. You need to understand what you're doing and why.
             </p>
             
             {/* Timeframe selector - interactive pills with visual cues */}

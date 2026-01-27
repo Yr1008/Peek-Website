@@ -6,13 +6,13 @@ import { motion } from 'framer-motion'
 const painPoints = [
   { icon: '📊', text: 'Shows what you spent, not why' },
   { icon: '😰', text: 'Vague guilt without clarity' },
-  { icon: '🔄', text: 'Budget → fail → repeat cycle' },
+  { icon: '🔄', text: "You're not bad at budgeting" },
 ]
 
 const solutions = [
   { icon: '💡', text: 'Labels the why: impulse, comfort, intentional', color: 'from-peek-orange-light/50 to-peek-orange-light/20' },
-  { icon: '🎯', text: 'Surfaces patterns you can actually change', color: 'from-peek-purple-soft/50 to-peek-purple-soft/20' },
-  { icon: '🧠', text: 'Learns what matters to you', color: 'from-peek-sky-soft/50 to-peek-sky-soft/20' },
+  { icon: '🎯', text: 'Anxiety relief through clarity, not restriction', color: 'from-peek-purple-soft/50 to-peek-purple-soft/20' },
+  { icon: '🧠', text: 'Money feels clearer, calmer, more intentional', color: 'from-peek-sky-soft/50 to-peek-sky-soft/20' },
 ]
 
 export default function ProblemSection() {

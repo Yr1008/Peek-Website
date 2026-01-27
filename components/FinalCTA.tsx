@@ -86,13 +86,13 @@ export default function FinalCTA() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4 leading-tight">
-              Ready to understand
+              Money that finally
               <br />
-              <span className="text-peek-orange">your money habits?</span>
+              <span className="text-peek-orange">reflects who you are.</span>
             </h2>
             <p className="text-lg text-text-secondary mb-8 max-w-lg mx-auto leading-relaxed">
               Join {METRICS.userCount} people who stopped guessing and started understanding. 
-              When you see clearly, you&apos;ll know what to do.
+              When you see clearly, money feels clearer, calmer, and more intentional.
             </p>
             
             {/* CTA + Trust badges together */}
