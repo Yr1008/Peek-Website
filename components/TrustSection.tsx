@@ -38,24 +38,30 @@ export default function TrustSection() {
     <section className="py-16 md:py-20 lg:py-24 px-6 md:px-8 lg:px-12 relative overflow-hidden bg-warm-beige">
       {/* Peek character listening to testimonials - RIGHT */}
       <motion.div
-        className="absolute right-4 md:right-12 bottom-12 z-10 hidden lg:block"
+        className="absolute right-4 md:right-12 bottom-12 z-10 hidden lg:flex flex-col items-center"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
-        <div className="flex items-center gap-1">
-          <motion.div
-            className="bg-[#007AFF] text-white rounded-2xl rounded-br-sm px-3 py-2 shadow-lg"
-            initial={{ opacity: 0, scale: 0.8, x: 10 }}
-            whileInView={{ opacity: 1, scale: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.3, delay: 0.9 }}
-          >
+        {/* Thought bubble */}
+        <motion.div
+          className="relative mb-1"
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: 0.9 }}
+        >
+          <div className="bg-[#007AFF] text-white rounded-2xl px-3 py-2 shadow-lg">
             <p className="text-xs font-bold whitespace-nowrap">*blushes* 🥹</p>
-          </motion.div>
-          <PeekCharacter size="lg" variant="eyes" />
-        </div>
+          </div>
+          {/* Thought bubble tail */}
+          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
+            <div className="w-2 h-2 bg-[#007AFF] rounded-full" />
+            <div className="w-1 h-1 bg-[#007AFF] rounded-full" />
+          </div>
+        </motion.div>
+        <PeekCharacter size="lg" variant="eyes" />
       </motion.div>
       
       <div className="max-w-5xl mx-auto relative">

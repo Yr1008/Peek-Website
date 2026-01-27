@@ -84,24 +84,32 @@ export default function ImpactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
-            {/* Peek character with blurb - TOP LEFT above content */}
+            {/* Peek character with thought bubble - TOP LEFT above content */}
             <motion.div
-              className="flex items-center gap-1 mb-4"
+              className="flex flex-col items-center mb-4 w-fit"
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              <PeekCharacter size="md" variant="business" />
+              {/* Thought bubble */}
               <motion.div
-                className="bg-[#007AFF] text-white rounded-2xl rounded-bl-sm px-3 py-2 shadow-lg"
-                initial={{ opacity: 0, scale: 0.8, x: -10 }}
-                whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                className="relative mb-1"
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: 0.3 }}
               >
-                <p className="text-xs font-bold whitespace-nowrap">Save more! 💰</p>
+                <div className="bg-[#007AFF] text-white rounded-2xl px-3 py-2 shadow-lg">
+                  <p className="text-xs font-bold whitespace-nowrap">Clarity is power! 💡</p>
+                </div>
+                {/* Thought bubble tail */}
+                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
+                  <div className="w-2 h-2 bg-[#007AFF] rounded-full" />
+                  <div className="w-1 h-1 bg-[#007AFF] rounded-full" />
+                </div>
               </motion.div>
+              <PeekCharacter size="md" variant="business" />
             </motion.div>
             
             <p className="text-sm md:text-base text-text-muted uppercase tracking-widest mb-4">Real clarity</p>

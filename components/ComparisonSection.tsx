@@ -48,22 +48,30 @@ export default function ComparisonSection() {
       </div>
       {/* Peek character looking confident - LEFT side */}
       <motion.div
-        className="absolute left-4 md:left-8 top-20 z-10 hidden lg:flex items-center gap-0.5"
+        className="absolute left-4 md:left-8 top-20 z-10 hidden lg:flex flex-col items-center"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <PeekCharacter size="md" variant="fancy" />
+        {/* Thought bubble - above character */}
         <motion.div
-          className="bg-[#007AFF] text-white rounded-2xl rounded-bl-sm px-3 py-2 shadow-lg"
-          initial={{ opacity: 0, scale: 0.8, x: -10 }}
-          whileInView={{ opacity: 1, scale: 1, x: 0 }}
+          className="relative mb-1"
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.3, delay: 0.7 }}
         >
-          <p className="text-xs font-bold whitespace-nowrap">Top tier 😎</p>
+          <div className="bg-[#007AFF] text-white rounded-2xl px-3 py-2 shadow-lg">
+            <p className="text-xs font-bold whitespace-nowrap">Top tier 😎</p>
+          </div>
+          {/* Thought bubble tail */}
+          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
+            <div className="w-2 h-2 bg-[#007AFF] rounded-full" />
+            <div className="w-1 h-1 bg-[#007AFF] rounded-full" />
+          </div>
         </motion.div>
+        <PeekCharacter size="md" variant="fancy" />
       </motion.div>
       
       <div className="max-w-5xl mx-auto">
