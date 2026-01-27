@@ -1,8 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import Button from './ui/Button'
 import { APP_STORE_URL, CTA_TEXT } from '@/lib/constants'
 
@@ -42,296 +41,130 @@ const features = [
 ]
 
 export default function FeaturesSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  })
-
   return (
-    <section ref={containerRef} className="relative bg-gradient-to-b from-[#FFF9F6] via-[#FFF5F0] to-[#FFFBF9]" style={{ height: '400vh' }}>
-      {/* Sticky container */}
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Soft gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF9F6] via-[#FFF5F0] to-[#FFFBF9]" />
+    <section className="py-16 md:py-24 px-6 md:px-8 relative overflow-hidden bg-gradient-to-b from-[#FFF9F6] via-[#FFF5F0] to-[#FFFBF9]">
+      {/* Ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div 
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(255,180,140,0.25) 0%, rgba(255,200,170,0.1) 40%, transparent 70%)' }}
+        />
+        <div 
+          className="absolute top-1/3 -left-20 w-[500px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(254,135,92,0.15) 0%, transparent 60%)' }}
+        />
+        <div 
+          className="absolute bottom-0 -right-20 w-[500px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(180,160,255,0.12) 0%, transparent 60%)' }}
+        />
+      </div>
+      
+      <div className="max-w-6xl mx-auto relative">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="text-peek-orange font-medium mb-3 text-xs uppercase tracking-[0.2em]">
+            How Peek works
+          </p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-text-primary leading-tight">
+            Understand yourself.
+            <br />
+            <span className="text-peek-orange">Change naturally follows.</span>
+          </h2>
+        </motion.div>
         
-        {/* Ambient orbs */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Phone + Features Grid */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-12">
+          {/* Phone - Left side on desktop, top on mobile */}
           <motion.div 
-            className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(255,180,140,0.35) 0%, rgba(255,200,170,0.15) 40%, transparent 70%)' }}
-          />
-          <motion.div 
-            className="absolute top-1/3 -left-20 w-[500px] h-[500px] rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(254,135,92,0.25) 0%, transparent 60%)' }}
-          />
-          <motion.div 
-            className="absolute top-1/2 -right-20 w-[500px] h-[500px] rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(180,160,255,0.2) 0%, transparent 60%)' }}
-          />
-        </div>
-        
-        {/* Centered content layout */}
-        <div className="relative h-full flex flex-col items-center justify-center px-6 md:px-8">
-          {/* Header - at top */}
-          <motion.div
-            className="text-center mb-6 md:mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="flex justify-center lg:justify-end order-1 lg:order-1"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-peek-orange font-medium mb-2 text-xs uppercase tracking-[0.2em]">
-              How Peek works
-            </p>
-            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl text-text-primary leading-tight">
-              Understand yourself.{' '}
-              <span className="text-peek-orange">Change naturally follows.</span>
-            </h2>
-          </motion.div>
-          
-          {/* Centered Phone */}
-          <div className="relative flex-shrink-0">
-            {/* Soft glow behind phone */}
-            <div 
-              className="absolute -inset-16 rounded-full blur-3xl opacity-40"
-              style={{ background: 'radial-gradient(circle, rgba(254,135,92,0.3) 0%, transparent 70%)' }}
-            />
-            
-            {/* Phone frame */}
-            <div className="relative w-[200px] md:w-[240px] lg:w-[260px]">
-              <div className="relative aspect-[9/19] rounded-[2.5rem] overflow-hidden bg-black p-[3px] shadow-[0_25px_80px_rgba(0,0,0,0.15)]">
-                {/* Screen */}
-                <div className="absolute inset-[3px] rounded-[2.3rem] overflow-hidden bg-white">
-                  {features.map((feature, index) => (
-                    <ScreenImage 
-                      key={feature.id}
-                      src={feature.screenshot}
-                      alt={feature.title}
-                      index={index}
-                      scrollProgress={scrollYProgress}
+            <div className="relative">
+              {/* Soft glow behind phone */}
+              <div 
+                className="absolute -inset-12 rounded-full blur-3xl opacity-40"
+                style={{ background: 'radial-gradient(circle, rgba(254,135,92,0.3) 0%, transparent 70%)' }}
+              />
+              
+              {/* Phone frame */}
+              <div className="relative w-[220px] md:w-[260px] lg:w-[280px]">
+                <div className="relative aspect-[9/19] rounded-[2.5rem] overflow-hidden bg-black p-[3px] shadow-[0_25px_80px_rgba(0,0,0,0.15)]">
+                  {/* Screen */}
+                  <div className="absolute inset-[3px] rounded-[2.3rem] overflow-hidden bg-white">
+                    <Image
+                      src="/images/app-screenshot.png"
+                      alt="Peek App"
+                      fill
+                      className="object-cover"
                     />
-                  ))}
+                  </div>
+                  
+                  {/* Notch */}
+                  <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-[70px] h-[20px] bg-black rounded-b-2xl z-10" />
+                  
+                  {/* Screen shine */}
+                  <div 
+                    className="absolute inset-[3px] rounded-[2.3rem] pointer-events-none"
+                    style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%)' }}
+                  />
                 </div>
-                
-                {/* Notch */}
-                <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-[70px] h-[20px] bg-black rounded-b-2xl z-10" />
-                
-                {/* Screen shine */}
-                <div 
-                  className="absolute inset-[3px] rounded-[2.3rem] pointer-events-none"
-                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%)' }}
-                />
               </div>
             </div>
-          </div>
-          
-          {/* Feature text below phone */}
-          <div className="mt-6 md:mt-8 text-center max-w-md mx-auto h-[140px] md:h-[120px] relative">
-            {features.map((feature, index) => (
-              <FeatureText 
-                key={feature.id} 
-                feature={feature} 
-                index={index}
-                scrollProgress={scrollYProgress}
-              />
-            ))}
-          </div>
-          
-          {/* Progress dots */}
-          <div className="flex gap-3 mt-4 md:mt-6">
-            {features.map((_, index) => (
-              <ScrollDot key={index} index={index} scrollProgress={scrollYProgress} />
-            ))}
-          </div>
-          
-          {/* CTA */}
-          <motion.div
-            className="flex flex-col items-center gap-2 mt-6 md:mt-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            <Button href={APP_STORE_URL} size="large">
-              {CTA_TEXT.primary}
-            </Button>
-            <p className="text-xs text-text-muted">Free on iOS · No credit card needed</p>
           </motion.div>
+          
+          {/* Features - Right side on desktop, bottom on mobile */}
+          <div className="order-2 lg:order-2 space-y-4">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.id}
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-gray-100/80 shadow-sm hover:shadow-md transition-shadow duration-200"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl flex-shrink-0 mt-0.5">{feature.emoji}</span>
+                  <div>
+                    <h3 className="font-heading text-lg text-text-primary mb-1">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-text-secondary leading-relaxed mb-2">
+                      {feature.description}
+                    </p>
+                    <span className="inline-block bg-peek-orange/10 text-peek-orange rounded-full px-3 py-1 text-xs font-medium">
+                      {feature.highlight}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
+        
+        {/* CTA */}
+        <motion.div
+          className="flex flex-col items-center gap-3"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+        >
+          <Button href={APP_STORE_URL} size="large">
+            {CTA_TEXT.primary}
+          </Button>
+          <p className="text-xs text-text-muted">Free on iOS · No credit card needed</p>
+        </motion.div>
       </div>
     </section>
-  )
-}
-
-// Feature text component with fade animations
-function FeatureText({ 
-  feature, 
-  index, 
-  scrollProgress 
-}: { 
-  feature: typeof features[0]
-  index: number
-  scrollProgress: ReturnType<typeof useScroll>['scrollYProgress']
-}) {
-  // Each feature is active in its scroll range (4 features over 400vh = 0.25 each)
-  const ranges = [
-    [0, 0.25],
-    [0.25, 0.5],
-    [0.5, 0.75],
-    [0.75, 1],
-  ]
-  
-  // First text starts visible, last text stays visible at end
-  const opacity = useTransform(
-    scrollProgress,
-    index === 0 
-      ? [0, ranges[index][1] - 0.08, ranges[index][1]]
-      : index === 3
-        ? [ranges[index][0], ranges[index][0] + 0.08, 1]
-        : [ranges[index][0], ranges[index][0] + 0.08, ranges[index][1] - 0.08, ranges[index][1]],
-    index === 0 
-      ? [1, 1, 0]
-      : index === 3
-        ? [0, 1, 1]
-        : [0, 1, 1, 0]
-  )
-  
-  // Slight upward movement on enter
-  const y = useTransform(
-    scrollProgress,
-    index === 0 
-      ? [0, ranges[index][1] - 0.08, ranges[index][1]]
-      : index === 3
-        ? [ranges[index][0], ranges[index][0] + 0.08, 1]
-        : [ranges[index][0], ranges[index][0] + 0.08, ranges[index][1] - 0.08, ranges[index][1]],
-    index === 0 
-      ? [0, 0, -20]
-      : index === 3
-        ? [20, 0, 0]
-        : [20, 0, 0, -20]
-  )
-
-  return (
-    <motion.div
-      className="absolute inset-0 flex flex-col items-center justify-start"
-      style={{ opacity, y }}
-    >
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-2xl">{feature.emoji}</span>
-        <h3 className="font-heading text-xl md:text-2xl text-text-primary">
-          {feature.title}
-        </h3>
-      </div>
-      <p className="text-sm md:text-base text-text-secondary leading-relaxed mb-3 px-4">
-        {feature.description}
-      </p>
-      <span className="inline-block bg-peek-orange/10 text-peek-orange rounded-full px-4 py-1.5 text-sm font-medium">
-        {feature.highlight}
-      </span>
-    </motion.div>
-  )
-}
-
-// Screen image component with scroll-based visibility
-function ScreenImage({
-  src,
-  alt,
-  index,
-  scrollProgress,
-}: {
-  src: string
-  alt: string
-  index: number
-  scrollProgress: ReturnType<typeof useScroll>['scrollYProgress']
-}) {
-  // Each feature is active in its scroll range (4 features over 400vh = 0.25 each)
-  const ranges = [
-    [0, 0.25],
-    [0.25, 0.50],
-    [0.50, 0.75],
-    [0.75, 1],
-  ]
-  
-  // First image starts visible, last image stays visible at end
-  const opacity = useTransform(
-    scrollProgress,
-    index === 0 
-      ? [0, ranges[index][1] - 0.05, ranges[index][1]]
-      : index === 3
-        ? [ranges[index][0], ranges[index][0] + 0.05, 1]
-        : [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
-    index === 0 
-      ? [1, 1, 0]
-      : index === 3
-        ? [0, 1, 1]
-        : [0, 1, 1, 0]
-  )
-
-  return (
-    <motion.div
-      className="absolute inset-0"
-      style={{ opacity }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="object-cover"
-      />
-    </motion.div>
-  )
-}
-
-// Scroll progress dot
-function ScrollDot({
-  index,
-  scrollProgress,
-}: {
-  index: number
-  scrollProgress: ReturnType<typeof useScroll>['scrollYProgress']
-}) {
-  // Each feature is active in its scroll range (4 features over 400vh = 0.25 each)
-  const ranges = [
-    [0, 0.25],
-    [0.25, 0.50],
-    [0.50, 0.75],
-    [0.75, 1],
-  ]
-  
-  // First dot starts active, last dot stays active at end
-  const scale = useTransform(
-    scrollProgress,
-    index === 0 
-      ? [0, ranges[index][1] - 0.05, ranges[index][1]]
-      : index === 3
-        ? [ranges[index][0], ranges[index][0] + 0.05, 1]
-        : [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
-    index === 0 
-      ? [1.5, 1.5, 1]
-      : index === 3
-        ? [1, 1.5, 1.5]
-        : [1, 1.5, 1.5, 1]
-  )
-  
-  const bgOpacity = useTransform(
-    scrollProgress,
-    index === 0 
-      ? [0, ranges[index][1] - 0.05, ranges[index][1]]
-      : index === 3
-        ? [ranges[index][0], ranges[index][0] + 0.05, 1]
-        : [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
-    index === 0 
-      ? [1, 1, 0.3]
-      : index === 3
-        ? [0.3, 1, 1]
-        : [0.3, 1, 1, 0.3]
-  )
-
-  return (
-    <motion.div
-      className="w-2 h-2 rounded-full bg-peek-orange"
-      style={{ scale, opacity: bgOpacity }}
-    />
   )
 }
