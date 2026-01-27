@@ -183,7 +183,7 @@ export default function SocialProof() {
           <Button href={APP_STORE_URL} size="large">
             {CTA_TEXT.primary}
           </Button>
-          <p className="text-xs text-text-muted">Free on iOS · No credit card needed</p>
+          <p className="text-xs text-text-muted">Free on iOS</p>
         </motion.div>
       </div>
     </section>

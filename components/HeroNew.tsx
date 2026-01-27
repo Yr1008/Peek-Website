@@ -94,7 +94,7 @@ export default function HeroNew() {
                   Try Peek Free
                 </Button>
                 <p className="text-sm text-text-muted">
-                  No credit card · 2 min setup
+                  Free on iOS · 2 min setup
                 </p>
               </motion.div>
               

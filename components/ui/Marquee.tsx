@@ -66,7 +66,7 @@ const defaultBadges: TrustBadge[] = [
   { icon: '⭐', text: '4.9 App Store rating' },
   { icon: '✓', text: 'Cancel anytime' },
   { icon: '🛡️', text: 'Secured by Plaid' },
-  { icon: '💳', text: 'No credit card needed' },
+  { icon: '🎯', text: 'Zero judgment' },
   { icon: '📱', text: 'Free on iOS' },
   { icon: '🧠', text: 'AI-powered insights' },
   { icon: '❤️', text: 'Loved by 50K+ users' },
