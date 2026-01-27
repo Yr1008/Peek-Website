@@ -1,153 +1,232 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { useRef, useState } from 'react'
 import Button from './ui/Button'
+import SplitText from './ui/SplitText'
 import { APP_STORE_URL, CTA_TEXT } from '@/lib/constants'
 
 const features = [
   {
     id: 'feed',
-    emoji: '📱',
-    title: '5 minutes a day',
-    description: 'No spreadsheets. No overwhelm. Just the moments worth noticing—an impulse buy, a habit forming, a subscription you forgot.',
-    highlight: 'Only what matters',
+    emoji: '✨',
+    title: 'Your daily check-in',
+    description: 'Quick swipes, zero judgment. See what you spent and how it made you feel.',
+    highlight: 'Takes 2 min',
     screenshot: '/images/app-screenshot.png',
   },
   {
     id: 'labeling',
-    emoji: '🏷️',
-    title: 'Know the why, not just the what',
-    description: 'Your bank shows what you spent. Peek shows why—the stress takeout, the celebration dinner, the autopilot coffee run.',
-    highlight: 'Impulse • Intentional • Autopilot',
+    emoji: '🎯',
+    title: 'Spot the patterns',
+    description: 'That late-night Amazon order? Stress shopping. Sunday brunch? Self-care. Finally see the why.',
+    highlight: 'Impulse vs intentional',
     screenshot: '/images/app-screenshot-insights.png',
   },
   {
     id: 'experiments',
-    emoji: '🧪',
-    title: 'Tiny experiments, real change',
-    description: 'Skip the strict budgets. Try small tests instead: pause an impulse for 48 hours, swap takeout for something you actually want.',
-    highlight: 'Change that sticks',
+    emoji: '💅',
+    title: 'Goals that don\'t suck',
+    description: 'No boring budgets. Just small challenges like "wait 24hrs before checkout" that actually work.',
+    highlight: 'Real results',
     screenshot: '/images/app-screenshot-goals.png',
   },
   {
     id: 'story',
-    emoji: '📖',
-    title: 'Your money, your story',
-    description: 'Watch patterns emerge over time. "$647 on Food & Dining" becomes a story you actually recognize—and can change.',
-    highlight: 'See the bigger picture',
+    emoji: '💬',
+    title: 'Your AI bestie',
+    description: 'Ask anything about your money. Get honest answers without the lecture from your parents.',
+    highlight: 'No judgment zone',
     screenshot: '/images/app-screenshot-chat.png',
   },
 ]
 
+// Split features into left and right columns
+const leftFeatures = features.filter((_, i) => i % 2 === 0)
+const rightFeatures = features.filter((_, i) => i % 2 === 1)
+
 export default function FeaturesSection() {
+  const [activeFeature, setActiveFeature] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+  
+  // Parallax transforms for ambient orbs
+  const orbY1 = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const orbY2 = useTransform(scrollYProgress, [0, 1], [50, -150])
+  const orbY3 = useTransform(scrollYProgress, [0, 1], [80, -80])
+  
   return (
-    <section className="py-16 md:py-24 px-6 md:px-8 relative overflow-hidden bg-gradient-to-b from-[#FFF9F6] via-[#FFF5F0] to-[#FFFBF9]">
-      {/* Ambient orbs */}
+    <section ref={sectionRef} className="py-16 md:py-24 px-6 md:px-8 relative overflow-hidden bg-gradient-to-b from-[#FFF9F6] via-[#FFF5F0] to-[#FFFBF9]">
+      {/* Ambient orbs with parallax */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div 
+        <motion.div 
           className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(255,180,140,0.25) 0%, rgba(255,200,170,0.1) 40%, transparent 70%)' }}
+          style={{ 
+            background: 'radial-gradient(circle, rgba(255,180,140,0.25) 0%, rgba(255,200,170,0.1) 40%, transparent 70%)',
+            y: orbY1
+          }}
         />
-        <div 
+        <motion.div 
           className="absolute top-1/3 -left-20 w-[500px] h-[500px] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(254,135,92,0.15) 0%, transparent 60%)' }}
+          style={{ 
+            background: 'radial-gradient(circle, rgba(254,135,92,0.15) 0%, transparent 60%)',
+            y: orbY2
+          }}
         />
-        <div 
+        <motion.div 
           className="absolute bottom-0 -right-20 w-[500px] h-[500px] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(180,160,255,0.12) 0%, transparent 60%)' }}
+          style={{ 
+            background: 'radial-gradient(circle, rgba(180,160,255,0.12) 0%, transparent 60%)',
+            y: orbY3
+          }}
         />
       </div>
       
-      <div className="max-w-6xl mx-auto relative">
+      <div className="max-w-7xl mx-auto relative">
         {/* Header */}
         <motion.div
           className="text-center mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
-          <p className="text-peek-orange font-medium mb-3 text-xs uppercase tracking-[0.2em]">
-            How Peek works
-          </p>
+          <motion.p 
+            className="text-peek-orange font-medium mb-3 text-xs uppercase tracking-[0.2em]"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+          >
+            How it works
+          </motion.p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-text-primary leading-tight">
-            Understand yourself.
+            <SplitText animation="fadeUp" staggerDelay={0.04}>
+              Finally get your money.
+            </SplitText>
             <br />
-            <span className="text-peek-orange">Change naturally follows.</span>
+            <span className="text-peek-orange">
+              <SplitText animation="fadeUp" delay={0.2} staggerDelay={0.04}>
+                Without the guilt trip.
+              </SplitText>
+            </span>
           </h2>
         </motion.div>
         
-        {/* Phone + Features Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-12">
-          {/* Phone - Left side on desktop, top on mobile */}
+        {/* Three column layout: Features - Phone - Features */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 lg:gap-8 items-center mb-12">
+          
+          {/* Left Features */}
+          <div className="space-y-4 order-2 lg:order-1">
+            {leftFeatures.map((feature) => {
+              const featureIndex = features.findIndex(f => f.id === feature.id)
+              const isActive = activeFeature === featureIndex
+              
+              return (
+                <FeatureCard
+                  key={feature.id}
+                  feature={feature}
+                  isActive={isActive}
+                  onClick={() => setActiveFeature(featureIndex)}
+                  align="right"
+                  index={featureIndex}
+                />
+              )
+            })}
+          </div>
+          
+          {/* Center Phone */}
           <motion.div 
-            className="flex justify-center lg:justify-end order-1 lg:order-1"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="flex justify-center order-1 lg:order-2"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <div className="relative">
               {/* Soft glow behind phone */}
-              <div 
-                className="absolute -inset-12 rounded-full blur-3xl opacity-40"
-                style={{ background: 'radial-gradient(circle, rgba(254,135,92,0.3) 0%, transparent 70%)' }}
+              <motion.div 
+                className="absolute -inset-16 rounded-full blur-3xl opacity-50"
+                style={{ background: 'radial-gradient(circle, rgba(254,135,92,0.35) 0%, transparent 70%)' }}
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
               
               {/* Phone frame */}
-              <div className="relative w-[220px] md:w-[260px] lg:w-[280px]">
-                <div className="relative aspect-[9/19] rounded-[2.5rem] overflow-hidden bg-black p-[3px] shadow-[0_25px_80px_rgba(0,0,0,0.15)]">
-                  {/* Screen */}
+              <div className="relative w-[240px] md:w-[280px] lg:w-[300px]">
+                <div className="relative aspect-[9/19] rounded-[2.5rem] overflow-hidden bg-black p-[3px] shadow-[0_25px_80px_rgba(0,0,0,0.2)]">
+                  {/* Screen with animated transitions */}
                   <div className="absolute inset-[3px] rounded-[2.3rem] overflow-hidden bg-white">
-                    <Image
-                      src="/images/app-screenshot.png"
-                      alt="Peek App"
-                      fill
-                      className="object-cover"
-                    />
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={features[activeFeature].id}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        className="absolute inset-0"
+                      >
+                        <Image
+                          src={features[activeFeature].screenshot}
+                          alt={features[activeFeature].title}
+                          fill
+                          className="object-cover"
+                        />
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
                   
                   {/* Notch */}
-                  <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-[70px] h-[20px] bg-black rounded-b-2xl z-10" />
+                  <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-[80px] h-[24px] bg-black rounded-b-2xl z-10" />
                   
                   {/* Screen shine */}
                   <div 
-                    className="absolute inset-[3px] rounded-[2.3rem] pointer-events-none"
-                    style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%)' }}
+                    className="absolute inset-[3px] rounded-[2.3rem] pointer-events-none z-20"
+                    style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%)' }}
                   />
                 </div>
+              </div>
+              
+              {/* Feature indicator dots */}
+              <div className="flex justify-center gap-2 mt-6">
+                {features.map((_, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => setActiveFeature(index)}
+                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                      activeFeature === index ? 'bg-peek-orange' : 'bg-gray-300'
+                    }`}
+                    whileHover={{ scale: 1.3 }}
+                    whileTap={{ scale: 0.9 }}
+                    animate={activeFeature === index ? { scale: [1, 1.3, 1] } : {}}
+                    transition={{ duration: 0.3 }}
+                  />
+                ))}
               </div>
             </div>
           </motion.div>
           
-          {/* Features - Right side on desktop, bottom on mobile */}
-          <div className="order-2 lg:order-2 space-y-4">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.id}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-gray-100/80 shadow-sm hover:shadow-md transition-shadow duration-200"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <div className="flex items-start gap-4">
-                  <span className="text-2xl flex-shrink-0 mt-0.5">{feature.emoji}</span>
-                  <div>
-                    <h3 className="font-heading text-lg text-text-primary mb-1">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-text-secondary leading-relaxed mb-2">
-                      {feature.description}
-                    </p>
-                    <span className="inline-block bg-peek-orange/10 text-peek-orange rounded-full px-3 py-1 text-xs font-medium">
-                      {feature.highlight}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          {/* Right Features */}
+          <div className="space-y-4 order-3 lg:order-3">
+            {rightFeatures.map((feature) => {
+              const featureIndex = features.findIndex(f => f.id === feature.id)
+              const isActive = activeFeature === featureIndex
+              
+              return (
+                <FeatureCard
+                  key={feature.id}
+                  feature={feature}
+                  isActive={isActive}
+                  onClick={() => setActiveFeature(featureIndex)}
+                  align="left"
+                  index={featureIndex}
+                />
+              )
+            })}
           </div>
         </div>
         
@@ -166,5 +245,78 @@ export default function FeaturesSection() {
         </motion.div>
       </div>
     </section>
+  )
+}
+
+// Feature Card Component
+function FeatureCard({ 
+  feature, 
+  isActive, 
+  onClick, 
+  align,
+  index
+}: { 
+  feature: typeof features[0]
+  isActive: boolean
+  onClick: () => void
+  align: 'left' | 'right'
+  index: number
+}) {
+  return (
+    <motion.div
+      onClick={onClick}
+      className={`
+        relative p-5 rounded-2xl cursor-pointer transition-all duration-300
+        ${isActive 
+          ? 'bg-white shadow-lg border-2 border-peek-orange/30' 
+          : 'bg-white/60 backdrop-blur-sm border border-gray-100/80 shadow-sm hover:bg-white/80'
+        }
+        ${align === 'right' ? 'lg:text-right' : 'lg:text-left'}
+      `}
+      initial={{ opacity: 0, x: align === 'right' ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      whileHover={{ scale: 1.02, y: -2 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      {/* Active indicator line */}
+      {isActive && (
+        <motion.div
+          className={`absolute top-1/2 -translate-y-1/2 w-1 h-12 bg-peek-orange rounded-full ${
+            align === 'right' ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'
+          }`}
+          layoutId="activeIndicator"
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        />
+      )}
+      
+      <div className={`flex items-start gap-3 ${align === 'right' ? 'lg:flex-row-reverse' : ''}`}>
+        <motion.span 
+          className="text-2xl flex-shrink-0"
+          animate={isActive ? { scale: [1, 1.2, 1], rotate: [0, -5, 5, 0] } : {}}
+          transition={{ duration: 0.4 }}
+        >
+          {feature.emoji}
+        </motion.span>
+        <div>
+          <h3 className={`font-heading text-base md:text-lg mb-1 ${
+            isActive ? 'text-peek-orange' : 'text-text-primary'
+          }`}>
+            {feature.title}
+          </h3>
+          <p className="text-xs md:text-sm text-text-secondary leading-relaxed mb-2">
+            {feature.description}
+          </p>
+          <span className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${
+            isActive 
+              ? 'bg-peek-orange text-white' 
+              : 'bg-peek-orange/10 text-peek-orange'
+          }`}>
+            {feature.highlight}
+          </span>
+        </div>
+      </div>
+    </motion.div>
   )
 }

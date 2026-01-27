@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Button from './ui/Button'
+import { TrustMarquee } from './ui/Marquee'
 import { METRICS, APP_STORE_URL, CTA_TEXT } from '@/lib/constants'
 
 const testimonials = [
@@ -110,6 +111,17 @@ export default function SocialProof() {
               </p>
             </motion.div>
           ))}
+        </motion.div>
+        
+        {/* Trust badges marquee */}
+        <motion.div
+          className="mb-12 -mx-6 md:-mx-8 lg:-mx-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <TrustMarquee className="py-4" />
         </motion.div>
         
         {/* Stats bar */}

@@ -1,7 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 const painPoints = [
   { icon: '📊', text: 'Shows what you spent, not why' },
@@ -16,9 +17,28 @@ const solutions = [
 ]
 
 export default function ProblemSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+  
+  // Subtle parallax for decorative elements
+  const decorY = useTransform(scrollYProgress, [0, 1], [30, -30])
+  
   return (
-    <section className="py-16 md:py-20 lg:py-24 px-6 md:px-8 lg:px-12 relative overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+    <section ref={sectionRef} className="py-16 md:py-20 lg:py-24 px-6 md:px-8 lg:px-12 relative overflow-hidden">
+      {/* Subtle background parallax decoration */}
+      <motion.div 
+        className="absolute top-20 right-10 w-32 h-32 rounded-full bg-peek-orange/5 blur-3xl pointer-events-none"
+        style={{ y: decorY }}
+      />
+      <motion.div 
+        className="absolute bottom-20 left-10 w-40 h-40 rounded-full bg-peek-purple-soft/10 blur-3xl pointer-events-none"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [-20, 40]) }}
+      />
+      
+      <div className="max-w-5xl mx-auto relative">
         <motion.div
           className="text-center mb-10"
           initial={{ opacity: 0, y: 20 }}

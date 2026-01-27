@@ -35,9 +35,11 @@ export function GlassCard({
       `}
       whileHover={hover ? {
         scale: 1.02,
+        y: -4,
         boxShadow: '0 16px 48px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.6)'
       } : undefined}
-      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+      whileTap={hover ? { scale: 0.99 } : undefined}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       {children}
     </motion.div>
@@ -69,9 +71,11 @@ export function WarmGlassCard({
       `}
       whileHover={hover ? {
         scale: 1.02,
-        boxShadow: '0 20px 50px rgba(254, 135, 92, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5)'
+        y: -4,
+        boxShadow: '0 20px 50px rgba(254, 135, 92, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.5)'
       } : undefined}
-      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+      whileTap={hover ? { scale: 0.99 } : undefined}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       {children}
     </motion.div>
@@ -108,8 +112,9 @@ export function GlowGlassCard({
         ${glowStyles[glowColor]}
         ${className}
       `}
-      whileHover={{ scale: 1.01 }}
-      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+      whileHover={{ scale: 1.02, y: -3 }}
+      whileTap={{ scale: 0.99 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       {children}
     </motion.div>

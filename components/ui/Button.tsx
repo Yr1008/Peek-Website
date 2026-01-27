@@ -21,10 +21,10 @@ export default function Button({
   icon,
 }: ButtonProps) {
 
-  const baseStyles = 'inline-flex items-center justify-center gap-2 font-body font-semibold rounded-full transition-all duration-300 whitespace-nowrap'
+  const baseStyles = 'inline-flex items-center justify-center gap-2 font-body font-semibold rounded-full transition-all duration-300 whitespace-nowrap relative overflow-hidden'
   
   const variants = {
-    primary: 'bg-peek-orange text-white shadow-lg shadow-peek-orange/25 hover:shadow-xl hover:shadow-peek-orange/30 hover:bg-peek-orange-dark',
+    primary: 'bg-peek-orange text-white shadow-lg shadow-peek-orange/25 hover:shadow-xl hover:shadow-peek-orange/35 hover:bg-peek-orange-dark',
     secondary: 'bg-white text-text-primary border border-gray-200 hover:border-gray-300 hover:bg-gray-50 shadow-sm hover:shadow-md',
     ghost: 'bg-transparent text-text-secondary hover:text-text-primary hover:bg-gray-100/50'
   }
@@ -37,11 +37,22 @@ export default function Button({
 
   const combinedStyles = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`
 
+  // Enhanced micro-interactions with spring physics
   const motionProps = {
     className: combinedStyles,
-    whileHover: { scale: 1.02 },
-    whileTap: { scale: 0.98 },
-    transition: { duration: 0.15, ease: 'easeOut' },
+    whileHover: { 
+      scale: 1.03,
+      y: -2,
+    },
+    whileTap: { 
+      scale: 0.97,
+      y: 0,
+    },
+    transition: { 
+      type: "spring",
+      stiffness: 400,
+      damping: 17,
+    },
   }
 
   const content = (

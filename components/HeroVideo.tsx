@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import Button from './ui/Button'
 import ProductHuntBadge from './ui/ProductHuntBadge'
@@ -14,10 +14,61 @@ const videos = [
   { src: '/videos/hero-bg.mp4', label: 'Street Scene' },
 ]
 
+// Staggered animation variants for container
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+// Variants for individual items
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+}
+
+// Variants for headline words (more dramatic)
+const wordVariants = {
+  hidden: { opacity: 0, y: 30, rotateX: -20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+}
+
 export default function HeroVideo() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const [isInitialized, setIsInitialized] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  
+  // Parallax effect for hero section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  })
+  
+  // Subtle parallax on video background (slower than scroll)
+  const videoY = useTransform(scrollYProgress, [0, 1], [0, 150])
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 50])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3])
 
   // Randomize video on client-side mount
   useEffect(() => {
@@ -37,9 +88,9 @@ export default function HeroVideo() {
   }, [currentVideoIndex, isInitialized])
 
   return (
-    <section className="min-h-screen relative overflow-hidden">
-      {/* Background video/gif */}
-      <div className="absolute inset-0">
+    <section ref={sectionRef} className="min-h-screen relative overflow-hidden">
+      {/* Background video/gif with parallax */}
+      <motion.div className="absolute inset-0" style={{ y: videoY }}>
         <video
           ref={videoRef}
           autoPlay
@@ -55,72 +106,77 @@ export default function HeroVideo() {
       </div>
       
       
-      <div className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-12 px-6 md:px-8 lg:px-16">
+      <motion.div 
+        className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-12 px-6 md:px-8 lg:px-16"
+        style={{ y: contentY, opacity }}
+      >
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-28 items-center">
             
-            {/* Left side - Content */}
+            {/* Left side - Content with staggered animations */}
             <motion.div 
               className="relative"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
               {/* Product Hunt Badge */}
-              <motion.div
-                className="mb-4"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
+              <motion.div className="mb-4" variants={itemVariants}>
                 <ProductHuntBadge />
               </motion.div>
               
               {/* Social proof - authentic */}
               <motion.div 
                 className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-3 py-1.5 mb-5"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
+                variants={itemVariants}
               >
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-peek-orange text-xs">★</span>
+                    <motion.span 
+                      key={i} 
+                      className="text-peek-orange text-xs"
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 + i * 0.05, duration: 0.3 }}
+                    >
+                      ★
+                    </motion.span>
                   ))}
                 </div>
                 <span className="text-xs text-white/90">{METRICS.appRating} · {METRICS.downloads} downloads</span>
               </motion.div>
               
-              {/* Main headline - punchy, specific */}
+              {/* Main headline - staggered word reveal */}
               <motion.h1 
                 className="font-heading text-4xl sm:text-5xl md:text-6xl text-white mb-5 leading-[1.1] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
+                variants={itemVariants}
               >
-                Know the why
+                <motion.span 
+                  className="inline-block"
+                  variants={wordVariants}
+                >
+                  Know the why
+                </motion.span>
                 <br />
-                <span className="text-peek-orange drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">behind every dollar.</span>
+                <motion.span 
+                  className="text-peek-orange drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] inline-block"
+                  variants={wordVariants}
+                >
+                  behind every dollar.
+                </motion.span>
               </motion.h1>
               
               {/* Value prop - specific, benefit-focused */}
               <motion.p 
                 className="text-lg md:text-xl text-white/90 mb-6 leading-relaxed max-w-md drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)]"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.25 }}
+                variants={itemVariants}
               >
                 Not just what you spent, but which were impulse, which were intentional, and which were autopilot.
                 <span className="text-white font-medium"> Understanding changes everything.</span>
               </motion.p>
               
               {/* CTA - action-oriented */}
-              <motion.div 
-                className="mb-5"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.28 }}
-              >
+              <motion.div className="mb-5" variants={itemVariants}>
                 <Button href={APP_STORE_URL} size="large">
                   {CTA_TEXT.primary}
                 </Button>
@@ -129,9 +185,7 @@ export default function HeroVideo() {
               {/* Trust badges row */}
               <motion.div
                 className="inline-flex flex-wrap items-center gap-2 md:gap-3 mb-5 bg-white/10 backdrop-blur-md rounded-2xl md:rounded-full px-4 md:px-5 py-2 md:py-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.32 }}
+                variants={itemVariants}
               >
                 <span className="flex items-center gap-1.5 text-[10px] md:text-xs text-white/90 whitespace-nowrap">
                   <span className="text-green-400">✓</span> Cancel anytime
@@ -147,30 +201,25 @@ export default function HeroVideo() {
               </motion.div>
               
               {/* Tagline */}
-              <motion.p 
-                className="text-xs text-white/50"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.36 }}
-              >
+              <motion.p className="text-xs text-white/50" variants={itemVariants}>
                 The difference between tracking your money and understanding yourself
               </motion.p>
               
             </motion.div>
             
-            {/* Right side - Phone */}
+            {/* Right side - Phone with staggered floating elements */}
             <motion.div 
               className="relative"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <div className="relative mx-auto max-w-[200px] lg:max-w-[220px]">
                 <motion.div 
                   className="relative"
-                  initial={{ y: 20 }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
                 >
                   {/* Phone frame */}
                   <div className="relative aspect-[9/19] rounded-[2rem] overflow-hidden shadow-2xl bg-black p-1">
@@ -185,16 +234,29 @@ export default function HeroVideo() {
                     <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full z-10" />
                   </div>
                   
-                  {/* Floating Peek character */}
+                  {/* Floating Peek character with breathing animation */}
                   <motion.div
                     className="absolute -top-10 -right-10 w-30 h-30 z-20"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.5 }}
+                    initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: 0.6,
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 15
+                    }}
                   >
                     <motion.div
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                      animate={{ 
+                        y: [0, -8, 0],
+                        rotate: [0, 2, 0, -2, 0]
+                      }}
+                      transition={{ 
+                        duration: 4, 
+                        repeat: Infinity, 
+                        ease: 'easeInOut' 
+                      }}
                     >
                       <Image
                         src="/images/13.png"
@@ -209,9 +271,16 @@ export default function HeroVideo() {
                   {/* Floating insight card - emotional labeling */}
                   <motion.div
                     className="absolute -left-20 top-16 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-xl"
-                    initial={{ opacity: 0, x: 20, scale: 0.9 }}
+                    initial={{ opacity: 0, x: 30, scale: 0.8 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.55 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: 0.7,
+                      type: "spring",
+                      stiffness: 150,
+                      damping: 12
+                    }}
+                    whileHover={{ scale: 1.05, y: -2 }}
                   >
                     <p className="text-xs font-semibold text-text-primary">🎯 Intentional</p>
                     <p className="text-lg font-bold text-peek-orange">$412</p>
@@ -221,9 +290,16 @@ export default function HeroVideo() {
                   {/* Floating savings card */}
                   <motion.div
                     className="absolute -right-14 top-1/3 bg-green-50 rounded-2xl px-4 py-3 shadow-xl border border-green-100"
-                    initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                    initial={{ opacity: 0, x: -30, scale: 0.8 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.65 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: 0.85,
+                      type: "spring",
+                      stiffness: 150,
+                      damping: 12
+                    }}
+                    whileHover={{ scale: 1.05, y: -2 }}
                   >
                     <p className="text-xs font-semibold text-green-700">You saved</p>
                     <p className="text-lg font-bold text-green-600">$340</p>
@@ -236,7 +312,7 @@ export default function HeroVideo() {
             
           </div>
         </div>
-      </div>
+      </motion.div>
       
       {/* Scroll indicator */}
       <motion.div

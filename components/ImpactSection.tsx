@@ -4,6 +4,7 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import PeekCharacter from './ui/PeekCharacter'
 import Button from './ui/Button'
+import SplitText from './ui/SplitText'
 import { APP_STORE_URL, CTA_TEXT } from '@/lib/constants'
 
 const timeframes = [
@@ -114,9 +115,15 @@ export default function ImpactSection() {
             
             <p className="text-sm md:text-base text-text-muted uppercase tracking-widest mb-4">Real clarity</p>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl text-text-primary mb-5">
-              When you understand,
+              <SplitText animation="slideUp" staggerDelay={0.05}>
+                When you understand,
+              </SplitText>
               <br />
-              <span className="text-peek-orange">change follows naturally.</span>
+              <span className="text-peek-orange">
+                <SplitText animation="slideUp" delay={0.3} staggerDelay={0.05}>
+                  change follows naturally.
+                </SplitText>
+              </span>
             </h2>
             <p className="text-sm md:text-base text-text-secondary mb-8 leading-relaxed max-w-md">
               You don't need to spend less to feel better. You need to understand what you're doing and why.
