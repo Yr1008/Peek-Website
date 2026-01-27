@@ -28,14 +28,6 @@ export default function HeroVideo() {
     }
   }, [isInitialized])
 
-  const handlePrev = () => {
-    setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
-  }
-
-  const handleNext = () => {
-    setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
-  }
-
   // Reload video when source changes
   useEffect(() => {
     if (videoRef.current && isInitialized) {
@@ -62,48 +54,6 @@ export default function HeroVideo() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30" />
       </div>
       
-      {/* Video Selector Control Panel */}
-      <div className="absolute bottom-24 right-6 z-20">
-        <div className="bg-black/50 backdrop-blur-md rounded-2xl px-4 py-3 flex items-center gap-3">
-          {/* Prev button */}
-          <button
-            onClick={handlePrev}
-            className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-            aria-label="Previous video"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 12L6 8l4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          
-          {/* Dots */}
-          <div className="flex items-center gap-2">
-            {videos.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentVideoIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentVideoIndex 
-                    ? 'bg-peek-orange w-4' 
-                    : 'bg-white/40 hover:bg-white/60'
-                }`}
-                aria-label={`Select video ${index + 1}`}
-              />
-            ))}
-          </div>
-          
-          {/* Next button */}
-          <button
-            onClick={handleNext}
-            className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-            aria-label="Next video"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 4l4 4-4 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
       
       <div className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-12 px-6 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto w-full">
