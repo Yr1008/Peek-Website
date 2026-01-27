@@ -12,8 +12,8 @@ export const METRICS = {
 export const APP_STORE_URL = 'https://apps.apple.com/us/app/peek-ai-personal-finance-app/id6742875016'
 
 export const CTA_TEXT = {
-  primary: "Try Peek for Free",
-  secondary: 'Try Peek',
-  mobile: 'Try Peek',
-  navbar: 'Try Free',
+  primary: "Get Started Free",
+  secondary: 'Learn More',
+  mobile: 'Get Started',
+  navbar: 'Get Started',
 } as const

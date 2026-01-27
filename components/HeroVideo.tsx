@@ -128,20 +128,20 @@ export default function HeroVideo() {
               
               {/* Trust badges row */}
               <motion.div
-                className="inline-flex flex-wrap items-center gap-3 mb-5 bg-white/10 backdrop-blur-md rounded-full px-5 py-3"
+                className="inline-flex flex-wrap items-center gap-2 md:gap-3 mb-5 bg-white/10 backdrop-blur-md rounded-2xl md:rounded-full px-4 md:px-5 py-2 md:py-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: 0.32 }}
               >
-                <span className="flex items-center gap-1.5 text-xs text-white/90">
+                <span className="flex items-center gap-1.5 text-[10px] md:text-xs text-white/90 whitespace-nowrap">
                   <span className="text-green-400">✓</span> Cancel anytime
                 </span>
-                <span className="w-px h-4 bg-white/20" />
-                <span className="flex items-center gap-1.5 text-xs text-white/90">
+                <span className="w-px h-3 md:h-4 bg-white/20 hidden sm:block" />
+                <span className="flex items-center gap-1.5 text-[10px] md:text-xs text-white/90 whitespace-nowrap">
                   <span>🔒</span> Secured by Plaid
                 </span>
-                <span className="w-px h-4 bg-white/20" />
-                <span className="flex items-center gap-1.5 text-xs text-white/90">
+                <span className="w-px h-3 md:h-4 bg-white/20 hidden sm:block" />
+                <span className="flex items-center gap-1.5 text-[10px] md:text-xs text-white/90 whitespace-nowrap">
                   <span className="text-yellow-400">⭐</span> {METRICS.userCount} users
                 </span>
               </motion.div>

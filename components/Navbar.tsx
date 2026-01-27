@@ -38,7 +38,7 @@ export default function Navbar() {
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-peek-orange text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-peek-orange-dark transition-colors duration-200 shadow-sm"
+            className="bg-peek-orange text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-peek-orange-dark transition-colors duration-200 shadow-sm whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >

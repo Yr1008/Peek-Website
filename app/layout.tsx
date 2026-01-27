@@ -21,7 +21,6 @@ export const metadata: Metadata = {
     title: 'Peek - Stop wondering where your money went',
     description: 'Peek shows you the real story behind your spending. No budgets. No judgment. Just clarity.',
   },
-  themeColor: '#FE875C',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -34,6 +33,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   viewportFit: 'cover',
+  themeColor: '#FE875C',
 }
 
 export default function RootLayout({

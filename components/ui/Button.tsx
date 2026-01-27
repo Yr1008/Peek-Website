@@ -6,9 +6,10 @@ import { motion } from 'framer-motion'
 interface ButtonProps {
   children: React.ReactNode
   href?: string
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'default' | 'large' | 'medium'
   className?: string
+  icon?: React.ReactNode
 }
 
 export default function Button({ 
@@ -17,29 +18,38 @@ export default function Button({
   variant = 'primary', 
   size = 'default',
   className = '',
+  icon,
 }: ButtonProps) {
 
-  const baseStyles = 'inline-flex items-center justify-center font-body font-medium rounded-full transition-all duration-200'
+  const baseStyles = 'inline-flex items-center justify-center gap-2 font-body font-semibold rounded-full transition-all duration-300 whitespace-nowrap'
   
   const variants = {
-    primary: 'bg-peek-orange text-white hover:bg-peek-orange-dark shadow-[0_0_20px_rgba(254,135,92,0.4),0_4px_15px_rgba(254,135,92,0.3)] hover:shadow-[0_0_30px_rgba(254,135,92,0.5),0_6px_20px_rgba(254,135,92,0.4)]',
-    secondary: 'bg-transparent text-text-primary border border-gray-200 hover:border-peek-orange/30 hover:bg-peek-orange/5 hover:shadow-[0_0_15px_rgba(254,135,92,0.2)]'
+    primary: 'bg-peek-orange text-white shadow-lg shadow-peek-orange/25 hover:shadow-xl hover:shadow-peek-orange/30 hover:bg-peek-orange-dark',
+    secondary: 'bg-white text-text-primary border border-gray-200 hover:border-gray-300 hover:bg-gray-50 shadow-sm hover:shadow-md',
+    ghost: 'bg-transparent text-text-secondary hover:text-text-primary hover:bg-gray-100/50'
   }
   
   const sizes = {
-    medium: 'px-4 py-2 text-sm',
-    default: 'px-5 py-2.5 text-sm',
-    large: 'px-6 py-3 text-base'
+    medium: 'px-5 py-2.5 text-sm',
+    default: 'px-6 py-3 text-sm',
+    large: 'px-8 py-4 text-base'
   }
 
   const combinedStyles = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`
 
   const motionProps = {
     className: combinedStyles,
-    whileHover: { scale: 1.03, y: -2 },
+    whileHover: { scale: 1.02 },
     whileTap: { scale: 0.98 },
-    transition: { duration: 0.2, type: 'spring', stiffness: 400 },
+    transition: { duration: 0.15, ease: 'easeOut' },
   }
+
+  const content = (
+    <>
+      {children}
+      {icon && <span className="ml-1">{icon}</span>}
+    </>
+  )
 
   if (href) {
     return (
@@ -49,14 +59,14 @@ export default function Button({
         target="_blank"
         rel="noopener noreferrer"
       >
-        {children}
+        {content}
       </motion.a>
     )
   }
 
   return (
     <motion.button {...motionProps}>
-      {children}
+      {content}
     </motion.button>
   )
 }

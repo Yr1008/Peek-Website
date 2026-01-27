@@ -11,32 +11,32 @@ const features = [
     id: 'feed',
     emoji: '📱',
     title: '5 minutes a day',
-    description: 'Most finance apps dump everything on you. Peek only surfaces the moments worth noticing: an impulse buy, a habit creeping up, a subscription you forgot.',
-    highlight: 'Just the stuff that needs attention',
+    description: 'No spreadsheets. No overwhelm. Just the moments worth noticing—an impulse buy, a habit forming, a subscription you forgot.',
+    highlight: 'Only what matters',
     screenshot: '/images/app-screenshot.png',
   },
   {
     id: 'labeling',
     emoji: '🏷️',
-    title: 'Emotional labeling',
-    description: 'Your bank statement shows what you spent, not why. Peek knows the difference between the celebratory dinner, the stress takeout, and the coffee ritual.',
+    title: 'Know the why, not just the what',
+    description: 'Your bank shows what you spent. Peek shows why—the stress takeout, the celebration dinner, the autopilot coffee run.',
     highlight: 'Impulse • Intentional • Autopilot',
     screenshot: '/images/app-screenshot-insights.png',
   },
   {
     id: 'experiments',
     emoji: '🧪',
-    title: 'Small experiments',
-    description: "You're not bad at budgeting. Budgeting is bad at understanding you. Try small tests instead: pause an impulse buy for 48 hours, swap takeout for something you've wanted.",
-    highlight: 'Change that actually sticks',
+    title: 'Tiny experiments, real change',
+    description: 'Skip the strict budgets. Try small tests instead: pause an impulse for 48 hours, swap takeout for something you actually want.',
+    highlight: 'Change that sticks',
     screenshot: '/images/app-screenshot-goals.png',
   },
   {
     id: 'story',
     emoji: '📖',
-    title: 'Your spending story',
-    description: 'Over time, Peek builds a picture of you and your money. The disconnected "$647 on Food & Dining" becomes a story you actually recognize.',
-    highlight: 'An autobiography of your financial life',
+    title: 'Your money, your story',
+    description: 'Watch patterns emerge over time. "$647 on Food & Dining" becomes a story you actually recognize—and can change.',
+    highlight: 'See the bigger picture',
     screenshot: '/images/app-screenshot-chat.png',
   },
 ]
@@ -49,7 +49,7 @@ export default function FeaturesSection() {
   })
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: '400vh' }}>
+    <section ref={containerRef} className="relative bg-gradient-to-b from-[#FFF9F6] via-[#FFF5F0] to-[#FFFBF9]" style={{ height: '400vh' }}>
       {/* Sticky container */}
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Soft gradient background */}
@@ -174,7 +174,7 @@ function FeatureText({
   index: number
   scrollProgress: ReturnType<typeof useScroll>['scrollYProgress']
 }) {
-  // Each feature is active in its scroll range
+  // Each feature is active in its scroll range (4 features over 400vh = 0.25 each)
   const ranges = [
     [0, 0.25],
     [0.25, 0.5],
@@ -182,28 +182,34 @@ function FeatureText({
     [0.75, 1],
   ]
   
-  // Fade in at start of range, fade out at end
+  // First text starts visible, last text stays visible at end
   const opacity = useTransform(
     scrollProgress,
-    [
-      ranges[index][0], 
-      ranges[index][0] + 0.08, 
-      ranges[index][1] - 0.08, 
-      ranges[index][1]
-    ],
-    [0, 1, 1, 0]
+    index === 0 
+      ? [0, ranges[index][1] - 0.08, ranges[index][1]]
+      : index === 3
+        ? [ranges[index][0], ranges[index][0] + 0.08, 1]
+        : [ranges[index][0], ranges[index][0] + 0.08, ranges[index][1] - 0.08, ranges[index][1]],
+    index === 0 
+      ? [1, 1, 0]
+      : index === 3
+        ? [0, 1, 1]
+        : [0, 1, 1, 0]
   )
   
   // Slight upward movement on enter
   const y = useTransform(
     scrollProgress,
-    [
-      ranges[index][0], 
-      ranges[index][0] + 0.08, 
-      ranges[index][1] - 0.08, 
-      ranges[index][1]
-    ],
-    [20, 0, 0, -20]
+    index === 0 
+      ? [0, ranges[index][1] - 0.08, ranges[index][1]]
+      : index === 3
+        ? [ranges[index][0], ranges[index][0] + 0.08, 1]
+        : [ranges[index][0], ranges[index][0] + 0.08, ranges[index][1] - 0.08, ranges[index][1]],
+    index === 0 
+      ? [0, 0, -20]
+      : index === 3
+        ? [20, 0, 0]
+        : [20, 0, 0, -20]
   )
 
   return (
@@ -239,17 +245,27 @@ function ScreenImage({
   index: number
   scrollProgress: ReturnType<typeof useScroll>['scrollYProgress']
 }) {
+  // Each feature is active in its scroll range (4 features over 400vh = 0.25 each)
   const ranges = [
     [0, 0.25],
-    [0.25, 0.5],
-    [0.5, 0.75],
+    [0.25, 0.50],
+    [0.50, 0.75],
     [0.75, 1],
   ]
   
+  // First image starts visible, last image stays visible at end
   const opacity = useTransform(
     scrollProgress,
-    [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
-    [0, 1, 1, 0]
+    index === 0 
+      ? [0, ranges[index][1] - 0.05, ranges[index][1]]
+      : index === 3
+        ? [ranges[index][0], ranges[index][0] + 0.05, 1]
+        : [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
+    index === 0 
+      ? [1, 1, 0]
+      : index === 3
+        ? [0, 1, 1]
+        : [0, 1, 1, 0]
   )
 
   return (
@@ -275,23 +291,41 @@ function ScrollDot({
   index: number
   scrollProgress: ReturnType<typeof useScroll>['scrollYProgress']
 }) {
+  // Each feature is active in its scroll range (4 features over 400vh = 0.25 each)
   const ranges = [
     [0, 0.25],
-    [0.25, 0.5],
-    [0.5, 0.75],
+    [0.25, 0.50],
+    [0.50, 0.75],
     [0.75, 1],
   ]
   
+  // First dot starts active, last dot stays active at end
   const scale = useTransform(
     scrollProgress,
-    [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
-    [1, 1.5, 1.5, 1]
+    index === 0 
+      ? [0, ranges[index][1] - 0.05, ranges[index][1]]
+      : index === 3
+        ? [ranges[index][0], ranges[index][0] + 0.05, 1]
+        : [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
+    index === 0 
+      ? [1.5, 1.5, 1]
+      : index === 3
+        ? [1, 1.5, 1.5]
+        : [1, 1.5, 1.5, 1]
   )
   
   const bgOpacity = useTransform(
     scrollProgress,
-    [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
-    [0.3, 1, 1, 0.3]
+    index === 0 
+      ? [0, ranges[index][1] - 0.05, ranges[index][1]]
+      : index === 3
+        ? [ranges[index][0], ranges[index][0] + 0.05, 1]
+        : [ranges[index][0], ranges[index][0] + 0.05, ranges[index][1] - 0.05, ranges[index][1]],
+    index === 0 
+      ? [1, 1, 0.3]
+      : index === 3
+        ? [0.3, 1, 1]
+        : [0.3, 1, 1, 0.3]
   )
 
   return (
