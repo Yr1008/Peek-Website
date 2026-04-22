@@ -1,238 +1,192 @@
-'use client'
+import AppStoreButton from './AppStoreButton'
+import { STATS } from '@/lib/constants'
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import Button from './ui/Button'
-import { APP_STORE_URL, METRICS, CTA_TEXT } from '@/lib/constants'
+function Stars() {
+  return (
+    <div className="flex items-center gap-0.5" aria-label="App Store rating">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg
+          key={i}
+          width="14"
+          height="14"
+          viewBox="0 0 20 20"
+          fill="#FF7A50"
+          aria-hidden="true"
+        >
+          <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9 4.8 17.6l1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
+        </svg>
+      ))}
+    </div>
+  )
+}
 
 export default function Hero() {
   return (
-    <section className="min-h-[90vh] md:min-h-screen pt-24 md:pt-28 pb-8 md:pb-12 px-6 md:px-8 lg:px-12 relative overflow-hidden flex items-center">
-      
-      <div className="max-w-6xl mx-auto w-full relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          
-          {/* Left - Problem Image */}
-          <motion.div 
-            className="relative order-2 lg:order-1"
-            initial={{ opacity: 0, x: -25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+    <section
+      id="top"
+      className="relative pt-28 md:pt-36 pb-16 md:pb-24 overflow-hidden"
+    >
+      {/* Ambient orbs */}
+      <div
+        className="orb orb-peach"
+        style={{ width: 520, height: 520, top: -120, left: -120 }}
+        aria-hidden="true"
+      />
+      <div
+        className="orb orb-purple"
+        style={{ width: 420, height: 420, top: 180, right: -100, opacity: 0.45 }}
+        aria-hidden="true"
+      />
+      <div
+        className="orb orb-sky"
+        style={{ width: 360, height: 360, bottom: -120, left: '38%', opacity: 0.35 }}
+        aria-hidden="true"
+      />
+
+      <div className="relative max-w-6xl mx-auto px-5 md:px-8 grid md:grid-cols-2 gap-12 md:gap-10 items-center">
+        {/* Copy column */}
+        <div className="text-center md:text-left">
+          <span className="eyebrow">
+            <span
+              className="inline-block w-1.5 h-1.5 rounded-full"
+              style={{ background: 'var(--peek-orange)' }}
+            />
+            Anti-budgeting. Pro-clarity.
+          </span>
+
+          <h1
+            className="mt-5 text-[2.5rem] sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem] leading-[1.05] tracking-tight text-balance"
           >
-            <div className="relative mx-auto max-w-sm lg:max-w-md">
-              {/* Stressed person image */}
-              <div className="relative aspect-[3/4] rounded-[28px] overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200 shadow-2xl">
-                <Image
-                  src="/images/hero-stressed-person.png"
-                  alt="Person stressed about finances"
-                  fill
-                  className="object-cover"
-                  priority
+            Know{' '}
+            <span className="accent-serif">the&nbsp;why</span>
+            <br className="hidden sm:block" /> behind every dollar.
+          </h1>
+
+          <p className="mt-5 text-lg md:text-xl text-text-secondary max-w-xl mx-auto md:mx-0 text-pretty">
+            Your bank shows what you spent. Peek shows you why. The money app
+            for people who want clarity without the spreadsheet.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center md:items-start gap-3 sm:gap-4 justify-center md:justify-start">
+            <AppStoreButton placement="hero" id="cta-hero" size="lg" />
+            <a
+              href="#how-it-works"
+              className="btn-ghost text-[15px] text-text-secondary"
+            >
+              See how it works
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 7h8m0 0L7.5 3.5M11 7l-3.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                
-                {/* Problem text overlay */}
-                <motion.div 
-                  className="absolute bottom-6 left-6 right-6"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.25 }}
-                >
-                  <p className="text-white/70 text-sm mb-1.5">Sound familiar?</p>
-                  <p className="text-white text-lg font-medium leading-snug">
-                    "Where did my $3,200 go this month?"
-                  </p>
-                </motion.div>
-              </div>
-              
-              {/* Floating problem bubbles */}
-              <motion.div
-                className="absolute -top-2 -right-2 md:-right-4 rounded-2xl px-4 py-2.5 shadow-lg bg-red-50 border border-red-100"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-              >
-                <p className="text-xs text-red-600 font-medium">😰 No idea where it went</p>
-              </motion.div>
-              
-              <motion.div
-                className="absolute top-1/3 -left-2 md:-left-4 rounded-2xl px-4 py-2.5 shadow-lg bg-gray-100"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.55 }}
-              >
-                <p className="text-xs text-gray-600 font-medium">🤔 Was it worth it?</p>
-              </motion.div>
-              
+              </svg>
+            </a>
+          </div>
+
+          {/* Trust row */}
+          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 justify-center md:justify-start text-sm text-text-secondary">
+            <div className="flex items-center gap-2">
+              <Stars />
+              <span>Loved on the App Store</span>
             </div>
-          </motion.div>
-          
-          {/* Right - Solution Content */}
-          <motion.div 
-            className="order-1 lg:order-2"
-            initial={{ opacity: 0, x: 25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.05, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            {/* Social proof */}
-            <motion.div 
-              className="inline-flex items-center gap-2 bg-peek-orange/10 rounded-full px-3 py-1.5 mb-5"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.15 }}
+            <span className="w-1 h-1 rounded-full bg-text-muted/50" aria-hidden="true" />
+            <span>Free on iOS</span>
+            <span className="w-1 h-1 rounded-full bg-text-muted/50" aria-hidden="true" />
+            <span>{STATS.downloads} downloads</span>
+          </div>
+        </div>
+
+        {/* Phone column */}
+        <div className="relative flex justify-center md:justify-end">
+          <div className="relative w-[280px] sm:w-[320px] md:w-[360px]">
+            {/* Phone frame */}
+            <div
+              className="relative rounded-[44px] p-[10px] shadow-2xl"
+              style={{
+                background:
+                  'linear-gradient(145deg, #2a2a2a 0%, #0f0f0f 60%, #1a1a1a 100%)',
+                boxShadow:
+                  '0 40px 80px -20px rgba(45, 35, 25, 0.25), 0 20px 40px -10px rgba(45, 35, 25, 0.15)',
+              }}
             >
-              <div className="flex -space-x-1.5">
-                {['👩🏻', '👨🏽', '👩🏾'].map((e, i) => (
-                  <span key={i} className="w-5 h-5 rounded-full bg-peek-orange/20 flex items-center justify-center text-[10px]">{e}</span>
-                ))}
-              </div>
-              <span className="text-xs text-peek-orange font-medium">4,200+ joined this month</span>
-            </motion.div>
-            
-            {/* Problem statement */}
-            <motion.p
-              className="text-text-muted text-sm md:text-base mb-2"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.2 }}
-            >
-              Money isn't just numbers. Neither is Peek.
-            </motion.p>
-            
-            {/* Main headline */}
-            <motion.h1 
-              className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] text-text-primary mb-5 leading-tight"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
-            >
-              Understand your
-              <br />
-              <span className="text-peek-orange">money habits.</span>
-            </motion.h1>
-            
-            {/* Value prop */}
-            <motion.p 
-              className="text-base md:text-lg text-text-secondary mb-5 max-w-md leading-relaxed"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-            >
-              See the why behind every purchase: the impulse buys, the comfort spending, the autopilot. 
-              <span className="text-text-primary font-medium"> So you can reshape them around what matters.</span>
-            </motion.p>
-            
-            {/* Objection busters */}
-            <motion.div
-              className="flex flex-wrap gap-3 mb-6 text-sm text-text-muted"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.33 }}
-            >
-              <span>✓ Bank-level security</span>
-            </motion.div>
-            
-            {/* CTA */}
-            <motion.div 
-              className="flex flex-wrap items-center gap-4 mb-6"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-            >
-              <Button href={APP_STORE_URL} size="large">
-                {CTA_TEXT.primary}
-              </Button>
-            </motion.div>
-            
-            {/* Trust badges row */}
-            <motion.div
-              className="inline-flex flex-wrap items-center gap-3 mb-5 bg-gray-100/80 backdrop-blur-md rounded-full px-5 py-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-            >
-              <span className="flex items-center gap-1.5 text-xs text-text-secondary">
-                <span className="text-green-500">✓</span> Cancel anytime
-              </span>
-              <span className="w-px h-4 bg-gray-300" />
-              <span className="flex items-center gap-1.5 text-xs text-text-secondary">
-                <span>🔒</span> Secured by Plaid
-              </span>
-              <span className="w-px h-4 bg-gray-300" />
-              <span className="flex items-center gap-1.5 text-xs text-text-secondary">
-                <span className="text-yellow-500">⭐</span> {METRICS.userCount} users
-              </span>
-            </motion.div>
-            
-            {/* Built with love tagline */}
-            <motion.p 
-              className="text-xs text-text-muted"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.45 }}
-            >
-              Built with love for people who want to understand their money
-            </motion.p>
-            
-            {/* App preview */}
-            <motion.a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 flex items-center gap-4 cursor-pointer group"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-            >
-              {/* Mini phone mockup */}
-              <motion.div 
-                className="relative w-16 h-32 rounded-[14px] overflow-hidden shadow-lg bg-black p-0.5 shrink-0 group-hover:shadow-xl transition-shadow"
-              >
-                <div className="absolute inset-0.5 rounded-[12px] overflow-hidden bg-white">
-                  <Image
-                    src="/images/app-screenshot.png"
-                    alt="Peek App"
-                    fill
-                    className="object-cover"
+              <div className="relative rounded-[36px] overflow-hidden bg-white">
+                <picture>
+                  <source
+                    srcSet="/images/optimized/app-screenshot-insights.webp"
+                    type="image/webp"
                   />
-                </div>
-              </motion.div>
-              
-              {/* Arrow and text */}
-              <div className="flex items-center gap-3">
-                <motion.svg 
-                  className="w-5 h-5 text-peek-orange" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor" 
-                  strokeWidth={2}
-                  animate={{ x: [0, 3, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </motion.svg>
-                <div>
-                  <p className="text-sm font-medium text-text-primary group-hover:text-peek-orange transition-colors">Start tracking in 2 min</p>
-                  <p className="text-xs text-text-muted">iOS only (Android coming soon)</p>
-                </div>
-              </div>
-              
-              {/* Floating Peek character */}
-              <motion.div
-                className="relative w-10 h-10 shrink-0"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <Image
-                  src="/images/13.png"
-                  alt="Peek"
-                  fill
-                  className="object-contain drop-shadow-lg"
+                  <img
+                    src="/images/app-screenshot-insights.png"
+                    alt="Peek app showing insight reveals on your spending patterns"
+                    className="w-full h-auto block"
+                    width={720}
+                    height={1560}
+                    loading="eager"
+                    decoding="async"
+                    // @ts-expect-error fetchpriority is a valid HTML attr
+                    fetchpriority="high"
+                  />
+                </picture>
+                {/* Notch */}
+                <div
+                  className="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-6 rounded-full"
+                  style={{ background: '#0a0a0a' }}
+                  aria-hidden="true"
                 />
-              </motion.div>
-            </motion.a>
-          </motion.div>
+              </div>
+            </div>
+
+            {/* Floating insight card — top left */}
+            <div
+              className="hidden sm:block absolute -left-10 md:-left-20 top-16 glass rounded-[18px] px-4 py-3 float-y"
+              style={{ width: 180 }}
+              aria-hidden="true"
+            >
+              <div className="flex items-center gap-2 mb-1.5">
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: 'var(--peek-green)' }}
+                />
+                <span className="text-[11px] font-semibold tracking-wide uppercase text-text-muted">
+                  Intentional
+                </span>
+              </div>
+              <div className="font-heading text-2xl text-text-primary">$412</div>
+              <div className="text-[12px] text-text-secondary mt-0.5">
+                dinners with friends
+              </div>
+            </div>
+
+            {/* Floating insight card — bottom right */}
+            <div
+              className="hidden sm:block absolute -right-6 md:-right-14 bottom-20 glass rounded-[18px] px-4 py-3 float-y-delay"
+              style={{ width: 200 }}
+              aria-hidden="true"
+            >
+              <div className="flex items-center gap-2 mb-1.5">
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: 'var(--peek-purple-deep)' }}
+                />
+                <span className="text-[11px] font-semibold tracking-wide uppercase text-text-muted">
+                  Saved this month
+                </span>
+              </div>
+              <div className="font-heading text-2xl text-text-primary">$340</div>
+              <div className="text-[12px] text-text-secondary mt-0.5">
+                skipped impulse buys
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

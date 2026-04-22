@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+/* Generate optimized WebP variants of hero and feature images. */
+const sharp = require('sharp')
+const fs = require('fs')
+const path = require('path')
+
+const root = path.join(__dirname, '..')
+const imgDir = path.join(root, 'public', 'images')
+const outDir = path.join(imgDir, 'optimized')
+
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
+
+const jobs = [
+  { src: 'app-screenshot-insights.png', out: 'app-screenshot-insights', width: 720, quality: 78 },
+  { src: 'app-screenshot-goals.png', out: 'app-screenshot-goals', width: 600, quality: 78 },
+  { src: 'app-screenshot-chat.png', out: 'app-screenshot-chat', width: 600, quality: 78 },
+  { src: 'peek-icon.png', out: 'peek-icon', width: 128, quality: 85 },
+]
+
+async function run() {
+  for (const j of jobs) {
+    const src = path.join(imgDir, j.src)
+    if (!fs.existsSync(src)) {
+      console.log('skip:', j.src, '(missing)')
+      continue
+    }
+    const out = path.join(outDir, `${j.out}.webp`)
+    await sharp(src)
+      .resize({ width: j.width, withoutEnlargement: true })
+      .webp({ quality: j.quality })
+      .toFile(out)
+    const size = fs.statSync(out).size
+    console.log(`${j.src} -> optimized/${j.out}.webp (${(size / 1024).toFixed(1)} KB)`)
+  }
+}
+
+run().catch((e) => {
+  console.error(e)
+  process.exit(1)
+})
