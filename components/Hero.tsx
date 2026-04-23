@@ -145,9 +145,9 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating insight card — top left */}
+            {/* Floating insight card — top left: Intentional */}
             <div
-              className="hidden sm:block absolute -left-10 md:-left-20 top-16 glass rounded-[18px] px-4 py-3 float-y"
+              className="hidden sm:block absolute -left-10 md:-left-20 top-14 glass rounded-[18px] px-4 py-3 float-y"
               style={{ width: 180 }}
               aria-hidden="true"
             >
@@ -166,9 +166,9 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating insight card — bottom right */}
+            {/* Floating insight card — middle right: Skipped impulse */}
             <div
-              className="hidden sm:block absolute -right-6 md:-right-14 bottom-20 glass rounded-[18px] px-4 py-3 float-y-delay"
+              className="hidden sm:block absolute -right-6 md:-right-14 top-[38%] glass rounded-[18px] px-4 py-3 float-y-delay"
               style={{ width: 200 }}
               aria-hidden="true"
             >
@@ -178,12 +178,76 @@ export default function Hero() {
                   style={{ background: 'var(--peek-purple-deep)' }}
                 />
                 <span className="text-[11px] font-semibold tracking-wide uppercase text-text-muted">
-                  Saved this month
+                  Skipped impulse
                 </span>
               </div>
               <div className="font-heading text-2xl text-text-primary">$340</div>
               <div className="text-[12px] text-text-secondary mt-0.5">
-                skipped impulse buys
+                saved this month
+              </div>
+            </div>
+
+            {/* Signature soft-question card — bottom, spans under phone */}
+            <div
+              className="hidden sm:block absolute -left-8 md:-left-20 -bottom-6 md:-bottom-10 glass rounded-[22px] p-4 float-y"
+              style={{ width: 260, animationDelay: '-1.5s' }}
+              aria-hidden="true"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(135deg, #ff7a50, #ff5722)',
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="white">
+                    <circle cx="8" cy="8" r="7" fill="none" stroke="white" strokeWidth="1.4" />
+                    <path d="M8 4v4l2.5 2.5" stroke="white" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-text-muted font-semibold">
+                    Soft question
+                  </div>
+                  <div className="text-[13px] font-semibold text-text-primary leading-tight">
+                    $47 at Target
+                  </div>
+                </div>
+              </div>
+              <div className="text-[13px] text-text-secondary leading-snug mb-3">
+                Was this the stuff you needed, or the stuff that needed you?
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span
+                  className="chip text-[11px]"
+                  style={{
+                    padding: '0.25rem 0.55rem',
+                    background: 'rgba(105, 240, 174, 0.18)',
+                    color: '#0d8a4b',
+                  }}
+                >
+                  Needed
+                </span>
+                <span
+                  className="chip text-[11px]"
+                  style={{
+                    padding: '0.25rem 0.55rem',
+                    background: 'rgba(255, 128, 171, 0.18)',
+                    color: '#c73163',
+                  }}
+                >
+                  Impulse
+                </span>
+                <span
+                  className="chip text-[11px]"
+                  style={{
+                    padding: '0.25rem 0.55rem',
+                    background: 'rgba(179, 136, 255, 0.18)',
+                    color: '#6d3dd0',
+                  }}
+                >
+                  Both
+                </span>
               </div>
             </div>
           </div>

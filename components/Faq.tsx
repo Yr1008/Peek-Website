@@ -32,7 +32,7 @@ export default function Faq() {
         <div className="text-center reveal">
           <span className="eyebrow">FAQ</span>
           <h2 className="mt-5 text-[2rem] sm:text-4xl md:text-[2.75rem] leading-[1.1] text-balance">
-            The questions you would ask
+            The questions you&rsquo;d ask
             <br className="hidden sm:block" />{' '}
             <span className="accent-serif">before downloading.</span>
           </h2>

@@ -38,42 +38,70 @@ export default function HowItWorks() {
           </h2>
         </div>
 
-        <ol className="mt-14 md:mt-20 grid gap-5 md:gap-6 md:grid-cols-3">
-          {steps.map((s, i) => (
-            <li
-              key={s.num}
-              className="card p-7 md:p-8 relative reveal"
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div
-                className="font-heading text-5xl md:text-6xl mb-5"
-                style={{
-                  background:
-                    'linear-gradient(135deg, #ff7a50 0%, #b388ff 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-                aria-hidden="true"
+        <div className="relative mt-14 md:mt-20">
+          {/* Soft connector line on desktop */}
+          <div
+            className="hidden md:block absolute top-[92px] left-[16%] right-[16%] h-px"
+            style={{
+              backgroundImage:
+                'linear-gradient(90deg, transparent 0%, rgba(255, 122, 80, 0.4) 15%, rgba(179, 136, 255, 0.4) 50%, rgba(64, 196, 255, 0.4) 85%, transparent 100%)',
+            }}
+            aria-hidden="true"
+          />
+
+          <ol className="grid gap-5 md:gap-6 md:grid-cols-3 relative">
+            {steps.map((s, i) => (
+              <li
+                key={s.num}
+                className="card p-7 md:p-8 relative reveal"
+                style={{ transitionDelay: `${i * 100}ms` }}
               >
-                {s.num}
-              </div>
-              <h3 className="font-heading text-2xl mb-3">{s.title}</h3>
-              <p className="text-text-secondary leading-relaxed mb-5">
-                {s.body}
-              </p>
-              <span
-                className="chip"
-                style={{
-                  background: 'rgba(255, 122, 80, 0.1)',
-                  color: 'var(--peek-orange-dark)',
-                }}
-              >
-                {s.tag}
-              </span>
-            </li>
-          ))}
-        </ol>
+                <div className="flex items-center gap-3 mb-5">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center relative shrink-0"
+                    style={{
+                      background: 'white',
+                      border: '1px solid rgba(255, 122, 80, 0.18)',
+                      boxShadow: '0 4px 12px rgba(255, 122, 80, 0.1)',
+                    }}
+                    aria-hidden="true"
+                  >
+                    <span
+                      className="font-heading text-lg"
+                      style={{
+                        background:
+                          'linear-gradient(135deg, #ff7a50 0%, #b388ff 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      {s.num}
+                    </span>
+                  </div>
+                  <div
+                    className="h-px flex-1 opacity-50"
+                    style={{ background: 'rgba(45, 35, 25, 0.08)' }}
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="font-heading text-2xl mb-3">{s.title}</h3>
+                <p className="text-text-secondary leading-relaxed mb-5">
+                  {s.body}
+                </p>
+                <span
+                  className="chip"
+                  style={{
+                    background: 'rgba(255, 122, 80, 0.1)',
+                    color: 'var(--peek-orange-dark)',
+                  }}
+                >
+                  {s.tag}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   )

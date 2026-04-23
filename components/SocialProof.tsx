@@ -10,7 +10,7 @@ const testimonials = [
   {
     name: 'Sarah, 28',
     quote:
-      'I actually open this app. Like, voluntarily. That is never happened with a finance app.',
+      "I actually open this app. Like, voluntarily. That's never happened with a finance app.",
     tint: 'var(--peek-orange)',
   },
   {
@@ -22,7 +22,7 @@ const testimonials = [
   {
     name: 'Priya, 26',
     quote:
-      'Finally an app that does not make me feel like garbage about my spending. It just helps.',
+      "Finally an app that doesn't make me feel like garbage about my spending. It just helps.",
     tint: 'var(--peek-sky-deep)',
   },
   {
@@ -63,11 +63,24 @@ export default function SocialProof() {
           ))}
         </div>
 
+        {/* Pull quote */}
+        <figure className="mt-20 md:mt-28 max-w-3xl mx-auto text-center reveal">
+          <blockquote className="font-heading text-[1.75rem] sm:text-[2rem] md:text-[2.5rem] leading-[1.18] text-text-primary text-balance">
+            <span className="accent-serif text-[1.4em] leading-none mr-1 align-[-0.12em]">&ldquo;</span>
+            I actually open this app. Like,{' '}
+            <span className="accent-serif">voluntarily.</span>
+            <span className="accent-serif text-[1.4em] leading-none ml-1 align-[-0.12em]">&rdquo;</span>
+          </blockquote>
+          <figcaption className="mt-4 text-sm text-text-muted uppercase tracking-wider font-semibold">
+            Sarah, 28 &middot; App Store review
+          </figcaption>
+        </figure>
+
         {/* Heading */}
-        <div className="mt-20 md:mt-28 max-w-3xl mx-auto text-center reveal">
+        <div className="mt-16 md:mt-20 max-w-3xl mx-auto text-center reveal">
           <span className="eyebrow">In their words</span>
           <h2 className="mt-5 text-[2rem] sm:text-4xl md:text-[2.75rem] leading-[1.1] text-balance">
-            Do not take our word for it.
+            Don&rsquo;t take our word for it.
           </h2>
         </div>
 

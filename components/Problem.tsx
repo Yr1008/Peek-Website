@@ -78,6 +78,26 @@ export default function Problem() {
           </p>
         </div>
 
+        {/* Killer pull quote */}
+        <figure className="mt-12 md:mt-16 max-w-3xl mx-auto reveal">
+          <blockquote
+            className="relative font-heading text-[1.5rem] sm:text-[1.875rem] md:text-[2.125rem] leading-[1.25] text-center text-balance px-4"
+          >
+            <span
+              className="absolute -top-6 left-1/2 -translate-x-1/2 font-heading text-7xl md:text-8xl leading-none select-none pointer-events-none"
+              style={{ color: 'rgba(255, 122, 80, 0.18)', fontStyle: 'italic' }}
+              aria-hidden="true"
+            >
+              &ldquo;
+            </span>
+            You are{' '}
+            <span className="accent-serif">not bad at budgeting.</span>
+            <br />
+            Budgeting is{' '}
+            <span className="accent-serif">bad at understanding you.</span>
+          </blockquote>
+        </figure>
+
         <div className="mt-14 md:mt-20 grid gap-5 md:grid-cols-3">
           {cards.map((c, i) => (
             <article

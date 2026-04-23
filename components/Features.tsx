@@ -9,6 +9,7 @@ type Feature = {
   fallback: string
   alt: string
   accent: string
+  overlay: { label: string; value: string; tone: string }
   reverse?: boolean
 }
 
@@ -32,6 +33,11 @@ const features: Feature[] = [
     fallback: '/images/app-screenshot-insights.png',
     alt: 'Peek insights screen showing weekly spending patterns',
     accent: 'var(--peek-orange)',
+    overlay: {
+      label: 'New this week',
+      value: 'Found: $84 you forgot about',
+      tone: '#ff7a50',
+    },
   },
   {
     eyebrow: 'Funds, not caps',
@@ -52,6 +58,11 @@ const features: Feature[] = [
     fallback: '/images/app-screenshot-goals.png',
     alt: 'Peek funds screen showing flexible spending pockets',
     accent: 'var(--peek-purple-deep)',
+    overlay: {
+      label: 'Travel fund',
+      value: '+$300 from dining',
+      tone: '#b388ff',
+    },
     reverse: true,
   },
   {
@@ -73,6 +84,11 @@ const features: Feature[] = [
     fallback: '/images/app-screenshot-chat.png',
     alt: 'Peek AI coach answering a money question',
     accent: 'var(--peek-sky-deep)',
+    overlay: {
+      label: 'Asked at 2:47am',
+      value: 'Can I afford Lisbon?',
+      tone: '#40c4ff',
+    },
   },
 ]
 
@@ -152,29 +168,56 @@ export default function Features() {
                   }}
                   aria-hidden="true"
                 />
-                <div
-                  className="relative rounded-[32px] p-[8px] shadow-xl"
-                  style={{
-                    background:
-                      'linear-gradient(145deg, #2a2a2a, #0f0f0f)',
-                    boxShadow:
-                      '0 30px 60px -20px rgba(45, 35, 25, 0.18)',
-                    maxWidth: 300,
-                  }}
-                >
-                  <div className="rounded-[26px] overflow-hidden bg-white">
-                    <picture>
-                      <source srcSet={f.image} type="image/webp" />
-                      <img
-                        src={f.fallback}
-                        alt={f.alt}
-                        className="w-full h-auto block"
-                        width={600}
-                        height={1300}
-                        loading="lazy"
-                        decoding="async"
+                <div className="relative" style={{ maxWidth: 300 }}>
+                  <div
+                    className="relative rounded-[32px] p-[8px] shadow-xl"
+                    style={{
+                      background:
+                        'linear-gradient(145deg, #2a2a2a, #0f0f0f)',
+                      boxShadow:
+                        '0 30px 60px -20px rgba(45, 35, 25, 0.18)',
+                    }}
+                  >
+                    <div className="rounded-[26px] overflow-hidden bg-white">
+                      <picture>
+                        <source srcSet={f.image} type="image/webp" />
+                        <img
+                          src={f.fallback}
+                          alt={f.alt}
+                          className="w-full h-auto block"
+                          width={600}
+                          height={1300}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </picture>
+                    </div>
+                  </div>
+
+                  {/* UI chip overlay */}
+                  <div
+                    className={`absolute glass rounded-[16px] px-3.5 py-2.5 float-y ${
+                      f.reverse ? '-left-6 sm:-left-10' : '-right-6 sm:-right-10'
+                    }`}
+                    style={{
+                      top: '18%',
+                      width: 200,
+                      animationDelay: `${i * -1.5}s`,
+                    }}
+                    aria-hidden="true"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ background: f.overlay.tone }}
                       />
-                    </picture>
+                      <span className="text-[10px] font-semibold tracking-wide uppercase text-text-muted">
+                        {f.overlay.label}
+                      </span>
+                    </div>
+                    <div className="font-heading text-[15px] text-text-primary leading-tight">
+                      {f.overlay.value}
+                    </div>
                   </div>
                 </div>
               </div>
