@@ -48,23 +48,6 @@ export default function FinalCta() {
             Built for iPhone. 4.4 stars on the App Store.
           </div>
         </div>
-
-        {/* Founder signature */}
-        <div className="mt-14 pt-10 border-t border-black/5 text-center">
-          <p className="text-[15px] text-text-secondary leading-relaxed max-w-md mx-auto text-pretty">
-            Peek is a tiny team making something we genuinely want to use. If
-            that sounds like the app you have been waiting for, it probably is.
-          </p>
-          <p
-            className="mt-4 font-heading text-xl text-text-primary"
-            style={{ fontStyle: 'italic' }}
-          >
-            yash
-          </p>
-          <p className="mt-1 text-xs text-text-muted uppercase tracking-wider font-semibold">
-            Founder, Peek
-          </p>
-        </div>
       </div>
     </section>
   )
