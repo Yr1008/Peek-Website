@@ -11,11 +11,10 @@ const outDir = path.join(imgDir, 'optimized')
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
 
 const jobs = [
-  { src: 'app-screenshot-insights.png', out: 'app-screenshot-insights', width: 720, quality: 78 },
-  { src: 'app-screenshot-goals.png', out: 'app-screenshot-goals', width: 600, quality: 78 },
-  { src: 'app-screenshot-chat.png', out: 'app-screenshot-chat', width: 600, quality: 78 },
   { src: 'peek-icon.png', out: 'peek-icon', width: 128, quality: 85 },
   { src: '1.png', out: 'mascot-party', width: 480, quality: 90 },
+  { src: 'hero-stressed-person.png', out: 'hero-stressed-person', width: 600, quality: 80 },
+  { src: 'hero-street-bg.png', out: 'hero-street-bg', width: 1600, quality: 70 },
 ]
 
 async function run() {

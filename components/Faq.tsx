@@ -1,144 +1,89 @@
 const faqs = [
   {
-    q: 'is connecting my bank actually safe?',
-    a: 'yes. peek uses plaid, the same encrypted connector your bank, venmo, and robinhood already use. read-only access. we never see your password.',
-    em: 'plaid',
+    q: 'Is connecting my bank actually safe?',
+    a: (
+      <>
+        Yes. Peek uses <em>Plaid</em> — the same encrypted connector your bank,
+        Venmo, and Robinhood use. Peek never sees your bank login, never
+        stores your credentials, and we have <em>read-only</em> access to
+        transactions. We can&rsquo;t move money. Even if we wanted to.
+      </>
+    ),
   },
   {
-    q: 'is peek free?',
-    a: 'the core app is free on ios. the feed, the tagging, the spending story. all free.',
-    em: 'free on ios.',
+    q: 'Is Peek free?',
+    a: (
+      <>
+        The core app is <em>free on iOS.</em> Tagging, caps, the spending
+        story — all free. We may add a paid tier later for power features; the
+        basics will stay free.
+      </>
+    ),
   },
   {
-    q: 'how long does it take?',
-    a: '30 seconds to connect a bank. 5 minutes a day after that.',
-    em: '30 seconds',
+    q: 'How long does it actually take?',
+    a: (
+      <>
+        About <em>30 seconds</em> to connect a bank. Tagging a charge takes
+        about <em>3 seconds</em>. Most users tag once a day on the toilet. We
+        respect your time more than your bank does.
+      </>
+    ),
   },
   {
-    q: 'will it nag or shame me?',
-    a: 'no. peek’s whole thing is noticing without scolding. no good or bad. just patterns, plainly stated.',
-    em: 'noticing without scolding.',
+    q: 'Will it nag me?',
+    a: (
+      <>
+        No. Peek&rsquo;s whole thing is <em>noticing without scolding.</em>{' '}
+        One nudge if you&rsquo;re heading over a cap. One paragraph on Sunday.
+        That&rsquo;s it. You can mute everything.
+      </>
+    ),
   },
   {
-    q: 'android?',
-    a: 'coming. ios first.',
-    em: '',
+    q: 'What about Android?',
+    a: (
+      <>
+        Coming. <em>iOS first</em> — we wanted to build the app properly for
+        one platform before splitting attention. Drop your email at the App
+        Store link and we&rsquo;ll tell you when Android lands.
+      </>
+    ),
   },
   {
-    q: 'how is this different from mint, monarch, or copilot?',
-    a: 'those apps categorize what you spent. peek asks why you spent it. they show you a pie chart. peek shows you a pattern.',
-    em: 'why',
+    q: 'Do you sell my data?',
+    a: (
+      <>
+        No. Peek&rsquo;s business model is the app, not your data. We
+        don&rsquo;t sell, share, or monetize your transactions. Your spending
+        story is between you and you.
+      </>
+    ),
   },
 ]
 
-function highlight(text: string, em: string) {
-  if (!em) return text
-  const idx = text.toLowerCase().indexOf(em.toLowerCase())
-  if (idx === -1) return text
-  return (
-    <>
-      {text.slice(0, idx)}
-      <em
-        style={{
-          fontStyle: 'italic',
-          color: 'var(--ink)',
-          fontWeight: 500,
-        }}
-      >
-        {text.slice(idx, idx + em.length)}
-      </em>
-      {text.slice(idx + em.length)}
-    </>
-  )
-}
-
 export default function Faq() {
   return (
-    <section
-      id="faq"
-      style={{
-        background: 'var(--cream-2)',
-        padding: 'clamp(80px, 14vh, 140px) var(--pad)',
-      }}
-    >
-      <div style={{ maxWidth: 820, margin: '0 auto' }}>
-        <span className="eyebrow">questions, plain answers</span>
-        <h2
-          style={{
-            fontFamily: 'var(--serif)',
-            fontSize: 'clamp(38px, 5vw, 64px)',
-            lineHeight: 1,
-            letterSpacing: '-0.025em',
-            fontWeight: 400,
-            margin: '14px 0 36px',
-          }}
-        >
-          things{' '}
-          <em
-            style={{
-              fontStyle: 'italic',
-              color: 'var(--peach)',
-              fontWeight: 500,
-            }}
-          >
-            people ask.
-          </em>
-        </h2>
+    <section className="faq-sec" id="faq">
+      <div className="wrap" style={{ maxWidth: 880 }}>
+        <div className="faq-sec__head r">
+          <span className="eyebrow">
+            <span className="dot" /> the small print, in plain english
+          </span>
+          <h2 className="h-section" style={{ marginTop: 20 }}>
+            Things <em>people ask.</em>
+          </h2>
+        </div>
 
-        {faqs.map((f) => (
-          <details
-            key={f.q}
-            className="faqi"
-            data-faq-question={f.q}
-            style={{
-              borderBottom: '1px solid rgba(42,19,82,0.12)',
-              padding: '6px 0',
-            }}
-          >
-            <summary
-              style={{
-                listStyle: 'none',
-                cursor: 'pointer',
-                padding: '22px 36px 22px 0',
-                fontFamily: 'var(--serif)',
-                fontSize: 'clamp(20px, 2.4vw, 26px)',
-                fontWeight: 500,
-                letterSpacing: '-0.015em',
-                position: 'relative',
-                transition: 'color 220ms',
-              }}
-            >
-              {f.q}
-            </summary>
-            <p
-              style={{
-                margin: '0 0 22px',
-                fontSize: 16,
-                lineHeight: 1.55,
-                color: 'var(--ink-2)',
-                maxWidth: 680,
-              }}
-            >
-              {highlight(f.a, f.em)}
-            </p>
-          </details>
-        ))}
+        <div className="faq r">
+          {faqs.map((f) => (
+            <details key={f.q} data-faq-question={f.q}>
+              <summary>{f.q}</summary>
+              <div className="faq__body">{f.a}</div>
+            </details>
+          ))}
+        </div>
       </div>
-
-      <style>{`
-        .faqi summary::-webkit-details-marker { display: none; }
-        .faqi summary::after {
-          content: "+";
-          position: absolute;
-          right: 4px; top: 50%;
-          transform: translateY(-50%);
-          font-size: 28px; font-weight: 300;
-          color: var(--ink-soft);
-          transition: transform 240ms cubic-bezier(0.2,0.8,0.2,1), color 240ms;
-        }
-        .faqi[open] summary::after { transform: translateY(-50%) rotate(45deg); color: var(--peach); }
-        .faqi summary:hover { color: var(--peach); }
-      `}</style>
     </section>
   )
 }

@@ -2,86 +2,83 @@ import { APP_STORE_URL } from '@/lib/constants'
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        padding: '40px var(--pad)',
-        background: 'var(--cream-3)',
-        fontSize: 14,
-        color: 'var(--ink-2)',
-      }}
-    >
-      <div
-        className="flex flex-wrap items-center justify-between gap-6"
-        style={{ maxWidth: 'var(--maxw)', margin: '0 auto' }}
-      >
-        <a
-          href="#top"
-          className="flex items-center gap-2"
-          style={{
-            fontFamily: 'var(--serif)',
-            fontStyle: 'italic',
-            fontWeight: 700,
-            fontSize: 20,
-          }}
-        >
-          <picture>
-            <source srcSet="/images/optimized/peek-icon.webp" type="image/webp" />
-            <img
-              src="/images/peek-icon.png"
-              alt=""
-              width={24}
-              height={24}
-              style={{ borderRadius: 6 }}
-              loading="lazy"
-            />
-          </picture>
-          peek
-        </a>
-        <span
-          style={{
-            fontStyle: 'italic',
-            fontFamily: 'var(--serif)',
-            color: 'var(--ink-soft)',
-            fontSize: 15,
-          }}
-        >
-          a money app for people figuring it out, in public.
-        </span>
-        <div className="flex items-center gap-5">
-          <a
-            href={APP_STORE_URL}
-            id="cta-footer"
-            data-cta-placement="footer"
-            className="footer-link"
-          >
-            app store
-          </a>
-          <a href="#faq" className="footer-link">
-            faq
-          </a>
-          <a href="/privacy" className="footer-link">
-            privacy
-          </a>
-          <a href="/terms" className="footer-link">
-            terms
-          </a>
+    <footer className="foot">
+      <div className="wrap">
+        <div className="foot__top">
+          <div>
+            <a className="foot__brand" href="#top" aria-label="Peek home">
+              <picture>
+                <source srcSet="/images/optimized/peek-icon.webp" type="image/webp" />
+                <img src="/images/peek-icon.png" alt="" width={34} height={34} loading="lazy" />
+              </picture>
+              <span className="foot__word">Peek</span>
+            </a>
+            <p className="foot__tag">
+              a calmer way to see your money. tag the why. notice the pattern.
+              no spreadsheets.
+            </p>
+          </div>
+          <div className="foot__cols">
+            <div className="foot__col">
+              <h6>app</h6>
+              <ul>
+                <li>
+                  <a
+                    id="cta-footer"
+                    data-cta-placement="footer"
+                    href={APP_STORE_URL}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    iOS
+                  </a>
+                </li>
+                <li>
+                  <a href="#how">how it works</a>
+                </li>
+                <li>
+                  <a href="#tags">the four tags</a>
+                </li>
+                <li>
+                  <a href="#faq">faq</a>
+                </li>
+              </ul>
+            </div>
+            <div className="foot__col">
+              <h6>company</h6>
+              <ul>
+                <li>
+                  <a href="#">about</a>
+                </li>
+                <li>
+                  <a href="#">contact</a>
+                </li>
+                <li>
+                  <a href="#">careers</a>
+                </li>
+              </ul>
+            </div>
+            <div className="foot__col">
+              <h6>legal</h6>
+              <ul>
+                <li>
+                  <a href="/privacy">privacy</a>
+                </li>
+                <li>
+                  <a href="/terms">terms</a>
+                </li>
+                <li>
+                  <a href="#">security</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="foot__bot">
+          <span>© {new Date().getFullYear()} Peek</span>
+          <span>made for the calm-money girls.</span>
         </div>
       </div>
-      <div
-        className="text-center mt-7"
-        style={{
-          maxWidth: 'var(--maxw)',
-          margin: '28px auto 0',
-          fontSize: 12,
-          color: 'var(--ink-soft)',
-        }}
-      >
-        © {new Date().getFullYear()} peek
-      </div>
-      <style>{`
-        .footer-link { transition: color 200ms; }
-        .footer-link:hover { color: var(--peach); }
-      `}</style>
     </footer>
   )
 }

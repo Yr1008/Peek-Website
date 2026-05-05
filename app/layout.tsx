@@ -6,33 +6,34 @@ import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'peek — your bank shows what. peek shows why.',
+  title: 'Peek — see why you spend',
   description:
-    'peek closes the gap between what you spent and why you spent it. a top personal finance app in the us & canada. free on ios, secured by plaid.',
+    'Peek tags every purchase with what actually drove it — Self Reward, Social, Ritual, Convenience. The patterns finally make sense. Free on iOS. Bank-secure with Plaid.',
   keywords: [
     'personal finance app',
     'spending awareness',
     'money clarity',
-    'anti budgeting',
-    'iOS finance app',
+    'tag the why',
     'peek money',
+    'iOS finance app',
   ],
-  authors: [{ name: 'peek' }],
+  authors: [{ name: 'Peek' }],
   openGraph: {
-    title: 'peek — your bank shows what. peek shows why.',
-    description: 'stop tracking. start understanding yourself.',
+    title: 'Peek — see why you spend',
+    description:
+      'Peek tags every purchase with what actually drove it. The patterns finally make sense.',
     type: 'website',
     url: SITE_URL,
-    siteName: 'peek',
+    siteName: 'Peek',
     locale: 'en_US',
-    images: [{ url: '/images/peek-logo-square.svg', width: 512, height: 512, alt: 'peek' }],
+    images: [{ url: '/images/peek-logo-square.svg', width: 512, height: 512, alt: 'Peek' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'peek — your bank shows what. peek shows why.',
-    description: 'stop tracking. start understanding yourself.',
+    title: 'Peek — see why you spend',
+    description: 'Tag every purchase with what actually drove it. Free on iOS.',
   },
-  appleWebApp: { capable: true, statusBarStyle: 'default', title: 'peek' },
+  appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Peek' },
   icons: { icon: '/images/peek-icon.png', apple: '/images/peek-icon.png' },
   alternates: { canonical: SITE_URL },
 }
@@ -41,7 +42,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#F2EBD9',
+  themeColor: '#F4ECDB',
 }
 
 const mobileAppSchema = {
@@ -76,14 +77,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/optimized/app-screenshot-insights.webp"
-          type="image/webp"
-          fetchPriority="high"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap"
         />
         <script
           type="application/ld+json"
