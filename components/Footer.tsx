@@ -3,63 +3,85 @@ import { APP_STORE_URL } from '@/lib/constants'
 export default function Footer() {
   return (
     <footer
-      className="relative px-5 md:px-8 pt-16 pb-10 md:pb-12 mt-6"
       style={{
-        borderTop: '1px solid rgba(45, 35, 25, 0.06)',
-        background: 'rgba(250, 248, 245, 0.5)',
+        padding: '40px var(--pad)',
+        background: 'var(--cream-3)',
+        fontSize: 14,
+        color: 'var(--ink-2)',
       }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-center justify-between">
-        <div className="flex items-center gap-3">
+      <div
+        className="flex flex-wrap items-center justify-between gap-6"
+        style={{ maxWidth: 'var(--maxw)', margin: '0 auto' }}
+      >
+        <a
+          href="#top"
+          className="flex items-center gap-2"
+          style={{
+            fontFamily: 'var(--serif)',
+            fontStyle: 'italic',
+            fontWeight: 700,
+            fontSize: 20,
+          }}
+        >
           <picture>
             <source srcSet="/images/optimized/peek-icon.webp" type="image/webp" />
             <img
               src="/images/peek-icon.png"
               alt=""
-              width={36}
-              height={36}
-              className="rounded-[10px]"
+              width={24}
+              height={24}
+              style={{ borderRadius: 6 }}
               loading="lazy"
             />
           </picture>
-          <div>
-            <div className="font-heading text-xl text-text-primary">peek</div>
-            <div className="text-xs text-text-muted mt-0.5">
-              Made with care for people who want clarity, not caps.
-            </div>
-          </div>
-        </div>
-
-        <nav
-          aria-label="Footer"
-          className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-text-secondary"
+          peek
+        </a>
+        <span
+          style={{
+            fontStyle: 'italic',
+            fontFamily: 'var(--serif)',
+            color: 'var(--ink-soft)',
+            fontSize: 15,
+          }}
         >
+          a money app for people figuring it out, in public.
+        </span>
+        <div className="flex items-center gap-5">
           <a
             href={APP_STORE_URL}
-            data-cta-placement="footer"
             id="cta-footer"
-            className="hover:text-text-primary transition-colors"
+            data-cta-placement="footer"
+            className="footer-link"
           >
-            App Store
+            app store
           </a>
-          <a href="/privacy" className="hover:text-text-primary transition-colors">
-            Privacy
+          <a href="#faq" className="footer-link">
+            faq
           </a>
-          <a href="/terms" className="hover:text-text-primary transition-colors">
-            Terms
+          <a href="/privacy" className="footer-link">
+            privacy
           </a>
-          <a
-            href="mailto:hello@peek.money"
-            className="hover:text-text-primary transition-colors"
-          >
-            Contact
+          <a href="/terms" className="footer-link">
+            terms
           </a>
-        </nav>
+        </div>
       </div>
-
-      <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-black/5 text-xs text-text-muted">
-        &copy; {new Date().getFullYear()} Peek. All rights reserved.
+      <div
+        className="text-center mt-7"
+        style={{
+          maxWidth: 'var(--maxw)',
+          margin: '28px auto 0',
+          fontSize: 12,
+          color: 'var(--ink-soft)',
+        }}
+      >
+        © {new Date().getFullYear()} peek
       </div>
+      <style>{`
+        .footer-link { transition: color 200ms; }
+        .footer-link:hover { color: var(--peach); }
+      `}</style>
     </footer>
   )
 }

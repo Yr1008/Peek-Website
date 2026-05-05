@@ -1,12 +1,10 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
-import Problem from '@/components/Problem'
-import HowItWorks from '@/components/HowItWorks'
-import Features from '@/components/Features'
-import Comparison from '@/components/Comparison'
-import SocialProof from '@/components/SocialProof'
+import Gap from '@/components/Gap'
+import How from '@/components/How'
+import Voices from '@/components/Voices'
 import Faq from '@/components/Faq'
-import FinalCta from '@/components/FinalCta'
+import Close from '@/components/Close'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -15,13 +13,11 @@ export default function Home() {
       <Navbar />
       <main className="pb-24 md:pb-0">
         <Hero />
-        <Problem />
-        <HowItWorks />
-        <Features />
-        <Comparison />
-        <SocialProof />
+        <Gap />
+        <How />
+        <Voices />
         <Faq />
-        <FinalCta />
+        <Close />
       </main>
       <Footer />
     </>

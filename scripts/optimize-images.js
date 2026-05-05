@@ -15,6 +15,7 @@ const jobs = [
   { src: 'app-screenshot-goals.png', out: 'app-screenshot-goals', width: 600, quality: 78 },
   { src: 'app-screenshot-chat.png', out: 'app-screenshot-chat', width: 600, quality: 78 },
   { src: 'peek-icon.png', out: 'peek-icon', width: 128, quality: 85 },
+  { src: '1.png', out: 'mascot-party', width: 480, quality: 90 },
 ]
 
 async function run() {

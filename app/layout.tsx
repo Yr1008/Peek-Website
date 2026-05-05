@@ -6,81 +6,54 @@ import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Peek. Know the why behind every dollar.',
+  title: 'peek — your bank shows what. peek shows why.',
   description:
-    'Your bank shows what you spent. Peek shows you why. The money app for people who want clarity without the spreadsheet. Free on iOS.',
+    'peek closes the gap between what you spent and why you spent it. a top personal finance app in the us & canada. free on ios, secured by plaid.',
   keywords: [
     'personal finance app',
-    'anti budgeting',
-    'money clarity',
     'spending awareness',
+    'money clarity',
+    'anti budgeting',
     'iOS finance app',
     'peek money',
   ],
-  authors: [{ name: 'Peek' }],
+  authors: [{ name: 'peek' }],
   openGraph: {
-    title: 'Peek. Know the why behind every dollar.',
-    description:
-      'Your bank shows what you spent. Peek shows you why. The money app for people who want clarity without the spreadsheet.',
+    title: 'peek — your bank shows what. peek shows why.',
+    description: 'stop tracking. start understanding yourself.',
     type: 'website',
     url: SITE_URL,
-    siteName: 'Peek',
+    siteName: 'peek',
     locale: 'en_US',
-    images: [
-      {
-        url: '/images/peek-logo-square.svg',
-        width: 512,
-        height: 512,
-        alt: 'Peek',
-      },
-    ],
+    images: [{ url: '/images/peek-logo-square.svg', width: 512, height: 512, alt: 'peek' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peek. Know the why behind every dollar.',
-    description:
-      'Your bank shows what you spent. Peek shows you why. Free on iOS.',
+    title: 'peek — your bank shows what. peek shows why.',
+    description: 'stop tracking. start understanding yourself.',
   },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Peek',
-  },
-  icons: {
-    icon: '/images/peek-icon.png',
-    apple: '/images/peek-icon.png',
-  },
-  alternates: {
-    canonical: SITE_URL,
-  },
+  appleWebApp: { capable: true, statusBarStyle: 'default', title: 'peek' },
+  icons: { icon: '/images/peek-icon.png', apple: '/images/peek-icon.png' },
+  alternates: { canonical: SITE_URL },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#FFF9F6',
+  themeColor: '#F2EBD9',
 }
 
 const mobileAppSchema = {
   '@context': 'https://schema.org',
   '@type': 'MobileApplication',
   name: 'Peek',
-  operatingSystem: 'iOS',
   applicationCategory: 'FinanceApplication',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.4',
-    ratingCount: '180',
-  },
-  url: APP_STORE_URL,
-  description:
-    'Peek is the money app that asks the soft questions, so you stop feeling lost about your spending.',
+  operatingSystem: 'iOS',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', ratingCount: '1240' },
+  url: SITE_URL,
+  downloadUrl: APP_STORE_URL,
 }
 
 export default function RootLayout({
@@ -91,7 +64,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* iOS Smart App Banner */}
         <meta
           name="apple-itunes-app"
           content={`app-id=${APP_STORE_ID}, app-argument=${SITE_URL}`}
@@ -104,9 +76,8 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap"
         />
-        {/* Preload LCP hero image */}
         <link
           rel="preload"
           as="image"
@@ -119,7 +90,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(mobileAppSchema) }}
         />
       </head>
-      <body className="font-body antialiased">
+      <body>
+        <div className="grain" aria-hidden="true" />
+        <div className="prog" id="prog" aria-hidden="true" />
         {children}
         <StickyMobileCta />
         <Analytics />

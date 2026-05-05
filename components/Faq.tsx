@@ -1,79 +1,144 @@
 const faqs = [
   {
-    q: 'Is my financial data safe?',
-    a: 'Yes. Peek uses Plaid for bank connections, which is the same infrastructure Venmo and Chime rely on. It is read-only, bank-level encrypted, and Peek cannot move money anywhere. We never sell your data.',
+    q: 'is connecting my bank actually safe?',
+    a: 'yes. peek uses plaid, the same encrypted connector your bank, venmo, and robinhood already use. read-only access. we never see your password.',
+    em: 'plaid',
   },
   {
-    q: 'What does Peek cost?',
-    a: 'Peek is free to download on iOS. There is a premium tier inside the app if you want deeper insights and unlimited AI coach conversations. No paywall before you can try it.',
+    q: 'is peek free?',
+    a: 'the core app is free on ios. the feed, the tagging, the spending story. all free.',
+    em: 'free on ios.',
   },
   {
-    q: 'How is this different from Mint, Monarch, or Copilot?',
-    a: 'Those apps categorize what you spent. Peek asks why you spent it. They show you a pie chart. Peek shows you a pattern. It is a different question, which makes it a different product.',
+    q: 'how long does it take?',
+    a: '30 seconds to connect a bank. 5 minutes a day after that.',
+    em: '30 seconds',
   },
   {
-    q: 'Do I have to budget to use Peek?',
-    a: 'No. Peek is anti-budget on purpose. Instead of caps and categories, you get funds and soft guardrails. If budgeting has never stuck for you, that is the point.',
+    q: 'will it nag or shame me?',
+    a: 'no. peek’s whole thing is noticing without scolding. no good or bad. just patterns, plainly stated.',
+    em: 'noticing without scolding.',
   },
   {
-    q: 'Is Peek on Android?',
-    a: 'Not yet. We are iOS only while we get the product right. If you are on Android, drop your email in the App Store description link and we will tell you when it lands.',
+    q: 'android?',
+    a: 'coming. ios first.',
+    em: '',
   },
   {
-    q: 'What if I just want to look around first?',
-    a: 'Download, poke around, connect one account if you want, disconnect it if you do not. No pressure. The whole product is designed so you can leave whenever without losing anything.',
+    q: 'how is this different from mint, monarch, or copilot?',
+    a: 'those apps categorize what you spent. peek asks why you spent it. they show you a pie chart. peek shows you a pattern.',
+    em: 'why',
   },
 ]
 
+function highlight(text: string, em: string) {
+  if (!em) return text
+  const idx = text.toLowerCase().indexOf(em.toLowerCase())
+  if (idx === -1) return text
+  return (
+    <>
+      {text.slice(0, idx)}
+      <em
+        style={{
+          fontStyle: 'italic',
+          color: 'var(--ink)',
+          fontWeight: 500,
+        }}
+      >
+        {text.slice(idx, idx + em.length)}
+      </em>
+      {text.slice(idx + em.length)}
+    </>
+  )
+}
+
 export default function Faq() {
   return (
-    <section id="faq" className="relative py-20 md:py-28 px-5 md:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center reveal">
-          <span className="eyebrow">FAQ</span>
-          <h2 className="mt-5 text-[2rem] sm:text-4xl md:text-[2.75rem] leading-[1.1] text-balance">
-            The questions you&rsquo;d ask
-            <br className="hidden sm:block" />{' '}
-            <span className="accent-serif">before downloading.</span>
-          </h2>
-        </div>
+    <section
+      id="faq"
+      style={{
+        background: 'var(--cream-2)',
+        padding: 'clamp(80px, 14vh, 140px) var(--pad)',
+      }}
+    >
+      <div style={{ maxWidth: 820, margin: '0 auto' }}>
+        <span className="eyebrow">questions, plain answers</span>
+        <h2
+          style={{
+            fontFamily: 'var(--serif)',
+            fontSize: 'clamp(38px, 5vw, 64px)',
+            lineHeight: 1,
+            letterSpacing: '-0.025em',
+            fontWeight: 400,
+            margin: '14px 0 36px',
+          }}
+        >
+          things{' '}
+          <em
+            style={{
+              fontStyle: 'italic',
+              color: 'var(--peach)',
+              fontWeight: 500,
+            }}
+          >
+            people ask.
+          </em>
+        </h2>
 
-        <div className="mt-12 md:mt-16 flex flex-col gap-3 reveal">
-          {faqs.map((f) => (
-            <details
-              key={f.q}
-              className="group card px-6 py-5 md:px-7 md:py-6 cursor-pointer"
-              data-faq-question={f.q}
+        {faqs.map((f) => (
+          <details
+            key={f.q}
+            className="faqi"
+            data-faq-question={f.q}
+            style={{
+              borderBottom: '1px solid rgba(42,19,82,0.12)',
+              padding: '6px 0',
+            }}
+          >
+            <summary
+              style={{
+                listStyle: 'none',
+                cursor: 'pointer',
+                padding: '22px 36px 22px 0',
+                fontFamily: 'var(--serif)',
+                fontSize: 'clamp(20px, 2.4vw, 26px)',
+                fontWeight: 500,
+                letterSpacing: '-0.015em',
+                position: 'relative',
+                transition: 'color 220ms',
+              }}
             >
-              <summary className="flex items-center justify-between gap-4 list-none cursor-pointer select-none">
-                <span className="font-heading text-lg md:text-xl text-text-primary pr-4">
-                  {f.q}
-                </span>
-                <span
-                  className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 group-open:rotate-45"
-                  style={{
-                    background: 'rgba(255, 122, 80, 0.1)',
-                    color: 'var(--peek-orange-dark)',
-                  }}
-                  aria-hidden="true"
-                >
-                  <svg width="14" height="14" viewBox="0 0 14 14">
-                    <path
-                      d="M7 2v10M2 7h10"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-              </summary>
-              <p className="mt-4 text-text-secondary leading-relaxed text-pretty">
-                {f.a}
-              </p>
-            </details>
-          ))}
-        </div>
+              {f.q}
+            </summary>
+            <p
+              style={{
+                margin: '0 0 22px',
+                fontSize: 16,
+                lineHeight: 1.55,
+                color: 'var(--ink-2)',
+                maxWidth: 680,
+              }}
+            >
+              {highlight(f.a, f.em)}
+            </p>
+          </details>
+        ))}
       </div>
+
+      <style>{`
+        .faqi summary::-webkit-details-marker { display: none; }
+        .faqi summary::after {
+          content: "+";
+          position: absolute;
+          right: 4px; top: 50%;
+          transform: translateY(-50%);
+          font-size: 28px; font-weight: 300;
+          color: var(--ink-soft);
+          transition: transform 240ms cubic-bezier(0.2,0.8,0.2,1), color 240ms;
+        }
+        .faqi[open] summary::after { transform: translateY(-50%) rotate(45deg); color: var(--peach); }
+        .faqi summary:hover { color: var(--peach); }
+      `}</style>
     </section>
   )
 }

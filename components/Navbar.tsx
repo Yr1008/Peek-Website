@@ -1,56 +1,86 @@
-import AppStoreButton from './AppStoreButton'
+import { APP_STORE_URL } from '@/lib/constants'
+import AppleIcon from './AppleIcon'
 
 export default function Navbar() {
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-40 glass-soft safe-top"
+      className="sticky top-0 z-40 flex items-center justify-between safe-top"
       style={{
-        background: 'rgba(255, 249, 246, 0.78)',
-        borderBottom: '1px solid rgba(45, 35, 25, 0.06)',
+        padding: '14px var(--pad)',
+        background: 'rgba(242, 235, 217, 0.78)',
+        backdropFilter: 'blur(14px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(14px) saturate(140%)',
+        borderBottom: '1px solid rgba(42, 19, 82, 0.06)',
       }}
     >
-      <nav
-        className="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between h-16 md:h-[72px]"
-        aria-label="Primary"
+      <a
+        href="#top"
+        aria-label="peek home"
+        className="flex items-center gap-2"
+        style={{
+          fontFamily: 'var(--serif)',
+          fontWeight: 700,
+          fontSize: 22,
+          fontStyle: 'italic',
+          letterSpacing: '-0.02em',
+        }}
       >
-        <a
-          href="#top"
-          className="flex items-center gap-2"
-          aria-label="Peek home"
-        >
-          <picture>
-            <source srcSet="/images/optimized/peek-icon.webp" type="image/webp" />
-            <img
-              src="/images/peek-icon.png"
-              alt=""
-              width={32}
-              height={32}
-              className="rounded-[8px]"
-              loading="eager"
-              decoding="async"
-            />
-          </picture>
-          <span className="font-heading text-xl text-text-primary">peek</span>
-        </a>
-
-        <div className="flex items-center gap-2 md:gap-3">
-          <a
-            href="#how-it-works"
-            className="hidden md:inline-flex btn-ghost"
-          >
-            How it works
-          </a>
-          <a href="#faq" className="hidden md:inline-flex btn-ghost">
-            FAQ
-          </a>
-          <AppStoreButton
-            placement="nav"
-            id="cta-nav"
-            label="Download"
-            size="sm"
+        <picture>
+          <source srcSet="/images/optimized/peek-icon.webp" type="image/webp" />
+          <img
+            src="/images/peek-icon.png"
+            alt=""
+            width={28}
+            height={28}
+            style={{ borderRadius: 8 }}
+            loading="eager"
+            decoding="async"
           />
-        </div>
+        </picture>
+        <span>peek</span>
+      </a>
+
+      <nav
+        className="hidden md:flex"
+        style={{ gap: 28, fontSize: 14, color: 'var(--ink-soft)', fontWeight: 500 }}
+        aria-label="primary"
+      >
+        <a href="#why" className="nav-link">why peek</a>
+        <a href="#how" className="nav-link">how it works</a>
+        <a href="#voices" className="nav-link">on tiktok</a>
+        <a href="#faq" className="nav-link">faq</a>
       </nav>
+
+      <a
+        href={APP_STORE_URL}
+        id="cta-nav"
+        data-cta-placement="nav"
+        data-mag
+        className="inline-flex items-center gap-1.5 transition-all"
+        style={{
+          background: 'var(--ink)',
+          color: 'var(--cream)',
+          padding: '9px 18px',
+          borderRadius: 999,
+          fontSize: 14,
+          fontWeight: 600,
+        }}
+        aria-label="Get peek. Opens App Store."
+      >
+        <AppleIcon size={14} />
+        get peek
+      </a>
+
+      <style>{`
+        .nav-link { position: relative; padding: 4px 0; transition: color 200ms; }
+        .nav-link::after {
+          content: ""; position: absolute; left: 0; bottom: -2px;
+          height: 1px; width: 0; background: var(--peach);
+          transition: width 240ms cubic-bezier(0.2,0.8,0.2,1);
+        }
+        .nav-link:hover { color: var(--ink); }
+        .nav-link:hover::after { width: 100%; }
+      `}</style>
     </header>
   )
 }
