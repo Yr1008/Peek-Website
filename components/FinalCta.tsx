@@ -6,8 +6,8 @@ export default function FinalCta() {
   return (
     <section className="cta">
       <div className="wrap">
-        <div className="cta__banner r">
-          <span className="cta__brow">tag your first charge tonight</span>
+        <div className="cta__banner reveal-up">
+          <span className="cta__brow">one more thing</span>
           <h2 className="cta__h">
             See <em>why</em> you spend.
             <br />
@@ -18,16 +18,15 @@ export default function FinalCta() {
             Cancel any time. There&rsquo;s nothing to cancel.
           </p>
           <a
-            className="btn btn--primary btn--lg"
+            className="btn btn--primary btn--big"
             id="cta-final"
             data-cta-placement="final"
-            data-mag
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener"
           >
             <span className="btn__icon">
-              <AppleIcon />
+              <AppleIcon size={20} />
             </span>
             Get Peek. Free on iOS.
             <span className="btn__arrow">→</span>
@@ -37,29 +36,17 @@ export default function FinalCta() {
             <PlaidMini light />
           </div>
 
-          <div className="cta__phones" aria-hidden="true">
-            <div className="cta__phone cta__phone--l">
+          <div className="cta__mascots" aria-hidden="true">
+            <div className="cta__mascot cta__mascot--l">
               <picture>
-                <source srcSet="/images/optimized/store-screen-2.webp" type="image/webp" />
-                <img
-                  src="/images/uploads/store-screen-2.png"
-                  alt=""
-                  width={720}
-                  height={1480}
-                  loading="lazy"
-                />
+                <source srcSet="/images/optimized/peek-3d-left.webp" type="image/webp" />
+                <img src="/images/uploads/mascots/peek-3d-left.png" alt="" loading="lazy" />
               </picture>
             </div>
-            <div className="cta__phone cta__phone--r">
+            <div className="cta__mascot cta__mascot--r">
               <picture>
-                <source srcSet="/images/optimized/store-screen-4.webp" type="image/webp" />
-                <img
-                  src="/images/uploads/store-screen-4.png"
-                  alt=""
-                  width={720}
-                  height={1480}
-                  loading="lazy"
-                />
+                <source srcSet="/images/optimized/peek-3d-right.webp" type="image/webp" />
+                <img src="/images/uploads/mascots/peek-3d-right.png" alt="" loading="lazy" />
               </picture>
             </div>
           </div>

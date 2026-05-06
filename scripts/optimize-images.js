@@ -15,11 +15,32 @@ const jobs = [
   { src: '1.png', out: 'mascot-party', width: 480, quality: 90 },
   { src: 'hero-stressed-person.png', out: 'hero-stressed-person', width: 600, quality: 80 },
   { src: 'hero-street-bg.png', out: 'hero-street-bg', width: 1600, quality: 70 },
-  { src: 'uploads/store-screen-1.png', out: 'store-screen-1', width: 720, quality: 82 },
-  { src: 'uploads/store-screen-2.png', out: 'store-screen-2', width: 720, quality: 82 },
-  { src: 'uploads/store-screen-3.png', out: 'store-screen-3', width: 720, quality: 82 },
-  { src: 'uploads/store-screen-4.png', out: 'store-screen-4', width: 720, quality: 82 },
   { src: 'uploads/lifestyle-laugh.png', out: 'lifestyle-laugh', width: 1600, quality: 75 },
+
+  // New canonical app screens
+  { src: 'uploads/screen-tags.png',     out: 'screen-tags',     width: 720, quality: 82 },
+  { src: 'uploads/screen-caps.png',     out: 'screen-caps',     width: 720, quality: 82 },
+  { src: 'uploads/screen-blindbox.png', out: 'screen-blindbox', width: 720, quality: 82 },
+  { src: 'uploads/screen-story.png',    out: 'screen-story',    width: 720, quality: 82 },
+  { src: 'uploads/screen-chat.png',     out: 'screen-chat',     width: 720, quality: 82 },
+  { src: 'uploads/screen-checkin.png',  out: 'screen-checkin',  width: 720, quality: 82 },
+  { src: 'uploads/screen-patterns.png', out: 'screen-patterns', width: 720, quality: 82 },
+  { src: 'uploads/screen-stickers.png', out: 'screen-stickers', width: 720, quality: 82 },
+
+  // 3D mascot
+  { src: 'uploads/mascots/peek-3d-left.png',  out: 'peek-3d-left',  width: 480, quality: 90 },
+  { src: 'uploads/mascots/peek-3d-right.png', out: 'peek-3d-right', width: 480, quality: 90 },
+
+  // Sticker icons (small, for inline collage)
+  { src: 'uploads/stickers/croissant.png', out: 'st-croissant', width: 220, quality: 90 },
+  { src: 'uploads/stickers/pizza.png',     out: 'st-pizza',     width: 220, quality: 90 },
+  { src: 'uploads/stickers/tea.png',       out: 'st-tea',       width: 220, quality: 90 },
+  { src: 'uploads/stickers/teahouse.png',  out: 'st-teahouse',  width: 220, quality: 90 },
+  { src: 'uploads/stickers/shoes.png',     out: 'st-shoes',     width: 220, quality: 90 },
+  { src: 'uploads/stickers/flower.png',    out: 'st-flower',    width: 220, quality: 90 },
+  { src: 'uploads/stickers/glasses.png',   out: 'st-glasses',   width: 220, quality: 90 },
+  { src: 'uploads/stickers/latest.png',    out: 'st-latest',    width: 220, quality: 90 },
+  { src: 'uploads/stickers/Container.png', out: 'st-container', width: 220, quality: 90 },
 ]
 
 async function run() {

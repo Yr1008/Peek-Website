@@ -1,66 +1,60 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
 import PlaidMini from './PlaidMini'
-import HeroCycle from './HeroCycle'
+
+const cycleWords: { tone: string; text: string }[] = [
+  { tone: 'why', text: 'why?' },
+  { tone: 'treat', text: 'a treat?' },
+  { tone: 'social', text: 'for friends?' },
+  { tone: 'ritual', text: 'routine?' },
+  { tone: 'conv', text: 'just easier?' },
+]
 
 export default function Hero() {
-  const phoneRef = useRef<HTMLDivElement | null>(null)
-  const [reduce, setReduce] = useState(false)
+  const [active, setActive] = useState(0)
 
   useEffect(() => {
-    const m = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduce(m.matches)
-    const fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches
-    if (m.matches || !fineHover) return
-    const el = phoneRef.current
-    if (!el) return
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect()
-      const cx = r.left + r.width / 2
-      const cy = r.top + r.height / 2
-      const x = (e.clientX - cx) / r.width
-      const y = (e.clientY - cy) / r.height
-      el.style.transform = `rotate(-2.5deg) rotateY(${x * 8}deg) rotateX(${-y * 6}deg)`
-    }
-    const onLeave = () => {
-      el.style.transform = ''
-    }
-    document.addEventListener('mousemove', onMove)
-    el.addEventListener('mouseleave', onLeave)
-    return () => {
-      document.removeEventListener('mousemove', onMove)
-      el.removeEventListener('mouseleave', onLeave)
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = window.setInterval(
+      () => setActive((i) => (i + 1) % cycleWords.length),
+      2200
+    )
+    return () => window.clearInterval(id)
   }, [])
 
   return (
     <section className="hero" id="top">
-      <div className="hero__orb hero__orb--peach" aria-hidden="true" />
-      <div className="hero__orb hero__orb--pink" aria-hidden="true" />
-
       <div className="wrap hero__grid">
         <div className="hero__copy">
-          <span className="eyebrow hero__brow">
-            <span className="dot" />
+          <span className="hero__brow">
             not a budget. not a tracker. <em>a money clarity app.</em>
           </span>
 
-          <h1 className="h-display hero__h1" style={{ marginTop: 18 }}>
-            you spent it.
-            <br />
-            but <HeroCycle />
-          </h1>
-
-          <p className="hero__pos">
-            Your bank shows you <em>what</em> you spent.
+          <h1 className="hero__h1">
+            Your bank shows you <em>what</em>.
             <br />
             Peek shows you <em>why.</em>
+          </h1>
+
+          <p className="hero__sub">
+            you spent it. but{' '}
+            <span className="hero__cycle" aria-live="polite">
+              {cycleWords.map((w, i) => (
+                <span
+                  key={w.tone}
+                  className={`hero__cycle__word${i === active ? ' is-active' : ''}`}
+                  data-tone={w.tone}
+                >
+                  {w.text}
+                </span>
+              ))}
+            </span>
           </p>
 
-          <p className="lead hero__lead">
+          <p className="hero__lead">
             Tap one of four tags. <strong>Self Reward, Social, Ritual,
             Convenience.</strong> Three days in, the patterns finally make
             sense. No spreadsheets. No guilt.
@@ -68,10 +62,9 @@ export default function Hero() {
 
           <div className="hero__cta">
             <a
-              className="btn btn--primary btn--lg"
+              className="btn btn--primary"
               id="cta-hero"
               data-cta-placement="hero"
-              data-mag
               href={APP_STORE_URL}
               target="_blank"
               rel="noopener"
@@ -96,25 +89,16 @@ export default function Hero() {
             <span className="hero__meta-sep">·</span>
             <PlaidMini />
           </div>
-
-          <a href="#how" className="hero__cue" aria-label="See how it works">
-            see why your spending is what it is
-          </a>
         </div>
 
-        <div className="hero__visual" id="hero-visual">
+        <div className="hero__visual">
           <div className="hero__phone-wrap">
-            <div
-              className="hero__phone"
-              id="hero-phone"
-              ref={phoneRef}
-              style={{ animation: reduce ? 'none' : undefined }}
-            >
+            <div className="hero__phone">
               <picture>
-                <source srcSet="/images/optimized/store-screen-1.webp" type="image/webp" />
+                <source srcSet="/images/optimized/screen-tags.webp" type="image/webp" />
                 <img
-                  src="/images/uploads/store-screen-1.png"
-                  alt="Peek app showing the tag-the-why moment for a purchase"
+                  src="/images/uploads/screen-tags.png"
+                  alt="Peek app: stop tracking, start seeing why"
                   width={720}
                   height={1480}
                   loading="eager"
@@ -125,41 +109,41 @@ export default function Hero() {
               </picture>
             </div>
 
-            <div className="receipt receipt--1">
-              <div className="receipt__row">
+            <div className="hero__receipt hero__receipt--1">
+              <div className="hero__receipt-row">
                 <span
-                  className="receipt__pill"
+                  className="hero__receipt-pill"
                   style={{ background: '#FFE0CF', color: 'var(--peek-2)' }}
                 >
                   self reward
                 </span>
-                <span className="receipt__amt">$84</span>
+                <span className="hero__receipt-amt">$84</span>
               </div>
-              <span className="receipt__why">&ldquo;new sambas&rdquo;</span>
+              <span className="hero__receipt-why">&ldquo;new sambas&rdquo;</span>
             </div>
-            <div className="receipt receipt--2">
-              <div className="receipt__row">
+            <div className="hero__receipt hero__receipt--2">
+              <div className="hero__receipt-row">
                 <span
-                  className="receipt__pill"
+                  className="hero__receipt-pill"
                   style={{ background: '#E1EFD7', color: '#3B7A3F' }}
                 >
                   ritual
                 </span>
-                <span className="receipt__amt">$5.75</span>
+                <span className="hero__receipt-amt">$5.75</span>
               </div>
-              <span className="receipt__why">blank street latte</span>
+              <span className="hero__receipt-why">blank street latte</span>
             </div>
-            <div className="receipt receipt--4">
-              <div className="receipt__row">
+            <div className="hero__receipt hero__receipt--3">
+              <div className="hero__receipt-row">
                 <span
-                  className="receipt__pill"
+                  className="hero__receipt-pill"
                   style={{ background: '#FAD8E5', color: '#B23F6E' }}
                 >
                   social
                 </span>
-                <span className="receipt__amt">$32</span>
+                <span className="hero__receipt-amt">$32</span>
               </div>
-              <span className="receipt__why">brunch w/ tess</span>
+              <span className="hero__receipt-why">brunch w/ tess</span>
             </div>
           </div>
         </div>

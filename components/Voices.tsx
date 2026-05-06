@@ -1,40 +1,52 @@
+import { APP_STORE_URL } from '@/lib/constants'
+import AppleIcon from './AppleIcon'
+
 const tks = [
   { src: '/images/tiktok/tiktok-1.jpg', handle: '@lindsay<3', rot: -3 },
   { src: '/images/tiktok/tiktok-2.jpg', handle: '@chloe', rot: 2, up: true },
   { src: '/images/tiktok/tiktok-3.jpg', handle: '@financeswithella', rot: -2 },
   { src: '/images/tiktok/tiktok-4.jpg', handle: '@madison · #peekmoney', rot: 3, up: true },
-  { src: '/images/tiktok/tiktok-5.jpg', handle: '@addison', rot: -3 },
 ]
 
 export default function Voices() {
   return (
     <section className="proof" id="proof">
       <div className="wrap">
-        <div className="proof__head r">
-          <span className="eyebrow">
-            <span className="dot" /> on tiktok · #peekapp
+        <div className="proof__head reveal-up">
+          <span className="eyebrow" style={{ justifyContent: 'center' }}>
+            <span className="dot" /> on tiktok this week
           </span>
-          <h2 className="h-section" style={{ marginTop: 20 }}>
-            The girls
-            <br />
-            <em>get it.</em>
+          <h2 className="h-section" style={{ marginTop: 14 }}>
+            People who finally <em>get it.</em>
           </h2>
-          <p className="lead" style={{ marginTop: 18, maxWidth: 560 }}>
+          <p className="lead" style={{ margin: '18px auto 0' }}>
             Real videos from people figuring it out in public, using Peek to
             make sense of where the money goes.
           </p>
         </div>
 
-        <div className="proof__row">
+        <div className="voices__stats reveal-up">
+          <span>
+            <strong>47k+</strong> downloads
+          </span>
+          <span>·</span>
+          <span>
+            <strong>3M+</strong> monthly TikTok views
+          </span>
+          <span>·</span>
+          <code>#peekapp</code>
+        </div>
+
+        <div className="proof__row reveal-up">
           {tks.map((t, i) => (
             <div
               key={i}
-              className={`tk r${t.up ? ' tk--up' : ''}`}
+              className={`tk${t.up ? ' tk--up' : ''}`}
               style={{ ['--rot' as string]: `${t.rot}deg` } as React.CSSProperties}
             >
               <img
                 src={t.src}
-                alt={`TikTok user ${t.handle.replace('@', '').split(' ')[0]} sharing peek app`}
+                alt={`TikTok creator ${t.handle.replace('@', '').split(' ')[0]} sharing peek`}
                 loading="lazy"
                 decoding="async"
               />
@@ -43,11 +55,25 @@ export default function Voices() {
           ))}
         </div>
 
-        <p className="proof__foot r">
-          <span>scroll the pile · search</span>
-          <code>#peekapp</code>
-          <span>on tiktok</span>
-        </p>
+        <div className="voices__mid reveal-up">
+          <h3 className="voices__mid-h">
+            Tag your first charge tonight. <em>Free on iOS.</em>
+          </h3>
+          <a
+            className="btn btn--primary"
+            id="cta-mid"
+            data-cta-placement="mid"
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener"
+          >
+            <span className="btn__icon">
+              <AppleIcon size={16} />
+            </span>
+            Get Peek
+            <span className="btn__arrow">→</span>
+          </a>
+        </div>
       </div>
     </section>
   )

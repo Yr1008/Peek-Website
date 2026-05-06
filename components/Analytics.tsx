@@ -38,25 +38,9 @@ export default function Analytics() {
     }
     document.addEventListener('click', onClick, { passive: true })
 
-    // 2. FAQ toggles
-    const onToggle = (e: Event) => {
-      const el = e.target as HTMLDetailsElement
-      if (!(el instanceof HTMLDetailsElement)) return
-      if (!el.hasAttribute('data-faq-question')) return
-      if (el.open)
-        track('faq_open', {
-          question: el.getAttribute('data-faq-question') || '',
-        })
-    }
-    const detailsEls = document.querySelectorAll<HTMLDetailsElement>(
-      'details[data-faq-question]'
-    )
-    detailsEls.forEach((d) => d.addEventListener('toggle', onToggle))
-
-    // 3. Scroll depth + progress bar
+    // 2. Scroll depth milestones
     const milestones = [25, 50, 75, 100]
     const fired = new Set<number>()
-    const prog = document.getElementById('prog')
     let ticking = false
     const onScroll = () => {
       if (ticking) return
@@ -64,7 +48,6 @@ export default function Analytics() {
       requestAnimationFrame(() => {
         const h = document.documentElement.scrollHeight - window.innerHeight
         const pct = h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0
-        if (prog) prog.style.width = pct.toFixed(2) + '%'
         for (const m of milestones) {
           if (pct >= m && !fired.has(m)) {
             fired.add(m)
@@ -77,7 +60,7 @@ export default function Analytics() {
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
 
-    // 4. Reveal-on-scroll
+    // 3. Reveal-on-scroll
     let io: IntersectionObserver | null = null
     if ('IntersectionObserver' in window) {
       io = new IntersectionObserver(
@@ -91,76 +74,20 @@ export default function Analytics() {
         },
         { rootMargin: '0px 0px -10% 0px', threshold: 0.18 }
       )
-      document
-        .querySelectorAll('.reveal-up')
-        .forEach((el) => io!.observe(el))
+      document.querySelectorAll('.reveal-up').forEach((el) => io!.observe(el))
     } else {
-      document
-        .querySelectorAll('.reveal-up')
-        .forEach((el) => el.classList.add('is-in'))
+      document.querySelectorAll('.reveal-up').forEach((el) => el.classList.add('is-in'))
     }
 
-    // 5. Magnetic buttons (subtle pull on hover)
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-    const fineHover = window.matchMedia('(hover: hover) and (pointer: fine)')
-      .matches
-    const mags: Array<{
-      el: HTMLElement
-      onMove: (e: MouseEvent) => void
-      onLeave: () => void
-    }> = []
-    if (!reduceMotion && fineHover) {
-      document.querySelectorAll<HTMLElement>('[data-mag]').forEach((btn) => {
-        const onMove = (e: MouseEvent) => {
-          const r = btn.getBoundingClientRect()
-          const x = (e.clientX - r.left - r.width / 2) * 0.18
-          const y = (e.clientY - r.top - r.height / 2) * 0.18
-          btn.style.transform = `translate(${x}px, ${y}px)`
-        }
-        const onLeave = () => {
-          btn.style.transform = ''
-        }
-        btn.addEventListener('mousemove', onMove)
-        btn.addEventListener('mouseleave', onLeave)
-        mags.push({ el: btn, onMove, onLeave })
-      })
+    // 4. Tagger interaction tracking
+    const taggerChips = document.querySelectorAll<HTMLButtonElement>('.tag-chip')
+    const onChipClick = (e: Event) => {
+      const t = e.currentTarget as HTMLElement
+      track('tagger_select', { tone: t.dataset.tone || 'unknown' })
     }
+    taggerChips.forEach((c) => c.addEventListener('click', onChipClick))
 
-    // 6. Cursor blob follower
-    let cursor: HTMLElement | null = document.getElementById('cursor')
-    if (!cursor && fineHover && !reduceMotion) {
-      cursor = document.createElement('div')
-      cursor.id = 'cursor'
-      cursor.className = 'cursor'
-      cursor.setAttribute('aria-hidden', 'true')
-      document.body.appendChild(cursor)
-    }
-    let onCursorMove: ((e: MouseEvent) => void) | null = null
-    let onCursorOver: ((e: MouseEvent) => void) | null = null
-    let onCursorOut: ((e: MouseEvent) => void) | null = null
-    if (cursor && fineHover && !reduceMotion) {
-      const c = cursor
-      onCursorMove = (e: MouseEvent) => {
-        c.style.left = e.clientX + 'px'
-        c.style.top = e.clientY + 'px'
-        c.classList.add('is-on')
-      }
-      onCursorOver = (e: MouseEvent) => {
-        const t = (e.target as HTMLElement)?.closest('a, button')
-        if (t) c.classList.add('is-link')
-      }
-      onCursorOut = (e: MouseEvent) => {
-        const t = (e.target as HTMLElement)?.closest('a, button')
-        if (t) c.classList.remove('is-link')
-      }
-      document.addEventListener('mousemove', onCursorMove)
-      document.addEventListener('mouseover', onCursorOver)
-      document.addEventListener('mouseout', onCursorOut)
-    }
-
-    // 7. Nav scroll-state for shadow line
+    // 5. Nav scroll-state for shadow line
     const nav = document.getElementById('nav')
     const onNavScroll = () => {
       if (!nav) return
@@ -172,17 +99,10 @@ export default function Analytics() {
 
     return () => {
       document.removeEventListener('click', onClick)
-      detailsEls.forEach((d) => d.removeEventListener('toggle', onToggle))
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('scroll', onNavScroll)
       io?.disconnect()
-      for (const m of mags) {
-        m.el.removeEventListener('mousemove', m.onMove)
-        m.el.removeEventListener('mouseleave', m.onLeave)
-      }
-      if (onCursorMove) document.removeEventListener('mousemove', onCursorMove)
-      if (onCursorOver) document.removeEventListener('mouseover', onCursorOver)
-      if (onCursorOut) document.removeEventListener('mouseout', onCursorOut)
+      taggerChips.forEach((c) => c.removeEventListener('click', onChipClick))
     }
   }, [])
 
