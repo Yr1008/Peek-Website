@@ -5,19 +5,22 @@ export default function HumanMoment() {
   return (
     <section className="moment">
       <div className="moment__bg">
-        <img
-          src="/images/hero-street-bg.png"
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet="/images/optimized/lifestyle-laugh.webp" type="image/webp" />
+          <img
+            src="/images/uploads/lifestyle-laugh.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </div>
       <div className="wrap moment__in r">
         <span className="moment__brow">the calm side of money</span>
         <h2 className="moment__h">
           <em>Less</em> dread.
           <br />
-          More <em>oh — that makes sense.</em>
+          More <em>oh, that makes sense.</em>
         </h2>
         <p className="moment__p">
           Peek isn&rsquo;t going to make you &ldquo;good with money.&rdquo;
@@ -25,9 +28,10 @@ export default function HumanMoment() {
           the spending part. The rest gets easier.
         </p>
         <a
-          className="btn btn--primary"
+          className="btn btn--primary btn--lg"
           id="cta-moment"
           data-cta-placement="moment"
+          data-mag
           href={APP_STORE_URL}
           target="_blank"
           rel="noopener"
@@ -35,7 +39,7 @@ export default function HumanMoment() {
           <span className="btn__icon">
             <AppleIcon />
           </span>
-          Get Peek — free on iOS
+          Get Peek. Free on iOS.
           <span className="btn__arrow">→</span>
         </a>
       </div>

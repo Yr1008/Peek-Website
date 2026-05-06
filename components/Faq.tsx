@@ -3,7 +3,7 @@ const faqs = [
     q: 'Is connecting my bank actually safe?',
     a: (
       <>
-        Yes. Peek uses <em>Plaid</em> — the same encrypted connector your bank,
+        Yes. Peek uses <em>Plaid</em>, the same encrypted connector your bank,
         Venmo, and Robinhood use. Peek never sees your bank login, never
         stores your credentials, and we have <em>read-only</em> access to
         transactions. We can&rsquo;t move money. Even if we wanted to.
@@ -15,7 +15,7 @@ const faqs = [
     a: (
       <>
         The core app is <em>free on iOS.</em> Tagging, caps, the spending
-        story — all free. We may add a paid tier later for power features; the
+        story. All free. We may add a paid tier later for power features. The
         basics will stay free.
       </>
     ),
@@ -44,7 +44,7 @@ const faqs = [
     q: 'What about Android?',
     a: (
       <>
-        Coming. <em>iOS first</em> — we wanted to build the app properly for
+        Coming. <em>iOS first.</em> We wanted to build the app properly for
         one platform before splitting attention. Drop your email at the App
         Store link and we&rsquo;ll tell you when Android lands.
       </>

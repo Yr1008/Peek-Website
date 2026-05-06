@@ -4,6 +4,7 @@ import Marquee from '@/components/Marquee'
 import Problem from '@/components/Problem'
 import How from '@/components/How'
 import Voices from '@/components/Voices'
+import MidCta from '@/components/MidCta'
 import Tags from '@/components/Tags'
 import Caps from '@/components/Caps'
 import BlindBox from '@/components/BlindBox'
@@ -23,6 +24,7 @@ export default function Home() {
         <Problem />
         <How />
         <Voices />
+        <MidCta />
         <Tags />
         <Caps />
         <BlindBox />

@@ -1196,3 +1196,120 @@ main, .nav, .foot, .sticky-cta { position: relative; z-index: 2; }
 @media (prefers-reduced-motion: reduce) {
   .reveal-up { opacity:1; transform:none; }
 }
+
+/* ═══════════════ HERO overrides + ambient orbs ═══════════════ */
+.hero{
+  position:relative;
+  padding:36px 0 96px;
+  overflow:hidden;
+}
+@media (min-width:900px){.hero{padding:48px 0 140px}}
+
+.hero__grid{
+  display:grid;grid-template-columns:1fr;gap:48px;
+  align-items:center;
+  position:relative;z-index:2;
+}
+@media (min-width:900px){
+  .hero__grid{grid-template-columns:1.05fr 1fr;gap:56px}
+}
+
+.hero__copy{position:relative;z-index:3;max-width:640px}
+.hero__h1{
+  font-size:clamp(64px, 11vw, 156px);
+  line-height:.92;
+}
+.hero__lead{margin-top:24px;max-width:540px}
+.hero__cta{margin:30px 0 18px}
+
+.hero__orb{
+  position:absolute;border-radius:50%;
+  filter:blur(80px);
+  pointer-events:none;z-index:1;
+}
+.hero__orb--peach{
+  width:520px;height:520px;
+  background:rgba(255,122,80,.32);
+  top:-180px;right:-120px;
+  animation:floaty 12s ease-in-out infinite;
+}
+.hero__orb--pink{
+  width:380px;height:380px;
+  background:rgba(236,110,156,.22);
+  bottom:-100px;left:-60px;
+  animation:floaty 14s ease-in-out infinite reverse;
+}
+
+.hero__visual{
+  position:relative;
+  display:flex;justify-content:center;align-items:center;
+  min-height:540px;
+  perspective:1400px;
+}
+.hero__phone-wrap{
+  position:relative;
+  width:min(360px, 92%);
+}
+.hero__phone{
+  position:relative;
+  border-radius:48px;overflow:hidden;
+  background:#1F0E33;
+  box-shadow:
+    0 30px 60px -10px rgba(31,14,51,.30),
+    0 80px 120px -30px rgba(255,122,80,.22),
+    inset 0 0 0 2px rgba(255,255,255,.04);
+  transform:rotate(-2.5deg);
+  transition:transform .25s cubic-bezier(.2,.9,.3,1);
+  animation:floaty 6s ease-in-out infinite;
+  will-change:transform;
+}
+.hero__phone img{display:block;width:100%;height:auto}
+
+/* sticker receipts overrides — bigger, more sticker-like */
+.hero__visual .receipt{
+  background:#fff;
+  border-radius:14px;
+  padding:11px 14px 12px;
+  box-shadow:
+    0 14px 30px rgba(40,20,60,.18),
+    0 1px 2px rgba(40,20,60,.08),
+    4px 4px 0 rgba(31,14,51,.08);
+}
+
+@media (max-width:899px){
+  .hero__phone-wrap{width:min(300px, 86%)}
+  .hero__visual{min-height:460px}
+}
+
+/* hide ghost ones at small */
+@media (max-width:520px){
+  .hero__visual .receipt--3{display:none}
+}
+
+/* ═══════════════ mid-page CTA strip ═══════════════ */
+.midcta{
+  padding:36px 0 0;
+}
+.midcta__inner{
+  max-width:var(--max);margin:0 auto;
+  background:var(--ink);color:var(--paper);
+  border-radius:24px;
+  padding:28px 32px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px;
+  justify-content:space-between;
+  box-shadow:0 24px 60px -20px rgba(31,14,51,.25);
+}
+.midcta__h{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(22px, 2.4vw, 30px);
+  letter-spacing:-0.02em;line-height:1.1;
+  margin:0;color:var(--paper);
+  flex:1;min-width:240px;
+}
+.midcta__h em{font-style:italic;color:var(--peek)}
+.midcta .btn{flex-shrink:0}
+.midcta .btn--primary{background:var(--peek);color:#fff;box-shadow:0 4px 0 0 var(--peek-2)}
+.midcta .btn--primary:hover{background:#ff8a63}
+
+/* ═══════════════ section sticker label (reused) ═══════════════ */
+.eyebrow.eyebrow--center{justify-content:center}

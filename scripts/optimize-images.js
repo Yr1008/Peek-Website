@@ -15,6 +15,11 @@ const jobs = [
   { src: '1.png', out: 'mascot-party', width: 480, quality: 90 },
   { src: 'hero-stressed-person.png', out: 'hero-stressed-person', width: 600, quality: 80 },
   { src: 'hero-street-bg.png', out: 'hero-street-bg', width: 1600, quality: 70 },
+  { src: 'uploads/store-screen-1.png', out: 'store-screen-1', width: 720, quality: 82 },
+  { src: 'uploads/store-screen-2.png', out: 'store-screen-2', width: 720, quality: 82 },
+  { src: 'uploads/store-screen-3.png', out: 'store-screen-3', width: 720, quality: 82 },
+  { src: 'uploads/store-screen-4.png', out: 'store-screen-4', width: 720, quality: 82 },
+  { src: 'uploads/lifestyle-laugh.png', out: 'lifestyle-laugh', width: 1600, quality: 75 },
 ]
 
 async function run() {

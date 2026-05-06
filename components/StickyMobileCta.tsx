@@ -11,7 +11,7 @@ export default function StickyMobileCta() {
     >
       <span className="sticky-cta__l">
         <span>
-          <span className="sticky-cta__t">Get Peek — free on iOS</span>
+          <span className="sticky-cta__t">Get Peek. Free on iOS.</span>
           <span className="sticky-cta__s">tag the why · 30 sec to connect</span>
         </span>
       </span>

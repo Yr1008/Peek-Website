@@ -20,7 +20,7 @@ export default function Voices() {
             <em>get it.</em>
           </h2>
           <p className="lead" style={{ marginTop: 18, maxWidth: 560 }}>
-            Real videos from people figuring it out in public — using Peek to
+            Real videos from people figuring it out in public, using Peek to
             make sense of where the money goes.
           </p>
         </div>

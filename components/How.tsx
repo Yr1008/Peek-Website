@@ -1,5 +1,4 @@
 import HowTagger from './HowTagger'
-import PhoneMock from './PhoneMock'
 
 export default function How() {
   return (
@@ -7,7 +6,7 @@ export default function How() {
       <div className="wrap">
         <div className="beat__head r">
           <span className="eyebrow">
-            <span className="dot" /> the fix · 30 seconds in
+            <span className="dot" /> the fix, 30 seconds in
           </span>
           <h2 className="h-section" style={{ marginTop: 20 }}>
             One tap. <em>That&rsquo;s it.</em>
@@ -22,7 +21,17 @@ export default function How() {
 
         <div className="demo">
           <div className="demo__phone r" style={{ width: 'min(330px, 90%)' }}>
-            <PhoneMock variant="tag" />
+            <picture>
+              <source srcSet="/images/optimized/store-screen-1.webp" type="image/webp" />
+              <img
+                src="/images/uploads/store-screen-1.png"
+                alt="Peek's tag-the-why screen"
+                width={720}
+                height={1480}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <span className="demo__sticker demo__sticker--1">tap → tag → done</span>
             <span className="demo__sticker demo__sticker--2">~3 sec</span>
           </div>

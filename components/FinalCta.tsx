@@ -1,7 +1,6 @@
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
 import PlaidMini from './PlaidMini'
-import PhoneMock from './PhoneMock'
 
 export default function FinalCta() {
   return (
@@ -15,13 +14,14 @@ export default function FinalCta() {
             Not just <em>how much.</em>
           </h2>
           <p className="cta__p">
-            Free on iOS. Connect a bank in 30 seconds. Secured by Plaid. Cancel
-            any time — there&rsquo;s nothing to cancel.
+            Free on iOS. Connect a bank in 30 seconds. Secured by Plaid.
+            Cancel any time. There&rsquo;s nothing to cancel.
           </p>
           <a
-            className="btn btn--primary"
+            className="btn btn--primary btn--lg"
             id="cta-final"
             data-cta-placement="final"
+            data-mag
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener"
@@ -29,7 +29,7 @@ export default function FinalCta() {
             <span className="btn__icon">
               <AppleIcon />
             </span>
-            Download on iOS
+            Get Peek. Free on iOS.
             <span className="btn__arrow">→</span>
           </a>
           <div className="cta__meta">
@@ -39,10 +39,28 @@ export default function FinalCta() {
 
           <div className="cta__phones" aria-hidden="true">
             <div className="cta__phone cta__phone--l">
-              <PhoneMock variant="caps" />
+              <picture>
+                <source srcSet="/images/optimized/store-screen-2.webp" type="image/webp" />
+                <img
+                  src="/images/uploads/store-screen-2.png"
+                  alt=""
+                  width={720}
+                  height={1480}
+                  loading="lazy"
+                />
+              </picture>
             </div>
             <div className="cta__phone cta__phone--r">
-              <PhoneMock variant="box" />
+              <picture>
+                <source srcSet="/images/optimized/store-screen-4.webp" type="image/webp" />
+                <img
+                  src="/images/uploads/store-screen-4.png"
+                  alt=""
+                  width={720}
+                  height={1480}
+                  loading="lazy"
+                />
+              </picture>
             </div>
           </div>
         </div>

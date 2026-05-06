@@ -7,7 +7,7 @@ const tags = [
     p: (
       <>
         Friday-evening Sephora. Payday sambas. The treat after a hard week.{' '}
-        <em>No shame — but worth seeing.</em>
+        <em>No shame. Just worth seeing.</em>
       </>
     ),
     rec: { when: 'Sep 12 · 6:14pm', amt: '$84', tag: 'self reward' },

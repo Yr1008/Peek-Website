@@ -1,5 +1,3 @@
-import PhoneMock from './PhoneMock'
-
 export default function BlindBox() {
   return (
     <section className="bbox-sec" id="bbox">
@@ -25,7 +23,7 @@ export default function BlindBox() {
               }}
             >
               Pick one when you set your caps. Stay curious all month. Open it
-              when the cycle ends — a tiny pattern Peek noticed about you that
+              when the cycle ends. A tiny pattern Peek noticed about you that
               no algorithm could&rsquo;ve guessed.
             </p>
             <ul className="bbox-list">
@@ -51,7 +49,17 @@ export default function BlindBox() {
               <span className="bp bp--6">✦</span>
             </div>
             <div className="bbox-phone">
-              <PhoneMock variant="box" />
+              <picture>
+                <source srcSet="/images/optimized/store-screen-4.webp" type="image/webp" />
+                <img
+                  src="/images/uploads/store-screen-4.png"
+                  alt="Peek blind box reveal screen"
+                  width={720}
+                  height={1480}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
             <div className="bbox-tag bbox-tag--1">22 days · 09 hrs</div>
             <div className="bbox-tag bbox-tag--2">tap me ✦</div>

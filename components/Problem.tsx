@@ -38,7 +38,7 @@ export default function Problem() {
 
         <div
           className={`pile r${fanned ? ' is-fanned' : ''}`}
-          aria-label="Pile of receipts — hover to fan out"
+          aria-label="Pile of receipts. Hover to fan out."
           onMouseEnter={() => setFanned(true)}
           onMouseLeave={() => setFanned(false)}
           onTouchStart={() => setFanned((f) => !f)}
@@ -51,7 +51,7 @@ export default function Problem() {
               </div>
               <div className="pile__r-line">
                 <span>{r.a}</span>
-                <span>—</span>
+                <span>·</span>
               </div>
               <div className="pile__r-line">
                 <span>{r.b}</span>

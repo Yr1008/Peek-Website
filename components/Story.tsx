@@ -1,11 +1,9 @@
-import PhoneMock from './PhoneMock'
-
 export default function Story() {
   return (
     <section className="story-sec" id="story">
       <div className="wrap">
         <div className="story-sec__head r">
-          <span className="eyebrow" style={{ justifyContent: 'center' }}>
+          <span className="eyebrow eyebrow--center">
             <span className="dot" /> the story · feature 03
           </span>
           <h2 className="h-section" style={{ marginTop: 20 }}>
@@ -30,7 +28,17 @@ export default function Story() {
 
         <div className="story-grid r">
           <div className="story-phone">
-            <PhoneMock variant="story" />
+            <picture>
+              <source srcSet="/images/optimized/store-screen-3.webp" type="image/webp" />
+              <img
+                src="/images/uploads/store-screen-3.png"
+                alt="Peek spending story showing weekday vs weekend"
+                width={720}
+                height={1480}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
 
           <div className="story-card">
@@ -39,7 +47,7 @@ export default function Story() {
               <span className="story-card__date">Sunday · Aug 18</span>
             </div>
             <p className="story-card__body">
-              You spent <mark>$230/day more</mark> on weekdays this week — most
+              You spent <mark>$230/day more</mark> on weekdays this week. Most
               of it tagged <em>&ldquo;convenience.&rdquo;</em> Tuesday was the
               peak: a <em>$47 Target run</em> at 9:14pm right after your 1:1.
             </p>
@@ -47,7 +55,7 @@ export default function Story() {
               The pattern&rsquo;s been holding for <mark>three weeks</mark>.
               Maybe a Tuesday thing. Maybe a 1:1 thing. <em>Up to you.</em>
             </p>
-            <div className="story-card__sig">— peek, sunday morning</div>
+            <div className="story-card__sig">peek, sunday morning</div>
           </div>
 
           <div className="story-stickers" aria-hidden="true">

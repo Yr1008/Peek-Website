@@ -6,9 +6,9 @@ import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Peek — see why you spend',
+  title: 'Peek. See why you spend.',
   description:
-    'Peek tags every purchase with what actually drove it — Self Reward, Social, Ritual, Convenience. The patterns finally make sense. Free on iOS. Bank-secure with Plaid.',
+    'Peek tags every purchase with what actually drove it. Self Reward, Social, Ritual, Convenience. The patterns finally make sense. Free on iOS. Bank-secure with Plaid.',
   keywords: [
     'personal finance app',
     'spending awareness',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Peek' }],
   openGraph: {
-    title: 'Peek — see why you spend',
+    title: 'Peek. See why you spend.',
     description:
       'Peek tags every purchase with what actually drove it. The patterns finally make sense.',
     type: 'website',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peek — see why you spend',
+    title: 'Peek. See why you spend.',
     description: 'Tag every purchase with what actually drove it. Free on iOS.',
   },
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Peek' },

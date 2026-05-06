@@ -1,5 +1,3 @@
-import PhoneMock from './PhoneMock'
-
 const left = [
   {
     cls: 'cap--green',
@@ -26,7 +24,7 @@ const right = [
     amt: '$96 / $80 ↑',
     w: '100%',
     bg: 'var(--peek-2)',
-    note: '"not worth it" — peek noticed.',
+    note: '"not worth it." peek noticed.',
   },
   {
     cls: 'cap--green',
@@ -65,7 +63,7 @@ export default function Caps() {
     <section className="caps-sec" id="caps">
       <div className="wrap">
         <div className="caps-sec__head r">
-          <span className="eyebrow" style={{ justifyContent: 'center' }}>
+          <span className="eyebrow eyebrow--center">
             <span className="dot" /> caps · feature 01
           </span>
           <h2 className="h-section" style={{ marginTop: 20 }}>
@@ -96,7 +94,17 @@ export default function Caps() {
           </div>
 
           <div className="caps-stage__phone">
-            <PhoneMock variant="caps" />
+            <picture>
+              <source srcSet="/images/optimized/store-screen-2.webp" type="image/webp" />
+              <img
+                src="/images/uploads/store-screen-2.png"
+                alt="Peek caps screen showing guilt-free vs not worth it"
+                width={720}
+                height={1480}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
 
           <div className="caps-side caps-side--r">
