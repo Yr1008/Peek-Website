@@ -128,15 +128,61 @@ export default function Analytics() {
       })
     }
 
+    // 6. Cursor blob follower
+    let cursor: HTMLElement | null = document.getElementById('cursor')
+    if (!cursor && fineHover && !reduceMotion) {
+      cursor = document.createElement('div')
+      cursor.id = 'cursor'
+      cursor.className = 'cursor'
+      cursor.setAttribute('aria-hidden', 'true')
+      document.body.appendChild(cursor)
+    }
+    let onCursorMove: ((e: MouseEvent) => void) | null = null
+    let onCursorOver: ((e: MouseEvent) => void) | null = null
+    let onCursorOut: ((e: MouseEvent) => void) | null = null
+    if (cursor && fineHover && !reduceMotion) {
+      const c = cursor
+      onCursorMove = (e: MouseEvent) => {
+        c.style.left = e.clientX + 'px'
+        c.style.top = e.clientY + 'px'
+        c.classList.add('is-on')
+      }
+      onCursorOver = (e: MouseEvent) => {
+        const t = (e.target as HTMLElement)?.closest('a, button')
+        if (t) c.classList.add('is-link')
+      }
+      onCursorOut = (e: MouseEvent) => {
+        const t = (e.target as HTMLElement)?.closest('a, button')
+        if (t) c.classList.remove('is-link')
+      }
+      document.addEventListener('mousemove', onCursorMove)
+      document.addEventListener('mouseover', onCursorOver)
+      document.addEventListener('mouseout', onCursorOut)
+    }
+
+    // 7. Nav scroll-state for shadow line
+    const nav = document.getElementById('nav')
+    const onNavScroll = () => {
+      if (!nav) return
+      if (window.scrollY > 12) nav.classList.add('is-scrolled')
+      else nav.classList.remove('is-scrolled')
+    }
+    window.addEventListener('scroll', onNavScroll, { passive: true })
+    onNavScroll()
+
     return () => {
       document.removeEventListener('click', onClick)
       detailsEls.forEach((d) => d.removeEventListener('toggle', onToggle))
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', onNavScroll)
       io?.disconnect()
       for (const m of mags) {
         m.el.removeEventListener('mousemove', m.onMove)
         m.el.removeEventListener('mouseleave', m.onLeave)
       }
+      if (onCursorMove) document.removeEventListener('mousemove', onCursorMove)
+      if (onCursorOver) document.removeEventListener('mouseover', onCursorOver)
+      if (onCursorOut) document.removeEventListener('mouseout', onCursorOut)
     }
   }, [])
 

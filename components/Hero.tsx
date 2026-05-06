@@ -45,7 +45,7 @@ export default function Hero() {
         <div className="hero__copy">
           <span className="eyebrow hero__brow">
             <span className="dot" />
-            a money app that asks <em>why</em>, not how much
+            not a budget. not a tracker. <em>a money clarity app.</em>
           </span>
 
           <h1 className="h-display hero__h1" style={{ marginTop: 18 }}>
@@ -54,10 +54,16 @@ export default function Hero() {
             but <HeroCycle />
           </h1>
 
+          <p className="hero__pos">
+            Your bank shows you <em>what</em> you spent.
+            <br />
+            Peek shows you <em>why.</em>
+          </p>
+
           <p className="lead hero__lead">
-            Peek tags every purchase with what actually drove it. Self
-            Reward, Social, Ritual, Convenience. No spreadsheets. No guilt.
-            Three days in, the patterns finally make sense.
+            Tap one of four tags. <strong>Self Reward, Social, Ritual,
+            Convenience.</strong> Three days in, the patterns finally make
+            sense. No spreadsheets. No guilt.
           </p>
 
           <div className="hero__cta">
@@ -90,6 +96,10 @@ export default function Hero() {
             <span className="hero__meta-sep">·</span>
             <PlaidMini />
           </div>
+
+          <a href="#how" className="hero__cue" aria-label="See how it works">
+            see why your spending is what it is
+          </a>
         </div>
 
         <div className="hero__visual" id="hero-visual">

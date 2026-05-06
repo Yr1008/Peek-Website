@@ -1313,3 +1313,334 @@ main, .nav, .foot, .sticky-cta { position: relative; z-index: 2; }
 
 /* ═══════════════ section sticker label (reused) ═══════════════ */
 .eyebrow.eyebrow--center{justify-content:center}
+
+/* ═══════════════ HERO REFIT — fix the broken composition ═══════════════ */
+
+/* tame the headline so words stop wrapping individually */
+.hero__h1{
+  font-size:clamp(48px, 6vw, 92px) !important;
+  line-height:.96 !important;
+  max-width:14ch;
+}
+
+/* keep the cycling word inline and narrow */
+.cycle{
+  min-width:auto !important;
+  white-space:nowrap;
+}
+.cycle__word{
+  position:absolute;
+  white-space:nowrap;
+}
+
+/* tighter columns so neither side overflows */
+@media (min-width:900px){
+  .hero__grid{
+    grid-template-columns:1.05fr 1fr !important;
+    gap:48px !important;
+    align-items:center !important;
+  }
+}
+
+/* contain the phone visual inside its column */
+.hero__visual{
+  overflow:visible;
+  min-height:520px;
+}
+.hero__phone-wrap{
+  width:100%;
+  max-width:320px;
+  margin:0 auto;
+  position:relative;
+}
+.hero__phone{
+  width:100%;
+  max-width:320px;
+  border-radius:46px;
+}
+
+/* Pull the receipts back inside the column. Hard offsets relative to the wrap, not the column */
+.hero__visual .receipt--1{
+  top:-6%; left:-12%;
+  transform:rotate(-7deg);
+}
+.hero__visual .receipt--2{
+  top:30%; right:-14%;
+  transform:rotate(5deg);
+}
+.hero__visual .receipt--4{
+  bottom:8%; right:-8%;
+  transform:rotate(-4deg);
+}
+@media (max-width:1199px){
+  .hero__visual .receipt--1{ left:-2%; }
+  .hero__visual .receipt--2{ right:-2%; }
+  .hero__visual .receipt--4{ right:0%; }
+}
+@media (max-width:680px){
+  .hero__visual .receipt--2{ display:none; }
+}
+
+/* Hero ambient orbs slightly toned down */
+.hero__orb--peach{
+  width:420px; height:420px;
+  top:-140px; right:-80px;
+  background:rgba(255,122,80,.22);
+}
+.hero__orb--pink{
+  width:300px; height:300px;
+  bottom:-60px; left:-40px;
+  background:rgba(236,110,156,.16);
+}
+
+/* belt and suspenders: nothing in the hero should bleed past viewport */
+.hero{
+  overflow:clip;
+}
+
+/* tighten the meta row spacing */
+.hero__meta{
+  margin-top:8px;
+  row-gap:8px;
+}
+
+/* Killer positioning line right under the headline */
+.hero__pos{
+  font-family:var(--f-display);
+  font-weight:500;
+  font-size:clamp(22px, 2.5vw, 32px);
+  line-height:1.18;
+  letter-spacing:-0.015em;
+  color:var(--ink);
+  margin:18px 0 4px;
+  max-width:540px;
+  position:relative;
+}
+.hero__pos em{
+  font-style:italic;
+  font-weight:600;
+  color:var(--peek-2);
+  position:relative;
+  display:inline-block;
+}
+.hero__pos em::after{
+  content:"";
+  position:absolute;
+  left:-2px; right:-2px;
+  bottom:-2px;
+  height:6px;
+  background:rgba(255,122,80,.22);
+  border-radius:3px;
+  z-index:-1;
+}
+.hero__lead{
+  margin-top:14px;
+  color:var(--ink-2);
+  font-size:clamp(15px, 1.4vw, 17px);
+}
+.hero__lead strong{
+  color:var(--ink);
+  font-weight:600;
+}
+
+/* eyebrow upgrade with stronger emphasis */
+.hero__brow em{
+  background:var(--peek-soft);
+  padding:2px 8px;
+  border-radius:6px;
+  color:var(--peek-2);
+  letter-spacing:0;
+}
+
+/* ═══════════════ HERO SIZE PASS — scale everything down to fit ═══════════════ */
+.hero{
+  padding:24px 0 72px !important;
+}
+@media (min-width:900px){
+  .hero{padding:32px 0 80px !important}
+}
+
+.hero__h1{
+  font-size:clamp(40px, 5.2vw, 76px) !important;
+  line-height:1 !important;
+  letter-spacing:-0.035em !important;
+  max-width:13ch;
+  margin-top:14px !important;
+}
+
+.hero__pos{
+  font-size:clamp(18px, 1.9vw, 24px) !important;
+  line-height:1.2 !important;
+  margin:14px 0 4px !important;
+}
+
+.hero__lead{
+  font-size:15px !important;
+  line-height:1.5 !important;
+  max-width:480px;
+}
+
+.hero__brow{
+  font-size:11px !important;
+  letter-spacing:.1em !important;
+}
+.hero__brow em{
+  font-size:12px;
+  padding:2px 6px;
+}
+
+.hero__visual{
+  min-height:auto !important;
+}
+.hero__phone-wrap{
+  max-width:280px !important;
+}
+.hero__phone{
+  max-width:280px !important;
+  border-radius:38px;
+}
+
+@media (min-width:1280px){
+  .hero__phone-wrap{max-width:320px !important}
+  .hero__phone{max-width:320px !important}
+}
+
+.hero__cta{margin:22px 0 14px !important}
+.btn--lg{padding:14px 22px !important;font-size:15px !important}
+
+.hero__meta{
+  font-size:12px;
+  gap:10px 14px;
+}
+
+/* Receipts smaller */
+.hero__visual .receipt{
+  font-size:12px;
+  padding:9px 12px 10px;
+  border-radius:12px;
+}
+.hero__visual .receipt__pill{font-size:9px;padding:2px 7px}
+.hero__visual .receipt__amt{font-size:13px}
+.hero__visual .receipt__why{font-size:12px}
+
+/* place receipts so they peek without escaping the column */
+.hero__visual .receipt--1{
+  top:-4%; left:-10%;
+}
+.hero__visual .receipt--2{
+  top:30%; right:-10%;
+}
+.hero__visual .receipt--4{
+  bottom:8%; right:-4%;
+}
+
+/* even smaller orbs so they don't dominate */
+.hero__orb--peach{
+  width:340px; height:340px;
+  top:-100px; right:-60px;
+  background:rgba(255,122,80,.18);
+}
+.hero__orb--pink{
+  width:240px; height:240px;
+  bottom:-40px; left:-30px;
+  background:rgba(236,110,156,.12);
+}
+
+/* ═══════════════ HERO ENTRANCE — staggered cinematic reveal ═══════════════ */
+@keyframes heroFadeUp{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes heroPhoneIn{
+  from{opacity:0;transform:rotate(-2.5deg) translateX(80px) scale(.92)}
+  to{opacity:1;transform:rotate(-2.5deg) translateX(0) scale(1)}
+}
+@keyframes receiptIn{
+  from{opacity:0;transform:translateY(40px) rotate(0deg) scale(.6)}
+  to{opacity:1}
+}
+@keyframes orbPulse{
+  0%,100%{transform:translate(0,0) scale(1);opacity:.65}
+  50%{transform:translate(20px,-30px) scale(1.08);opacity:.85}
+}
+
+.hero__brow{
+  animation:heroFadeUp .7s cubic-bezier(.2,.9,.3,1) both;
+  animation-delay:.05s;
+}
+.hero__h1{
+  animation:heroFadeUp .8s cubic-bezier(.2,.9,.3,1) both;
+  animation-delay:.18s;
+}
+.hero__pos{
+  animation:heroFadeUp .7s cubic-bezier(.2,.9,.3,1) both;
+  animation-delay:.42s;
+}
+.hero__lead{
+  animation:heroFadeUp .7s cubic-bezier(.2,.9,.3,1) both;
+  animation-delay:.56s;
+}
+.hero__cta{
+  animation:heroFadeUp .7s cubic-bezier(.2,.9,.3,1) both;
+  animation-delay:.7s;
+}
+.hero__meta{
+  animation:heroFadeUp .7s cubic-bezier(.2,.9,.3,1) both;
+  animation-delay:.84s;
+}
+
+.hero__phone{
+  animation:heroPhoneIn 1.1s cubic-bezier(.2,.9,.3,1) both, floaty 6s ease-in-out infinite 1.1s !important;
+  animation-delay:.5s, 1.6s;
+}
+.hero__visual .receipt{animation:receiptIn .7s cubic-bezier(.34,1.56,.64,1) both, receiptFloat 7s ease-in-out infinite 1.5s !important}
+.hero__visual .receipt--1{animation-delay:.95s, 1.5s}
+.hero__visual .receipt--2{animation-delay:1.1s, 2s}
+.hero__visual .receipt--4{animation-delay:1.25s, 1s}
+
+.hero__orb{animation:orbPulse 16s ease-in-out infinite !important}
+.hero__orb--pink{animation-delay:-6s !important}
+
+@media (prefers-reduced-motion: reduce){
+  .hero__brow,.hero__h1,.hero__pos,.hero__lead,.hero__cta,.hero__meta,
+  .hero__phone,.hero__visual .receipt,.hero__orb{animation:none !important; opacity:1 !important; transform:none !important}
+}
+
+/* ═══════════════ scroll cue at bottom of hero ═══════════════ */
+.hero__cue{
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--f-script);
+  font-size:18px;
+  color:var(--ink-3);
+  margin-top:36px;
+  opacity:0;
+  animation:heroFadeUp .7s cubic-bezier(.2,.9,.3,1) 1.2s both;
+}
+.hero__cue::after{
+  content:"↓";
+  font-family:var(--f-sans);
+  font-size:18px;
+  color:var(--peek-2);
+  animation:bounceDown 2s ease-in-out infinite;
+}
+@keyframes bounceDown{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(6px)}
+}
+
+/* ═══════════════ cursor blob — visible always ═══════════════ */
+.cursor{
+  display:block !important;
+  width:18px;height:18px;
+  background:rgba(255,122,80,.55) !important;
+  mix-blend-mode:multiply;
+  transform:translate(-50%,-50%) !important;
+}
+.cursor.is-on{transform:translate(-50%,-50%) scale(1.2) !important}
+.cursor.is-link{
+  width:48px;height:48px;
+  background:rgba(255,122,80,.18) !important;
+  transform:translate(-50%,-50%) scale(1) !important;
+}
+@media (hover:none),(pointer:coarse){.cursor{display:none !important}}
+
