@@ -1,216 +1,203 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
-import Confetti from './Confetti'
 
-type Tone = 'ritual' | 'treat' | 'social' | 'conv'
+type Tag = 'ritual' | 'reward' | 'social' | 'conv'
 
 type Question = {
-  prompt: string
-  amount: string
-  merchant: string
-  time: string
-  chips: { tone: Tone; label: string; name: string }[]
+  prompt: React.ReactNode
+  options: { tag: Tag; lbl: string; name: string }[]
 }
 
-const questions: Question[] = [
+const Q: Question[] = [
   {
-    prompt: 'a $5.75 latte',
-    amount: '$5.75',
-    merchant: 'Blank Street',
-    time: 'today · 8:42am',
-    chips: [
-      { tone: 'ritual', label: 'Ritual', name: 'every weekday' },
-      { tone: 'treat', label: 'Self Reward', name: 'the seasonal one' },
-      { tone: 'social', label: 'Social', name: 'with a friend' },
-      { tone: 'conv', label: 'Convenience', name: 'closest to me' },
+    prompt: <><em>8:42am.</em> $5.75 latte at blank street. why?</>,
+    options: [
+      { tag: 'ritual',  lbl: 'ritual',       name: 'part of my routine' },
+      { tag: 'reward',  lbl: 'self reward',  name: 'treating myself' },
+      { tag: 'social',  lbl: 'social',       name: 'with someone' },
+      { tag: 'conv',    lbl: 'convenience',  name: 'easiest option' },
     ],
   },
   {
-    prompt: 'a pair of sambas',
-    amount: '$84',
-    merchant: 'Adidas',
-    time: 'last fri · 7:12pm',
-    chips: [
-      { tone: 'treat', label: 'Self Reward', name: 'hard week' },
-      { tone: 'ritual', label: 'Ritual', name: 'replace old pair' },
-      { tone: 'social', label: 'Social', name: 'matched a friend' },
-      { tone: 'conv', label: 'Convenience', name: 'on sale, just ordered' },
+    prompt: <>$84 sambas, three days later. <em>worth it?</em></>,
+    options: [
+      { tag: 'reward',  lbl: 'self reward',  name: 'still feels right' },
+      { tag: 'ritual',  lbl: 'ritual',       name: 'classic. always good' },
+      { tag: 'social',  lbl: 'social',       name: 'wore them out w/ tess' },
+      { tag: 'conv',    lbl: 'convenience',  name: 'mid. would skip next time' },
     ],
   },
   {
-    prompt: '$22 doordash',
-    amount: '$22',
-    merchant: 'DoorDash',
-    time: 'tue · 9:18pm',
-    chips: [
-      { tone: 'conv', label: 'Convenience', name: 'too tired to cook' },
-      { tone: 'ritual', label: 'Ritual', name: 'tuesday thing' },
-      { tone: 'treat', label: 'Self Reward', name: 'long day' },
-      { tone: 'social', label: 'Social', name: 'split with roommate' },
+    prompt: <>$22 doordash, 9pm tuesday. <em>pattern or one-off?</em></>,
+    options: [
+      { tag: 'conv',    lbl: 'convenience',  name: 'happens every week' },
+      { tag: 'ritual',  lbl: 'ritual',       name: 'sunday night thing' },
+      { tag: 'reward',  lbl: 'self reward',  name: 'rough day. earned it' },
+      { tag: 'social',  lbl: 'social',       name: 'sharing w/ roommate' },
     ],
   },
 ]
 
-const kinds: Record<Tone, { kind: string; body: string }> = {
+const KIND: Record<Tag, { name: React.ReactNode; body: React.ReactNode }> = {
   ritual: {
-    kind: 'a ritual person.',
-    body: 'you spend on the same anchors every week. that is not a problem. that is a personality. peek shows the rituals worth keeping and the ones that quietly drift.',
+    name: <>you're a <em>ritual person.</em></>,
+    body: <>you spend on the same anchors every week. that's not a problem. that's a personality. peek shows the ones <em>worth it</em> and the ones that drift.</>,
   },
-  treat: {
-    kind: 'a self-reward person.',
-    body: 'you tag the hard weeks with little wins. peek tracks which treats actually feel worth it three days later, and which were just a dopamine hit you forgot.',
+  reward: {
+    name: <>you're a <em>self-reward person.</em></>,
+    body: <>your money tracks your week. hard week, treat. good week, splurge. peek shows which rewards <em>actually</em> recharge you, and which were autopilot.</>,
   },
   social: {
-    kind: 'a social spender.',
-    body: 'most of your meaningful spending is shared with someone you care about. peek surfaces the ones that built memory, and the ones that were peer pressure in a nice outfit.',
+    name: <>you're a <em>social spender.</em></>,
+    body: <>your money moves with the people you love. that's a feature, not a leak. peek shows which moments felt <em>worth it</em> and which were just the room.</>,
   },
   conv: {
-    kind: 'a convenience spender.',
-    body: 'the 9pm doordash, the airport pretzel, the thing you grabbed because you could not deal. peek does not judge. it shows you the hidden cost of "just easier" so you can decide.',
+    name: <>you're a <em>convenience optimizer.</em></>,
+    body: <>your money buys time. peek shows when that trade <em>landed</em> and when it cost more than the time it saved.</>,
   },
 }
 
 export default function Tagger() {
   const [step, setStep] = useState(0)
-  const [picks, setPicks] = useState<Tone[]>([])
-  const [burstKey, setBurstKey] = useState(0)
+  const [picks, setPicks] = useState<Tag[]>([])
+  const confettiRoot = useRef<HTMLDivElement>(null)
 
-  const done = step >= questions.length
-  const winner = (() => {
-    if (!picks.length) return null
-    const c: Record<Tone, number> = { ritual: 0, treat: 0, social: 0, conv: 0 }
-    picks.forEach((p) => (c[p] += 1))
-    return (Object.entries(c).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null) as Tone | null
-  })()
-
-  const onPick = (t: Tone) => {
-    setBurstKey((k) => k + 1)
-    setPicks((p) => [...p, t])
-    setStep((s) => s + 1)
+  const choose = (tag: Tag, ev: React.MouseEvent<HTMLButtonElement>) => {
+    burst(ev.currentTarget, confettiRoot.current)
+    const next = [...picks, tag]
+    setPicks(next)
+    if (step < Q.length - 1) {
+      setTimeout(() => setStep(step + 1), 280)
+    } else {
+      setTimeout(() => setStep(Q.length), 280)
+    }
   }
 
-  const onReset = () => {
-    setStep(0)
-    setPicks([])
-  }
+  const reset = () => { setStep(0); setPicks([]) }
 
-  const q = !done ? questions[step] : null
+  const result: Tag = picks.length === Q.length ? topTag(picks) : 'ritual'
+  const k = KIND[result]
+  const isDone = step >= Q.length
 
   return (
-    <section className="tagger-sec" id="tagger">
-      <div className="tagger-sec__photo tagger-sec__photo--l" aria-hidden="true">
-        <picture>
-          <source srcSet="/images/optimized/p-candid-1.webp" type="image/webp" />
-          <img src="/images/uploads/people/candid-1.png" alt="" loading="lazy" />
-        </picture>
-        <span className="tagger-sec__photo-cap">$84 sambas worth it ✓</span>
-      </div>
-      <div className="tagger-sec__photo tagger-sec__photo--r" aria-hidden="true">
-        <picture>
-          <source srcSet="/images/optimized/p-candid-2.webp" type="image/webp" />
-          <img src="/images/uploads/people/candid-2.png" alt="" loading="lazy" />
-        </picture>
-        <span className="tagger-sec__photo-cap">brunch w/ tess</span>
-      </div>
-
+    <section className="tagger sec--cream-2" id="tagger">
       <div className="wrap">
-        <div className="tagger-sec__inner reveal-up" style={{ position: 'relative' }}>
+        <div className="tagger__head reveal">
           <span className="eyebrow">
-            <span className="dot" /> spending personality · 30 seconds
+            <span className="dot" aria-hidden="true" />
+            try it · <em>3 seconds</em>
           </span>
-          <h2 className="tagger-sec__h">
-            What kind of <em>spender</em> are you?
+          <h2 className="h-section tagger__h">
+            what kind of <em>spender</em> are you?
           </h2>
-          <p className="tagger-sec__sub">
-            Three questions. Tap the one that sounds like you. Peek will tell
-            you the rest.
+          <p className="lead tagger__lead">
+            three real moments. tap a reason. peek labels the rest.
           </p>
+        </div>
 
-          <div className="quiz-progress" aria-hidden="true">
-            {questions.map((_, i) => (
-              <span
-                key={i}
-                className={`quiz-progress__dot${
-                  i === step ? ' is-on' : i < step ? ' is-done' : ''
-                }`}
-              />
-            ))}
-          </div>
-
-          {q && (
-            <div className="quiz-step-anim" key={step}>
-              <div className="tagger-sec__prompt">
-                <span>
-                  <strong className="tagger-sec__prompt-amt">{q.amount}</strong>{' '}
-                  at {q.merchant}, {q.time}. <em>why?</em>
-                </span>
+        <div className="tagger__sheet reveal">
+          {!isDone && (
+            <>
+              <div className="tagger__progress" aria-hidden="true">
+                {Q.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`tagger__dot${i === step ? ' is-active' : ''}${i < step ? ' is-done' : ''}`}
+                  />
+                ))}
               </div>
-              <div className="tagger-sec__chips" style={{ position: 'relative' }}>
-                {q.chips.map((c) => (
+              <p className="tagger__prompt">{Q[step].prompt}</p>
+              <div className="tagger__chips">
+                {Q[step].options.map((opt) => (
                   <button
-                    key={c.tone + c.label}
-                    className="tag-chip"
-                    data-tone={c.tone}
-                    onClick={() => onPick(c.tone)}
-                    aria-label={`${c.label}, ${c.name}`}
+                    key={opt.tag + opt.name}
+                    className="tagger__chip"
+                    data-tag={opt.tag}
+                    onClick={(e) => choose(opt.tag, e)}
                   >
-                    <span className="tag-chip__lbl">{c.label}</span>
-                    <span className="tag-chip__name">{c.name}</span>
+                    <span className="tagger__chip-lbl">{opt.lbl}</span>
+                    <span className="tagger__chip-name">{opt.name}</span>
                   </button>
                 ))}
-                <Confetti trigger={burstKey} count={14} />
               </div>
-            </div>
+            </>
           )}
 
-          {done && winner && (
-            <div className="tagger-sec__result is-on quiz-step-anim" key="result">
-              <div className="tagger-sec__result-mascot">
+          {isDone && (
+            <div className="tagger__result">
+              <span className="tagger__result-eyebrow">your spending kind</span>
+              <h3 className="tagger__result-kind">{k.name}</h3>
+              <p className="tagger__result-body">{k.body}</p>
+              <div className="tagger__result-mascot" aria-hidden="true">
                 <picture>
                   <source srcSet="/images/optimized/peek-3d-left.webp" type="image/webp" />
-                  <img src="/images/uploads/mascots/peek-3d-left.png" alt="" loading="lazy" />
+                  <img src="/images/uploads/mascots/peek-3d-left.png" alt="" />
                 </picture>
               </div>
-              <div className="tagger-sec__result-text">
-                <span className="quiz-badge">badge unlocked</span>
-                <p className="tagger-sec__result-kind">you&rsquo;re {kinds[winner].kind}</p>
-                <p className="tagger-sec__result-body">{kinds[winner].body}</p>
-                <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-                  <a
-                    href={APP_STORE_URL}
-                    id="cta-quiz-result"
-                    data-cta-placement="quiz-result"
-                    className="tagger-sec__result-cta"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <AppleIcon size={14} />
-                    See your real spending kind on Peek
-                    <span className="tagger-sec__result-cta-arrow">→</span>
-                  </a>
-                  <button
-                    onClick={onReset}
-                    style={{
-                      fontSize: 13,
-                      color: 'rgba(244,236,219,.65)',
-                      textDecoration: 'underline',
-                      background: 'none',
-                      border: 0,
-                      cursor: 'pointer',
-                      padding: '4px 8px',
-                    }}
-                  >
-                    take it again
-                  </button>
-                </div>
+              <div className="tagger__result-cta">
+                <a
+                  className="btn btn--peach"
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener"
+                  data-cta="cta-quiz-result"
+                >
+                  <AppleIcon />
+                  <span>you've got the framework. <em>peek does the rest.</em></span>
+                </a>
               </div>
+              <button
+                onClick={reset}
+                style={{ marginTop: 18, fontSize: 13, color: 'var(--ink-3)', fontFamily: 'var(--f-display)', fontStyle: 'italic' }}
+              >
+                ↺ try again
+              </button>
             </div>
           )}
         </div>
+
+        <div ref={confettiRoot} className="confetti" aria-hidden="true" />
       </div>
     </section>
   )
+}
+
+function topTag(picks: Tag[]): Tag {
+  const counts: Record<string, number> = {}
+  for (const p of picks) counts[p] = (counts[p] || 0) + 1
+  return (Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0]) as Tag
+}
+
+const COLORS = ['#FF7A50', '#F4D547', '#7DB880', '#9DC8E8', '#EC6E9C']
+
+function burst(target: HTMLElement, root: HTMLElement | null) {
+  if (!root) return
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const rect = target.getBoundingClientRect()
+  const cx = rect.left + rect.width / 2
+  const cy = rect.top + rect.height / 2
+  const layer = document.createElement('div')
+  layer.style.position = 'fixed'
+  layer.style.left = `${cx}px`
+  layer.style.top = `${cy}px`
+  layer.style.pointerEvents = 'none'
+  layer.style.zIndex = '1000'
+  for (let i = 0; i < 14; i++) {
+    const dot = document.createElement('span')
+    dot.className = 'confetti__dot'
+    const angle = Math.random() * Math.PI * 2
+    const dist = 50 + Math.random() * 60
+    dot.style.setProperty('--dx', `${Math.cos(angle) * dist}px`)
+    dot.style.setProperty('--dy', `${Math.sin(angle) * dist - 40}px`)
+    dot.style.background = COLORS[i % COLORS.length]
+    dot.style.left = '-4px'
+    dot.style.top = '-4px'
+    dot.style.animationDelay = `${i * 14}ms`
+    layer.appendChild(dot)
+  }
+  root.appendChild(layer)
+  setTimeout(() => layer.remove(), 1200)
 }

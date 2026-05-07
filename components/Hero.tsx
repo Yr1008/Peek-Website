@@ -1,202 +1,204 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
-import PlaidMini from './PlaidMini'
-import KineticH1 from './KineticH1'
 
-const cycleWords: { tone: string; text: string }[] = [
-  { tone: 'why', text: 'why?' },
-  { tone: 'treat', text: 'a treat?' },
-  { tone: 'social', text: 'for friends?' },
-  { tone: 'ritual', text: 'routine?' },
-  { tone: 'conv', text: 'just easier?' },
-]
+type Tag = 'reward' | 'ritual' | 'social' | 'convenience'
+
+const TAG_DATA: Record<Tag, {
+  label: string
+  pillBg: string
+  pillFg: string
+  why: string
+  story: string
+  worth: number
+}> = {
+  reward:      { label: 'self reward',  pillBg: '#FF7A50', pillFg: '#1F0E33', why: 'a celebration with your sister', story: '"treating myself" · felt worth it',     worth: 84 },
+  ritual:      { label: 'ritual',       pillBg: '#F4D547', pillFg: '#1F0E33', why: 'sunday slow-down with mom',       story: '"part of my routine" · weekly anchor', worth: 72 },
+  social:      { label: 'social',       pillBg: '#7DB880', pillFg: '#1F0E33', why: 'birthday dinner for tess',         story: '"with someone" · shared the bill',     worth: 91 },
+  convenience: { label: 'convenience',  pillBg: '#9DC8E8', pillFg: '#1F0E33', why: 'too tired to cook · friday late',  story: '"easiest option" · would skip next time', worth: 38 },
+}
 
 export default function Hero() {
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState<Tag>('reward')
+  const confettiRoot = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const id = window.setInterval(
-      () => setActive((i) => (i + 1) % cycleWords.length),
-      2200
-    )
-    return () => window.clearInterval(id)
+  const onTap = useCallback((tag: Tag, ev: React.MouseEvent<HTMLButtonElement>) => {
+    setActive(tag)
+    burst(ev.currentTarget, confettiRoot.current)
   }, [])
 
+  const t = TAG_DATA[active]
+
   return (
-    <section className="hero" id="top">
-      <div className="wrap hero__grid">
-        <div className="hero__copy">
-          <span className="hero__brow">
-            not a budget. not a tracker. <em>a money clarity app.</em>
-          </span>
-
-          <KineticH1
-            className="hero__h1"
-            ariaLabel="Your bank shows you what. Peek shows you why."
-            parts={[
-              { text: 'Your bank shows you ' },
-              { text: 'what', accent: true },
-              { text: '.' },
-              { br: true },
-              { text: 'Peek shows you ' },
-              { text: 'why.', accent: true },
-            ]}
-          />
-
-          <p className="hero__sub">
-            you spent it. but{' '}
-            <span
-              className="hero__cycle"
-              aria-live="polite"
-              role="button"
-              tabIndex={0}
-              aria-label="Cycle through reasons. Tap to advance."
-              onClick={() => setActive((i) => (i + 1) % cycleWords.length)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  setActive((i) => (i + 1) % cycleWords.length)
-                }
-              }}
-            >
-              {cycleWords.map((w, i) => (
-                <span
-                  key={w.tone}
-                  className={`hero__cycle__word${i === active ? ' is-active' : ''}`}
-                  data-tone={w.tone}
-                >
-                  {w.text}
-                </span>
-              ))}
+    <section className="hero" id="why">
+      <div className="wrap">
+        <div className="hero__grid">
+          <div className="hero__head">
+            <span className="eyebrow hero__eyebrow">
+              <span className="dot" aria-hidden="true" />
+              not a budget. not a tracker. a money <em>clarity</em> app.
             </span>
-          </p>
 
-          <p className="hero__lead">
-            Tap one of four tags. <strong>Self Reward, Social, Ritual,
-            Convenience.</strong> Three days in, the patterns finally make
-            sense. No spreadsheets. No guilt.
-          </p>
+            <h1 className="h-display hero__h1">
+              your bank shows <em>what.</em><br />
+              peek shows <em>why.</em>
+            </h1>
 
-          <div className="hero__cta">
-            <a
-              className="btn btn--primary"
-              id="cta-hero"
-              data-cta-placement="hero"
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener"
-            >
-              <span className="btn__icon">
+            <p className="hero__sub">
+              tap a tag below. watch the <em>why</em> change live.
+            </p>
+
+            <div className="hero__cta-row">
+              <a
+                className="btn btn--primary"
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener"
+                data-cta="cta-hero"
+              >
                 <AppleIcon />
+                <span>download peek <em>free</em></span>
+              </a>
+              <span className="hero__trust">
+                <span className="stars" aria-hidden="true">★★★★★</span>
+                <strong>4.9</strong>
+                <span className="sep">·</span>
+                <span>secured by <strong>plaid</strong></span>
+                <span className="sep">·</span>
+                <span>free on ios</span>
               </span>
-              Get Peek. Free on iOS.
-              <span className="btn__arrow">→</span>
-            </a>
+            </div>
           </div>
 
-          <div className="hero__meta">
-            <span className="stars">★★★★★</span>
-            <span>
-              <strong>4.9</strong> on the App Store
-            </span>
-            <span className="hero__meta-sep">·</span>
-            <span>
-              connect a bank in <strong>30 sec</strong>
-            </span>
-            <span className="hero__meta-sep">·</span>
-            <PlaidMini />
+          <div className="hero__visual" aria-label="how your bank shows it vs how peek shows it">
+            {/* boring bank card */}
+            <article className="bcard" aria-label="how your bank app shows it">
+              <header className="bcard__top">
+                <span className="bcard__badge">your bank app</span>
+                <span className="bcard__date">apr 6 · mon</span>
+              </header>
+              <div className="bcard__body">
+                <div className="bcard__merchant">
+                  <span className="bcard__avatar">C</span>
+                  <div>
+                    <h3>Chubby Cattle BBQ</h3>
+                    <span className="bcard__cat">Food &amp; Dining</span>
+                  </div>
+                </div>
+                <div className="bcard__amount">$345.26</div>
+              </div>
+              <footer className="bcard__foot">debit · ****4271</footer>
+            </article>
+
+            {/* alive peek card — transforms on tap */}
+            <article className="pcard" aria-label="how peek shows it" aria-live="polite">
+              <header className="pcard__top">
+                <span className="pcard__badge">
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#FF7A50', display: 'inline-block' }} />
+                  peek
+                </span>
+                <span style={{ color: 'rgba(255,255,255,.55)' }}>apr 6 · 8pm</span>
+              </header>
+              <div className="pcard__body">
+                <div className="pcard__merchant">
+                  <span className="pcard__avatar">C</span>
+                  <div>
+                    <h3>chubby cattle bbq</h3>
+                    <span className="pcard__cat" key={active}>
+                      {t.why}
+                    </span>
+                  </div>
+                </div>
+                <div className="pcard__amount">$345.26</div>
+              </div>
+
+              <div className="pcard__story">
+                <span
+                  className="pcard__tag"
+                  style={{ background: t.pillBg, color: t.pillFg }}
+                  key={`tag-${active}`}
+                >
+                  {t.label}
+                </span>
+                <span style={{ color: 'rgba(255,255,255,.85)', fontFamily: 'var(--f-display)', fontStyle: 'italic' }}>
+                  {t.story}
+                </span>
+              </div>
+
+              <div className="pcard__feel">
+                <span className="pcard__feel-q">how did this feel?</span>
+                <div className="pcard__feel-bar">
+                  <span className="pcard__feel-fill" style={{ width: `${t.worth}%` }} />
+                </div>
+                <span className="pcard__feel-val">{t.worth}% worth it</span>
+              </div>
+
+              {/* peek mascot peeking from corner */}
+              <div className="hero__mascot" aria-hidden="true">
+                <picture>
+                  <source srcSet="/images/optimized/peek-3d-right.webp" type="image/webp" />
+                  <img src="/images/uploads/mascots/peek-3d-right.png" alt="" />
+                </picture>
+              </div>
+            </article>
           </div>
         </div>
 
-        <div className="hero__visual">
-          <div className="hero__phone-wrap" data-parallax data-parallax-speed="-0.08">
-            <div className="hero__phone">
-              <picture>
-                <source srcSet="/images/optimized/screen-tags.webp" type="image/webp" />
-                <img
-                  src="/images/uploads/screen-tags.png"
-                  alt="Peek app: stop tracking, start seeing why"
-                  width={720}
-                  height={1480}
-                  loading="eager"
-                  decoding="async"
-                  // @ts-expect-error fetchpriority is a valid HTML attr
-                  fetchpriority="high"
-                />
-              </picture>
-            </div>
-
-            <div className="hero__receipt hero__receipt--1">
-              <div className="hero__receipt-row">
-                <span
-                  className="hero__receipt-pill"
-                  style={{ background: '#FFE0CF', color: 'var(--peek-2)' }}
-                >
-                  self reward
-                </span>
-                <span className="hero__receipt-amt">$84</span>
-              </div>
-              <span className="hero__receipt-why">&ldquo;new sambas&rdquo;</span>
-            </div>
-            <div className="hero__receipt hero__receipt--2">
-              <div className="hero__receipt-row">
-                <span
-                  className="hero__receipt-pill"
-                  style={{ background: '#E1EFD7', color: '#3B7A3F' }}
-                >
-                  ritual
-                </span>
-                <span className="hero__receipt-amt">$5.75</span>
-              </div>
-              <span className="hero__receipt-why">blank street latte</span>
-            </div>
-            <div className="hero__receipt hero__receipt--3">
-              <div className="hero__receipt-row">
-                <span
-                  className="hero__receipt-pill"
-                  style={{ background: '#FAD8E5', color: '#B23F6E' }}
-                >
-                  social
-                </span>
-                <span className="hero__receipt-amt">$32</span>
-              </div>
-              <span className="hero__receipt-why">brunch w/ tess</span>
-            </div>
-
-            <div className="hero__sticker hero__sticker--croissant" aria-hidden="true">
-              <picture>
-                <source srcSet="/images/optimized/st-croissant.webp" type="image/webp" />
-                <img src="/images/uploads/stickers/croissant.png" alt="" loading="lazy" />
-              </picture>
-            </div>
-            <div className="hero__sticker hero__sticker--latest" aria-hidden="true">
-              <picture>
-                <source srcSet="/images/optimized/st-latest.webp" type="image/webp" />
-                <img src="/images/uploads/stickers/latest.png" alt="" loading="lazy" />
-              </picture>
-            </div>
+        {/* tag chips below the diptych */}
+        <div className="hero__chips" id="hero-chips">
+          <span className="hero__chips-label">↓ what made this move?</span>
+          <div className="hero__chips-row" role="radiogroup" aria-label="tag this transaction">
+            {(Object.keys(TAG_DATA) as Tag[]).map(tag => (
+              <button
+                key={tag}
+                className={`hchip${active === tag ? ' is-on' : ''}`}
+                data-tag={tag}
+                role="radio"
+                aria-checked={active === tag}
+                onClick={(ev) => onTap(tag, ev)}
+              >
+                <span className="hchip__dot" aria-hidden="true" />
+                {TAG_DATA[tag].label}
+              </button>
+            ))}
           </div>
-
-          <div className="hero__mascot-peek" aria-hidden="true">
-            <picture>
-              <source srcSet="/images/optimized/peek-3d-right.webp" type="image/webp" />
-              <img src="/images/uploads/mascots/peek-3d-right.png" alt="" loading="lazy" />
-            </picture>
-          </div>
-
-          <div className="hero__portrait" aria-hidden="true">
-            <picture>
-              <source srcSet="/images/optimized/p-portrait-blonde.webp" type="image/webp" />
-              <img src="/images/uploads/people/portrait-blonde.png" alt="" loading="lazy" />
-            </picture>
-            <div className="hero__portrait-cap">tagged. moving on.</div>
-          </div>
+          <span className="hchip-hint">tap one. peek's card changes live ✦</span>
         </div>
+        <div ref={confettiRoot} className="confetti" aria-hidden="true" />
       </div>
     </section>
   )
+}
+
+const COLORS = ['#FF7A50', '#F4D547', '#7DB880', '#9DC8E8', '#EC6E9C']
+
+function burst(target: HTMLElement, root: HTMLElement | null) {
+  if (!root) return
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const rect = target.getBoundingClientRect()
+  const cx = rect.left + rect.width / 2
+  const cy = rect.top + rect.height / 2
+  const layer = document.createElement('div')
+  layer.style.position = 'fixed'
+  layer.style.left = `${cx}px`
+  layer.style.top = `${cy}px`
+  layer.style.pointerEvents = 'none'
+  layer.style.zIndex = '1000'
+  for (let i = 0; i < 10; i++) {
+    const dot = document.createElement('span')
+    dot.className = 'confetti__dot'
+    const angle = Math.random() * Math.PI * 2
+    const dist = 40 + Math.random() * 40
+    dot.style.setProperty('--dx', `${Math.cos(angle) * dist}px`)
+    dot.style.setProperty('--dy', `${Math.sin(angle) * dist - 30}px`)
+    dot.style.background = COLORS[i % COLORS.length]
+    dot.style.left = '-4px'
+    dot.style.top = '-4px'
+    dot.style.animationDelay = `${i * 12}ms`
+    layer.appendChild(dot)
+  }
+  root.appendChild(layer)
+  setTimeout(() => layer.remove(), 1200)
 }

@@ -6,9 +6,9 @@ import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Peek. See why you spend. A top budgeting alternative for iOS.',
+  title: 'peek — your bank shows what. peek shows why.',
   description:
-    "Your bank shows you what you spent. Peek shows you why. Tap one of four tags. Three days in, the patterns finally make sense. A top personal finance app in the US and Canada. Free on iOS. Bank-secure with Plaid.",
+    'peek closes the gap between what you spent and why you spent it. a money clarity app for people who hate money apps. free on ios, secured by plaid.',
   keywords: [
     'top budgeting apps',
     'top budgeting apps in us',
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Peek' }],
   openGraph: {
-    title: 'Peek. See why you spend.',
+    title: 'peek — your bank shows what. peek shows why.',
     description:
-      'Your bank shows you what. Peek shows you why. The money clarity app for people who hate money apps. Free on iOS.',
+      'a money clarity app for people who hate money apps. free on ios, secured by plaid.',
     type: 'website',
     url: SITE_URL,
     siteName: 'Peek',
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peek. See why you spend.',
+    title: 'peek — your bank shows what. peek shows why.',
     description:
-      'Your bank shows you what. Peek shows you why. Tap one of four tags. Three days in, the patterns finally make sense. Free on iOS.',
+      'tap one of four tags. three days in, the patterns finally make sense. free on ios.',
   },
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Peek' },
   icons: { icon: '/images/peek-icon.png', apple: '/images/peek-icon.png' },
@@ -89,12 +89,12 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;700&display=swap"
         />
         <link
           rel="preload"
           as="image"
-          href="/images/optimized/screen-tags.webp"
+          href="/images/optimized/peek-3d-right.webp"
           type="image/webp"
           fetchPriority="high"
         />
@@ -104,7 +104,6 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="grain" aria-hidden="true" />
         {children}
         <StickyMobileCta />
         <Analytics />

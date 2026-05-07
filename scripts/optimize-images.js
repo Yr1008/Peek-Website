@@ -42,12 +42,8 @@ const jobs = [
   { src: 'uploads/stickers/latest.png',    out: 'st-latest',    width: 220, quality: 90 },
   { src: 'uploads/stickers/Container.png', out: 'st-container', width: 220, quality: 90 },
 
-  // Human portraits
+  // Human portraits - keep only the Maya polaroid
   { src: 'uploads/people/portrait-blonde.png', out: 'p-portrait-blonde', width: 520, quality: 78 },
-  { src: 'uploads/people/candid-1.png',        out: 'p-candid-1',        width: 720, quality: 78 },
-  { src: 'uploads/people/candid-2.png',        out: 'p-candid-2',        width: 720, quality: 78 },
-  { src: 'uploads/people/cute-1.png',          out: 'p-cute-1',          width: 520, quality: 78 },
-  { src: 'uploads/people/story-vertical.png',  out: 'p-story-vertical',  width: 720, quality: 78 },
 ]
 
 async function run() {

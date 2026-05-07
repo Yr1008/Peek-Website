@@ -26,19 +26,19 @@ function track(event: string, props?: Payload) {
 
 export default function Analytics() {
   useEffect(() => {
-    // 1. CTA clicks via delegation
+    // CTA clicks via delegation
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null
       if (!target) return
-      const el = target.closest<HTMLElement>('[data-cta-placement]')
+      const el = target.closest<HTMLElement>('[data-cta]')
       if (!el) return
       track('appstore_click', {
-        placement: el.dataset.ctaPlacement || 'unknown',
+        placement: el.dataset.cta || 'unknown',
       })
     }
     document.addEventListener('click', onClick, { passive: true })
 
-    // 2. Scroll depth milestones
+    // Scroll depth milestones
     const milestones = [25, 50, 75, 100]
     const fired = new Set<number>()
     let ticking = false
@@ -60,7 +60,7 @@ export default function Analytics() {
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
 
-    // 3. Reveal-on-scroll
+    // Reveal-on-scroll for .reveal nodes
     let io: IntersectionObserver | null = null
     if ('IntersectionObserver' in window) {
       io = new IntersectionObserver(
@@ -74,20 +74,12 @@ export default function Analytics() {
         },
         { rootMargin: '0px 0px -10% 0px', threshold: 0.18 }
       )
-      document.querySelectorAll('.reveal-up').forEach((el) => io!.observe(el))
+      document.querySelectorAll('.reveal').forEach((el) => io!.observe(el))
     } else {
-      document.querySelectorAll('.reveal-up').forEach((el) => el.classList.add('is-in'))
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-in'))
     }
 
-    // 4. Tagger interaction tracking
-    const taggerChips = document.querySelectorAll<HTMLButtonElement>('.tag-chip')
-    const onChipClick = (e: Event) => {
-      const t = e.currentTarget as HTMLElement
-      track('tagger_select', { tone: t.dataset.tone || 'unknown' })
-    }
-    taggerChips.forEach((c) => c.addEventListener('click', onChipClick))
-
-    // 5. Nav scroll-state for shadow line
+    // Nav scroll-state for shadow line
     const nav = document.getElementById('nav')
     const onNavScroll = () => {
       if (!nav) return
@@ -97,43 +89,11 @@ export default function Analytics() {
     window.addEventListener('scroll', onNavScroll, { passive: true })
     onNavScroll()
 
-    // 6. Parallax: shift [data-parallax] elements as they scroll past viewport
-    const reduceMotion2 = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const parallaxEls = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-parallax]')
-    )
-    let parallaxTicking = false
-    const updateParallax = () => {
-      if (parallaxTicking) return
-      parallaxTicking = true
-      requestAnimationFrame(() => {
-        const vh = window.innerHeight
-        for (const el of parallaxEls) {
-          const r = el.getBoundingClientRect()
-          // distance of the element's center from viewport center, normalized
-          const center = r.top + r.height / 2
-          const offset = center - vh / 2
-          const speed = parseFloat(el.dataset.parallaxSpeed || '0.15')
-          const py = offset * speed * -1
-          el.style.setProperty('--py', py.toFixed(1) + 'px')
-        }
-        parallaxTicking = false
-      })
-    }
-    if (!reduceMotion2 && parallaxEls.length) {
-      window.addEventListener('scroll', updateParallax, { passive: true })
-      window.addEventListener('resize', updateParallax)
-      updateParallax()
-    }
-
     return () => {
       document.removeEventListener('click', onClick)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('scroll', onNavScroll)
-      window.removeEventListener('scroll', updateParallax)
-      window.removeEventListener('resize', updateParallax)
       io?.disconnect()
-      taggerChips.forEach((c) => c.removeEventListener('click', onChipClick))
     }
   }, [])
 

@@ -1,179 +1,88 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
-import CountUp from './CountUp'
 
-const tks = [
-  { src: '/images/tiktok/tiktok-1.jpg', handle: '@lindsay<3', rot: -3 },
-  { src: '/images/tiktok/tiktok-2.jpg', handle: '@chloe', rot: 2, up: true },
-  { src: '/images/tiktok/tiktok-3.jpg', handle: '@financeswithella', rot: -2 },
-  { src: '/images/tiktok/tiktok-4.jpg', handle: '@madison · #peekmoney', rot: 3, up: true },
-]
-
-const badges = [
-  { cls: 'voices__badge--reward', icon: '/images/uploads/stickers/latest.png', icon_webp: '/images/optimized/st-latest.webp', label: 'self reward' },
-  { cls: 'voices__badge--ritual', icon: '/images/uploads/stickers/tea.png', icon_webp: '/images/optimized/st-tea.webp', label: 'ritual' },
-  { cls: 'voices__badge--social', icon: '/images/uploads/stickers/croissant.png', icon_webp: '/images/optimized/st-croissant.webp', label: 'social' },
-  { cls: 'voices__badge--conv', icon: '/images/uploads/stickers/pizza.png', icon_webp: '/images/optimized/st-pizza.webp', label: 'convenience' },
+const TKS = [
+  {
+    src: '/images/tiktok/tiktok-1.jpg',
+    handle: '@maya.km · 14k',
+    cap: '"first money app that didn\'t make me feel like a failure."',
+    rot: -3,
+  },
+  {
+    src: '/images/tiktok/tiktok-2.jpg',
+    handle: '@itslara_ · 38k',
+    cap: '"the tagging fixed my doordash problem in like a week."',
+    rot: 2,
+  },
+  {
+    src: '/images/tiktok/tiktok-3.jpg',
+    handle: '@sun.day.notes · 22k',
+    cap: '"replaced my journal AND my banking app."',
+    rot: -2,
+  },
+  {
+    src: '/images/tiktok/tiktok-4.jpg',
+    handle: '@fintok.fairy · 51k',
+    cap: '"the only app on the green-flags side of fintok."',
+    rot: 3,
+  },
 ]
 
 export default function Voices() {
-  const badgeRowRef = useRef<HTMLDivElement | null>(null)
-  const [unlocked, setUnlocked] = useState<number[]>([])
-
-  useEffect(() => {
-    const el = badgeRowRef.current
-    if (!el) return
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      setUnlocked(badges.map((_, i) => i))
-      return
-    }
-    if (typeof IntersectionObserver === 'undefined') {
-      setUnlocked(badges.map((_, i) => i))
-      return
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            badges.forEach((_, i) => {
-              window.setTimeout(() => {
-                setUnlocked((u) => (u.includes(i) ? u : [...u, i]))
-              }, 180 * i)
-            })
-            io.disconnect()
-            break
-          }
-        }
-      },
-      { threshold: 0.3 }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
   return (
-    <section className="proof" id="proof">
-      <div className="proof__scatter" aria-hidden="true">
-        <span className="proof__scatter-item proof__scatter-item--croissant">
-          <picture>
-            <source srcSet="/images/optimized/st-croissant.webp" type="image/webp" />
-            <img src="/images/uploads/stickers/croissant.png" alt="" loading="lazy" />
-          </picture>
-        </span>
-        <span className="proof__scatter-item proof__scatter-item--pizza">
-          <picture>
-            <source srcSet="/images/optimized/st-pizza.webp" type="image/webp" />
-            <img src="/images/uploads/stickers/pizza.png" alt="" loading="lazy" />
-          </picture>
-        </span>
-        <span className="proof__scatter-item proof__scatter-item--tea">
-          <picture>
-            <source srcSet="/images/optimized/st-tea.webp" type="image/webp" />
-            <img src="/images/uploads/stickers/tea.png" alt="" loading="lazy" />
-          </picture>
-        </span>
-        <span className="proof__scatter-item proof__scatter-item--latest">
-          <picture>
-            <source srcSet="/images/optimized/st-latest.webp" type="image/webp" />
-            <img src="/images/uploads/stickers/latest.png" alt="" loading="lazy" />
-          </picture>
-        </span>
-      </div>
-
+    <section className="voices sec--pink" id="voices">
       <div className="wrap">
-        <div className="proof__head reveal-up">
-          <span className="eyebrow" style={{ justifyContent: 'center' }}>
-            <span className="dot" /> on tiktok this week
+        <div className="voices__head reveal">
+          <span className="eyebrow">
+            <span className="dot" aria-hidden="true" />
+            on tiktok this week
           </span>
-          <h2 className="h-section" style={{ marginTop: 14 }}>
-            People who finally <em>get it.</em>
+          <h2 className="h-section voices__h">
+            people who finally <em>get it.</em>
           </h2>
-          <p className="lead" style={{ margin: '18px auto 0' }}>
-            Real videos from people figuring it out in public, using Peek to
-            make sense of where the money goes.
+          <p className="lead voices__lead">
+            not influencers. real users sharing peek on their grids.
           </p>
         </div>
 
-        <div className="voices__stats reveal-up">
-          <span>
-            <strong>
-              <CountUp to={47000} format={(n) => (n / 1000).toFixed(0) + 'k'} />+
-            </strong>{' '}
-            downloads
-          </span>
-          <span>·</span>
-          <span>
-            <strong>
-              <CountUp to={3} format={(n) => n.toString()} />M+
-            </strong>{' '}
-            monthly TikTok views
-          </span>
-          <span>·</span>
-          <code>#peekapp</code>
+        <div className="voices__stats reveal">
+          <span className="voices__stat"><strong>47k+</strong> downloads</span>
+          <span className="sep" aria-hidden="true">·</span>
+          <span className="voices__stat"><strong>3M+</strong> tiktok views</span>
+          <span className="sep" aria-hidden="true">·</span>
+          <span className="voices__stat"><strong>4.9★</strong> on the app store</span>
         </div>
 
-        <div className="proof__row reveal-up">
-          {tks.map((t, i) => (
-            <div
+        <div className="voices__row reveal">
+          {TKS.map((t, i) => (
+            <figure
               key={i}
-              className={`tk${t.up ? ' tk--up' : ''}`}
+              className="tk"
               style={{ ['--rot' as string]: `${t.rot}deg` } as React.CSSProperties}
             >
               <img
                 src={t.src}
-                alt={`TikTok creator ${t.handle.replace('@', '').split(' ')[0]} sharing peek`}
+                alt={`tiktok creator ${t.handle.split(' ')[0]} sharing peek`}
                 loading="lazy"
                 decoding="async"
               />
-              <div className="tk__handle">{t.handle}</div>
-            </div>
-          ))}
-          <div className="voices__lifestyle" aria-hidden="true">
-            <picture>
-              <source srcSet="/images/optimized/p-story-vertical.webp" type="image/webp" />
-              <img src="/images/uploads/people/story-vertical.png" alt="" loading="lazy" />
-            </picture>
-            <span className="voices__lifestyle-cap">peek user · brooklyn</span>
-          </div>
-        </div>
-
-        <div ref={badgeRowRef} className="voices__badges">
-          <span className="voices__badges-label">stickers our users have collected this week</span>
-          {badges.map((b, i) => (
-            <span
-              key={b.label}
-              className={`voices__badge ${b.cls}${unlocked.includes(i) ? ' is-on' : ''}`}
-            >
-              <picture>
-                <source srcSet={b.icon_webp} type="image/webp" />
-                <img src={b.icon} alt="" loading="lazy" />
-              </picture>
-              {b.label}
-            </span>
+              <figcaption className="tk__cap">{t.cap}</figcaption>
+              <span className="tk__handle">{t.handle}</span>
+            </figure>
           ))}
         </div>
 
-        <div className="voices__mid reveal-up">
-          <h3 className="voices__mid-h">
-            Tag your first charge tonight. <em>Free on iOS.</em>
-          </h3>
+        <div className="voices__cta-row reveal">
+          <span>tag your first charge tonight.</span>
           <a
             className="btn btn--primary"
-            id="cta-mid"
-            data-cta-placement="mid"
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener"
+            data-cta="cta-mid"
           >
-            <span className="btn__icon">
-              <AppleIcon size={16} />
-            </span>
-            Get Peek
-            <span className="btn__arrow">→</span>
+            <AppleIcon />
+            <span>download peek <em>free</em></span>
           </a>
         </div>
       </div>

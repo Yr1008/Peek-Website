@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <header className="nav" id="nav">
       <div className="nav__in">
-        <a className="nav__brand" href="#top" aria-label="Peek home">
+        <a className="nav__brand" href="#top" aria-label="peek home">
           <picture>
             <source srcSet="/images/optimized/peek-icon.webp" type="image/webp" />
             <img
@@ -17,22 +17,22 @@ export default function Navbar() {
               decoding="async"
             />
           </picture>
-          <span className="nav__word">Peek</span>
+          <span className="nav__word">peek</span>
         </a>
         <nav className="nav__links">
+          <a href="#why">why peek</a>
           <a href="#how">how it works</a>
-          <a href="#tags">the four tags</a>
-          <a href="#proof">people on it</a>
-          <a href="#faq">faq</a>
+          <a href="#tagger">try it</a>
+          <a href="#voices">on tiktok</a>
           <a
             className="nav__cta"
             id="cta-nav"
-            data-cta-placement="nav"
+            data-cta="cta-nav"
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener"
           >
-            Get Peek
+            get peek
           </a>
         </nav>
       </div>

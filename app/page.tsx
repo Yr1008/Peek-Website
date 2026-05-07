@@ -1,9 +1,8 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
-import Permission from '@/components/Permission'
-import Tagger from '@/components/Tagger'
-import Bento from '@/components/Bento'
+import Gap from '@/components/Gap'
 import Inside from '@/components/Inside'
+import Tagger from '@/components/Tagger'
 import Voices from '@/components/Voices'
 import FinalCta from '@/components/FinalCta'
 import Footer from '@/components/Footer'
@@ -12,12 +11,11 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="top">
         <Hero />
-        <Permission />
-        <Tagger />
-        <Bento />
+        <Gap />
         <Inside />
+        <Tagger />
         <Voices />
         <FinalCta />
       </main>
