@@ -187,6 +187,14 @@ export default function Hero() {
               <img src="/images/uploads/mascots/peek-3d-right.png" alt="" loading="lazy" />
             </picture>
           </div>
+
+          <div className="hero__portrait" aria-hidden="true">
+            <picture>
+              <source srcSet="/images/optimized/p-portrait-blonde.webp" type="image/webp" />
+              <img src="/images/uploads/people/portrait-blonde.png" alt="" loading="lazy" />
+            </picture>
+            <div className="hero__portrait-cap">tagged. moving on.</div>
+          </div>
         </div>
       </div>
     </section>

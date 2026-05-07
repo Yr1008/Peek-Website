@@ -17,13 +17,15 @@ type Part =
   | { br: true }
 
 let globalIndex = 0
-const STAGGER_MS = 38
-const START_DELAY_MS = 100
+const STAGGER_MS = 14
+const START_DELAY_MS = 30
+const MAX_INDEX = 22
 
 function Letter({ ch, accent }: { ch: string; accent?: boolean }) {
   const isSpace = ch === ' '
   const cls = `kinetic__letter${isSpace ? ' kinetic__letter--space' : ''}`
-  const delay = START_DELAY_MS + globalIndex * STAGGER_MS
+  const cappedIndex = Math.min(globalIndex, MAX_INDEX)
+  const delay = START_DELAY_MS + cappedIndex * STAGGER_MS
   globalIndex += 1
   return (
     <span

@@ -132,6 +132,13 @@ export default function Voices() {
               <div className="tk__handle">{t.handle}</div>
             </div>
           ))}
+          <div className="voices__lifestyle" aria-hidden="true">
+            <picture>
+              <source srcSet="/images/optimized/p-story-vertical.webp" type="image/webp" />
+              <img src="/images/uploads/people/story-vertical.png" alt="" loading="lazy" />
+            </picture>
+            <span className="voices__lifestyle-cap">peek user · brooklyn</span>
+          </div>
         </div>
 
         <div ref={badgeRowRef} className="voices__badges">

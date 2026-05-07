@@ -1276,8 +1276,8 @@ main, .nav, .foot, .sticky-cta { position: relative; z-index: 2; }
 .kinetic{display:inline-block}
 .kinetic__letter{
   display:inline-block;
-  opacity:0;transform:translateY(40%) rotate(8deg);
-  animation:kin-drop .55s cubic-bezier(.34,1.56,.64,1) forwards;
+  opacity:0;transform:translateY(20%);
+  animation:kin-drop .32s cubic-bezier(.2,.9,.3,1) forwards;
 }
 .kinetic__letter--space{width:.28em}
 @keyframes kin-drop{
@@ -1579,3 +1579,156 @@ main, .nav, .foot, .sticky-cta { position: relative; z-index: 2; }
 
 /* ─── Final CTA confetti pulse ─── */
 .cta__banner{position:relative}
+
+/* ═══════════════ V3.1 — humans, brightness, fun ═══════════════ */
+
+/* Hero portrait card (small, NYC vibes, peeking from corner) */
+.hero__portrait{
+  position:absolute;
+  width:180px;height:240px;
+  border-radius:18px;
+  overflow:hidden;
+  transform:rotate(-5deg);
+  box-shadow:0 26px 50px -16px rgba(31,14,51,.32), 0 1px 2px rgba(31,14,51,.08), 4px 4px 0 rgba(31,14,51,.06);
+  z-index:4;
+  bottom:-30px;
+  right:-2%;
+  pointer-events:none;
+  background:#1F0E33;
+}
+.hero__portrait::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 60%, rgba(31,14,51,.55));
+}
+.hero__portrait img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.hero__portrait-cap{
+  position:absolute;left:10px;bottom:10px;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--f-script);font-size:14px;
+  color:#fff;
+  background:rgba(0,0,0,.4);backdrop-filter:blur(6px);
+  padding:5px 10px;border-radius:999px;
+}
+.hero__portrait-cap::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:#FF4444;
+  box-shadow:0 0 0 0 rgba(255,68,68,.6);
+  animation:pulse 1.6s ease-out infinite;
+}
+@media (max-width:899px){.hero__portrait{display:none}}
+
+/* lighten Tagger: replace dark background with peach-tinted aubergine + decorative photo */
+.tagger-sec{
+  background:linear-gradient(165deg, #E8D7F2 0%, #DCC4F0 60%, #C9A6E8 100%);
+  color:var(--ink);
+}
+.tagger-sec::before{
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 30%, rgba(255,122,80,.22), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 70%, rgba(236,110,156,.18), transparent 60%);
+}
+.tagger-sec .eyebrow{color:var(--peek-2)}
+.tagger-sec .eyebrow .dot{background:var(--peek)}
+.tagger-sec__h{color:var(--ink)}
+.tagger-sec__h em{color:var(--peek-2)}
+.tagger-sec__sub{color:var(--ink-2)}
+.tagger-sec__prompt{
+  background:rgba(255,255,255,.55);
+  border-color:rgba(31,14,51,.12);
+  color:var(--ink);
+}
+.tagger-sec__prompt em{color:var(--peek-2)}
+
+/* tag chips on light background */
+.tag-chip{
+  background:rgba(255,255,255,.55);
+  border-color:rgba(31,14,51,.12);
+  color:var(--ink);
+}
+.tag-chip:hover{background:#fff;border-color:rgba(31,14,51,.22)}
+.tag-chip__lbl{color:var(--ink-3)}
+.tag-chip__name{color:var(--ink)}
+
+/* result card on light bg */
+.tagger-sec__result{
+  background:rgba(255,255,255,.7);
+  border-color:rgba(31,14,51,.1);
+  box-shadow:0 24px 50px -16px rgba(31,14,51,.18);
+}
+.tagger-sec__result-kind{color:var(--peek-2)}
+.tagger-sec__result-body{color:var(--ink-2)}
+.quiz-progress__dot{background:rgba(31,14,51,.18)}
+
+/* tagger decorative human peek */
+.tagger-sec__photo{
+  position:absolute;
+  width:170px;height:230px;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 24px 48px -12px rgba(31,14,51,.32), 4px 4px 0 rgba(31,14,51,.1);
+  z-index:1;
+}
+.tagger-sec__photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tagger-sec__photo--l{
+  top:8%;left:3%;
+  transform:rotate(-7deg);
+}
+.tagger-sec__photo--r{
+  bottom:8%;right:3%;
+  transform:rotate(6deg);
+}
+.tagger-sec__photo-cap{
+  position:absolute;left:8px;bottom:8px;z-index:2;
+  font-family:var(--f-script);font-size:14px;
+  color:#fff;
+  background:rgba(0,0,0,.42);backdrop-filter:blur(6px);
+  padding:5px 10px;border-radius:999px;
+}
+@media (max-width:1100px){.tagger-sec__photo{display:none}}
+
+/* Voices: lifestyle photo card mixed into the grid */
+.voices__lifestyle{
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  transform:rotate(2deg);
+  box-shadow:0 22px 40px -14px rgba(31,14,51,.28);
+  aspect-ratio: 9 / 16;
+  background:#1F0E33;
+}
+.voices__lifestyle img{width:100%;height:100%;object-fit:cover;display:block}
+.voices__lifestyle::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 55%, rgba(31,14,51,.55));
+}
+.voices__lifestyle-cap{
+  position:absolute;left:10px;bottom:10px;z-index:2;
+  font-family:var(--f-script);font-size:14px;
+  color:#fff;
+  background:rgba(0,0,0,.45);backdrop-filter:blur(6px);
+  padding:5px 11px;border-radius:999px;
+}
+
+/* Permission: small candid photo as an aside */
+.permission__photo{
+  position:relative;
+  width:130px;height:170px;
+  border-radius:16px;
+  overflow:hidden;
+  margin:24px auto 0;
+  transform:rotate(-3deg);
+  box-shadow:0 20px 38px -16px rgba(31,14,51,.28), 4px 4px 0 rgba(31,14,51,.08);
+  display:none;
+}
+.permission__photo img{width:100%;height:100%;object-fit:cover;display:block}
+@media (min-width:760px){.permission__photo{display:block;position:absolute;top:32%;right:4%}}
+@media (max-width:759px){.permission__photo{display:none}}
+
+/* Bento card hover confetti host (no interaction needed, just reserves z) */
+.bcell{position:relative;z-index:1}
+.bcell:hover{z-index:2}
+
+/* small mascot emoji burst on bento title hover (simple) */
+.bcell__h{transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.bcell:hover .bcell__h{transform:translateY(-2px)}

@@ -101,6 +101,21 @@ export default function Tagger() {
 
   return (
     <section className="tagger-sec" id="tagger">
+      <div className="tagger-sec__photo tagger-sec__photo--l" aria-hidden="true">
+        <picture>
+          <source srcSet="/images/optimized/p-candid-1.webp" type="image/webp" />
+          <img src="/images/uploads/people/candid-1.png" alt="" loading="lazy" />
+        </picture>
+        <span className="tagger-sec__photo-cap">$84 sambas worth it ✓</span>
+      </div>
+      <div className="tagger-sec__photo tagger-sec__photo--r" aria-hidden="true">
+        <picture>
+          <source srcSet="/images/optimized/p-candid-2.webp" type="image/webp" />
+          <img src="/images/uploads/people/candid-2.png" alt="" loading="lazy" />
+        </picture>
+        <span className="tagger-sec__photo-cap">brunch w/ tess</span>
+      </div>
+
       <div className="wrap">
         <div className="tagger-sec__inner reveal-up" style={{ position: 'relative' }}>
           <span className="eyebrow">
