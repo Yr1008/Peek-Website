@@ -27,20 +27,17 @@ export default function Gap() {
   const diff = ACTUAL - guess
 
   return (
-    <section className="gap sec--lavender" id="gap">
+    <section className="gap" id="gap">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            the part nobody says out loud
-          </span>
+          <span className="chapter">chapter three. the gap.</span>
           <h2 className="h-section sec__h">
-            you're not bad at <em>budgeting.</em><br />
-            budgeting is bad at <em>understanding you.</em>
+            You're not bad at <em>budgeting.</em><br />
+            Budgeting is bad at <em>understanding you.</em>
           </h2>
           <p className="lead sec__lead">
-            most apps tell you <em>what</em> you spent. they can't tell you why.
-            here's the gap they leave you in.
+            Most apps tell you <em>what</em> you spent. They can't tell you why.
+            Here's the gap they leave you in.
           </p>
         </div>
 
@@ -75,7 +72,7 @@ export default function Gap() {
 
           {revealed && (
             <div className="gap__panel" role="status">
-              <span className="gap__panel-lbl">average peek user, week one:</span>
+              <span className="gap__panel-lbl">btw — this is what peek users learn on day one:</span>
               <div className="gap__panel-amount">
                 <span className="gap__demo-prefix" style={{ color: '#E85F30' }}>$</span>
                 {animatedActual}
@@ -97,6 +94,10 @@ export default function Gap() {
             </picture>
             <span className="gap__polaroid-cap">maya · brooklyn</span>
           </div>
+        </div>
+
+        <div className="forward">
+          <span>↓ here's how peek closes it</span>
         </div>
       </div>
     </section>

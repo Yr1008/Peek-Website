@@ -3,49 +3,47 @@ import AppleIcon from './AppleIcon'
 
 const TESTIS = [
   {
-    name: 'sarah',
+    name: 'Sarah',
     age: 28,
     initial: 'S',
-    quote: 'i actually open this app. like, voluntarily. that has never happened with a finance app.',
+    quote: 'I actually open this app. Like, voluntarily. That has never happened with a finance app.',
     rot: -2,
   },
   {
-    name: 'marcus',
+    name: 'Marcus',
     age: 34,
     initial: 'M',
-    quote: 'found out i was spending $200 a month on subscriptions i forgot about. peek paid for itself day one.',
+    quote: 'Found out I was spending $200 a month on subscriptions I forgot about. Peek paid for itself day one.',
     rot: 1,
   },
   {
-    name: 'priya',
+    name: 'Priya',
     age: 26,
     initial: 'P',
-    quote: 'finally an app that does not make me feel like garbage about my spending. it just helps.',
+    quote: 'Finally an app that does not make me feel like garbage about my spending. It just helps.',
     rot: -1,
   },
   {
-    name: 'jake',
+    name: 'Jake',
     age: 31,
     initial: 'J',
-    quote: 'the ai coach is lowkey addicting. i ask it random money questions at 2am, lol.',
+    quote: 'The AI coach is lowkey addicting. I ask it random money questions at 2am, lol.',
     rot: 2,
   },
 ]
 
 export default function Voices() {
   return (
-    <section className="voices sec--pink" id="voices">
-      <div className="wrap">
-        <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            people who finally <em>get it</em>
-          </span>
+    <section className="voices" id="voices">
+      <div className="voices__wallpaper" aria-hidden="true" />
+      <div className="voices__inner wrap">
+        <div className="voices__head reveal">
+          <span className="chapter">chapter eight. people who get it.</span>
           <h2 className="h-section sec__h">
-            don't take our word <em>for it.</em>
+            Don't take our word <em>for it.</em>
           </h2>
           <p className="lead sec__lead">
-            real users, real iphones, real receipts. no influencer polish.
+            Real users. Real iPhones. Real receipts. Sarah, Marcus, Priya, Jake.
           </p>
         </div>
 
@@ -93,8 +91,13 @@ export default function Voices() {
             data-cta="mid"
           >
             <AppleIcon />
-            <span>download <em>peek</em></span>
+            Get Peek. <em>Free on iOS.</em>
+            <span className="arrow" aria-hidden="true">→</span>
           </a>
+        </div>
+
+        <div className="forward">
+          <span>↓ before you tap</span>
         </div>
       </div>
     </section>

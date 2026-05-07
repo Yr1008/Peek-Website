@@ -4,58 +4,58 @@ import { useEffect } from 'react'
 
 const Q = [
   {
-    q: 'is my financial data safe?',
+    q: 'Is my financial data safe?',
     a: (
       <>
-        yes. peek connects through <em>plaid</em>, the same encrypted bank connector that powers
-        venmo, robinhood, and coinbase. read-only access. we never see your bank password,
-        and we cannot move money. your data is encrypted at rest and in transit.
+        Yes. Peek connects through <em>Plaid</em>, the same encrypted bank connector that powers
+        Venmo, Robinhood, and Coinbase. Read-only access. We never see your bank password,
+        and we cannot move money. Your data is encrypted at rest and in transit.
       </>
     ),
   },
   {
-    q: 'what does peek cost?',
+    q: 'What does Peek cost?',
     a: (
       <>
-        free on ios. the whole core experience (insights, soft questions, funds, reflection coach)
-        is included. we'll be honest if that ever changes.
+        <em>Free on iOS.</em> The whole core experience (insights, soft questions, funds, reflection coach)
+        is included. We will be honest if that ever changes.
       </>
     ),
   },
   {
-    q: 'how is this different from mint, monarch, or copilot?',
+    q: 'How is this different from Mint, Monarch, or Copilot?',
     a: (
       <>
-        those apps categorize your transactions and show you charts. peek asks <em>why</em> you spent,
-        and shows you the pattern in plain english. mint and copilot are about tracking. peek is
+        Those apps categorize your transactions and show you charts. Peek asks <em>why</em> you spent,
+        and shows you the pattern in plain English. Mint and Copilot are about tracking. Peek is
         about understanding.
       </>
     ),
   },
   {
-    q: 'do i have to budget to use peek?',
+    q: 'Do I have to budget to use Peek?',
     a: (
       <>
-        nope. there are no rigid budgets, no zero-based math, no monthly plan to stick to. you can
-        use peek as a soft journal for your money and never set a single rule. most people find that
+        Nope. There are no rigid budgets, no zero-based math, no monthly plan to stick to. You can
+        use Peek as a soft journal for your money and never set a single rule. Most people find that
         the patterns alone change how they spend.
       </>
     ),
   },
   {
-    q: 'is peek on android?',
+    q: 'Is Peek on Android?',
     a: (
       <>
-        ios first. android is coming. if you want to be on the early-access list, the app store
+        iOS first. Android is coming. If you want to be on the early-access list, the App Store
         listing has the most current update.
       </>
     ),
   },
   {
-    q: "what if i just want to look around first?",
+    q: 'What if I just want to look around first?',
     a: (
       <>
-        totally fine. the app has a guided tour mode, no bank connection required. you can poke
+        Totally fine. The app has a guided tour mode, no bank connection required. You can poke
         around, see the soft questions, read a sample insight, and decide if it feels like you.
       </>
     ),
@@ -86,15 +86,12 @@ export default function Faq() {
     <section className="faq" id="faq">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            questions, plain answers
-          </span>
+          <span className="chapter">chapter nine. the questions.</span>
           <h2 className="h-section sec__h">
-            the questions you'd ask <em>before downloading.</em>
+            The questions you'd ask <em>before downloading.</em>
           </h2>
           <p className="lead sec__lead">
-            no fluff. real answers to the things people actually ask before they install.
+            No fluff. Real answers to the things people actually ask before they install.
           </p>
         </div>
 
@@ -105,6 +102,10 @@ export default function Faq() {
               <div className="faqi__body">{item.a}</div>
             </details>
           ))}
+        </div>
+
+        <div className="forward">
+          <span>↓ exhale</span>
         </div>
       </div>
     </section>

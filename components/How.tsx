@@ -2,40 +2,37 @@ const STEPS = [
   {
     n: '01',
     rot: -1.5,
-    h: <>connect your accounts.</>,
-    p: 'bank-level encryption, read-only access through plaid. the same connector your bank, venmo, and robinhood already use. we never see your password.',
+    h: <>Connect your accounts.</>,
+    p: 'Bank-level encryption, read-only access through Plaid. The same connector your bank, Venmo, and Robinhood already use. We never see your password.',
     hint: '30 seconds. bank-grade security.',
   },
   {
     n: '02',
     rot: 1,
-    h: <>peek asks the <em>soft questions.</em></>,
-    p: 'you spent $47 at target. was that planned, or autopilot? did it feel worth it? tap an answer. that is it. three taps, three seconds. peek learns. you stay in charge.',
+    h: <>Peek asks the <em>soft questions.</em></>,
+    p: 'You spent $47 at Target. Was that planned, or autopilot? Did it feel worth it? Tap an answer. That is it. Three taps, three seconds. Peek learns. You stay in charge.',
     hint: '4 taps. 3 seconds. no typing.',
   },
   {
     n: '03',
     rot: -1,
-    h: <>patterns reveal <em>themselves.</em></>,
-    p: 'after a week, you stop seeing transactions and start seeing yourself. the sunday brunches you love. the doordash spiral you do not. the little story your money has been telling.',
+    h: <>Patterns reveal <em>themselves.</em></>,
+    p: 'After a week, you stop seeing transactions and start seeing yourself. The Sunday brunches you love. The doordash spiral you do not. The little story your money has been telling.',
     hint: '5 minutes a day. that is all.',
   },
 ]
 
 export default function How() {
   return (
-    <section className="how sec--cream" id="how">
+    <section className="how" id="how">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            how it works
-          </span>
+          <span className="chapter">chapter four. three soft steps.</span>
           <h2 className="h-section sec__h">
-            three soft steps. <em>zero spreadsheet.</em>
+            Remember the gap from chapter three? <em>Here's how peek closes it.</em>
           </h2>
           <p className="lead sec__lead">
-            no category dropdowns. no monthly budget you'll quietly abandon. just three small things you already wanted to do, made easier.
+            No category dropdowns. No monthly budget you'll quietly abandon. Just three small things you already wanted to do, made easier.
           </p>
         </div>
 
@@ -52,6 +49,10 @@ export default function How() {
               <span className="howcard__hint">{s.hint}</span>
             </article>
           ))}
+        </div>
+
+        <div className="forward">
+          <span>→ let me show you</span>
         </div>
       </div>
     </section>

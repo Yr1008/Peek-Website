@@ -16,18 +16,16 @@ const US = [
 
 export default function Comparison() {
   return (
-    <section className="compare sec--cream" id="compare">
+    <section className="compare" id="compare">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            why peek is different
-          </span>
+          <span className="chapter">chapter six. the difference.</span>
           <h2 className="h-section sec__h">
-            other apps track. <em>peek understands.</em>
+            Every other money app makes you <em>manage.</em><br />
+            Peek makes you <em>exhale.</em>
           </h2>
           <p className="lead sec__lead">
-            same data, two completely different conversations. one leaves you with a chart. one leaves you with clarity.
+            Same data, two completely different conversations. One leaves you with a chart. One leaves you with clarity.
           </p>
         </div>
 
@@ -41,11 +39,15 @@ export default function Comparison() {
           </div>
           <div className="col col--us reveal">
             <h3 className="col__h">peek</h3>
-            <span className="col__sub">asks. reveals. pays attention.</span>
+            <span className="col__sub">asks. reveals. <em>pays attention.</em></span>
             <ul className="col__list">
               {US.map((u) => <li key={u}>{u}</li>)}
             </ul>
           </div>
+        </div>
+
+        <div className="forward">
+          <span>→ what kind of spender are you?</span>
         </div>
       </div>
     </section>

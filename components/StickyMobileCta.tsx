@@ -9,12 +9,13 @@ export default function StickyMobileCta() {
         id="cta-sticky"
         data-cta="sticky"
         className="smcta__btn"
-        aria-label="get peek free on ios. opens app store."
+        aria-label="Get Peek. Free on iOS. Opens the App Store."
         target="_blank"
         rel="noopener"
       >
         <AppleIcon />
-        get peek. free on ios.
+        Get Peek. Free on iOS.
+        <span className="arrow" aria-hidden="true">→</span>
       </a>
     </div>
   )
