@@ -14,33 +14,29 @@ type Charge = {
 }
 
 const CHARGES: Charge[] = [
-  { amount: '$5.75',  merchant: <>latte at <em>blank street</em></>,        when: '8:42am tuesday' },
-  { amount: '$84',    merchant: <>sambas at <em>new balance</em></>,        when: 'saturday afternoon' },
-  { amount: '$22',    merchant: <>doordash</>,                                when: '9pm tuesday' },
-  { amount: '$47',    merchant: <>target run</>,                              when: 'sunday evening' },
-  { amount: '$345',   merchant: <>chubby cattle bbq <em>w/ sister</em></>,  when: 'friday 8pm' },
+  { amount: '$5.75',  merchant: <>Latte at <em>Blank Street</em></>,        when: '8:42am · Tuesday' },
+  { amount: '$84',    merchant: <>Sambas at <em>New Balance</em></>,        when: 'Saturday afternoon' },
+  { amount: '$22',    merchant: <>DoorDash</>,                                when: '9pm · Tuesday' },
+  { amount: '$47',    merchant: <>Target run</>,                              when: 'Sunday evening' },
+  { amount: '$345',   merchant: <>Chubby Cattle BBQ <em>w/ sister</em></>,  when: 'Friday 8pm' },
 ]
 
-const KINDS: Record<Kind, { name: React.ReactNode; body: React.ReactNode; bubble: string }> = {
+const KINDS: Record<Kind, { name: React.ReactNode; body: React.ReactNode }> = {
   reward: {
-    name: <>You're a <em>self-reward person.</em></>,
+    name: <>You&rsquo;re a <em>self-reward person.</em></>,
     body: <>Your money tracks your week. Hard week, treat. Good week, splurge. Peek shows which rewards <em>actually</em> recharge you, and which were autopilot.</>,
-    bubble: 'she gets it.',
   },
   ritual: {
-    name: <>You're a <em>ritual person.</em></>,
-    body: <>You spend on the same anchors every week. That's not a problem. That's a personality. Peek shows the ones <em>worth it</em> and the ones that drift.</>,
-    bubble: 'she has rituals.',
+    name: <>You&rsquo;re a <em>ritual person.</em></>,
+    body: <>You spend on the same anchors every week. That&rsquo;s not a problem. That&rsquo;s a personality. Peek shows the ones <em>worth it</em> and the ones that drift.</>,
   },
   social: {
-    name: <>You're a <em>social spender.</em></>,
-    body: <>Your money moves with the people you love. That's a feature, not a leak. Peek shows which moments felt <em>worth it</em> and which were just the room.</>,
-    bubble: 'she shares well.',
+    name: <>You&rsquo;re a <em>social spender.</em></>,
+    body: <>Your money moves with the people you love. That&rsquo;s a feature, not a leak. Peek shows which moments felt <em>worth it</em> and which were just the room.</>,
   },
   conv: {
-    name: <>You're a <em>convenience optimizer.</em></>,
+    name: <>You&rsquo;re a <em>convenience optimizer.</em></>,
     body: <>Your money buys time. Peek shows when that trade <em>landed</em> and when it cost more than the time it saved.</>,
-    bubble: 'time is money.',
   },
 }
 
@@ -71,7 +67,7 @@ export default function Swipe() {
       setOutDirection(null)
       const card = cardRef.current
       if (card) card.style.transform = ''
-    }, 380)
+    }, 420)
   }, [outDirection])
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -118,16 +114,16 @@ export default function Swipe() {
     return (
       <section className="swipe" id="swipe">
         <div className="wrap">
-          <div className="sec__head reveal">
-            <span className="chapter">chapter seven. your turn.</span>
-            <h2 className="h-section sec__h">
-              What kind of <em>spender</em> are you?
-            </h2>
+          <div className="sec__head reveal" style={{ marginBottom: 36 }}>
+            <span className="eyebrow">
+              <span className="eyebrow__num">07</span>
+              <span className="eyebrow__sep" aria-hidden="true" />
+              <span>Your turn</span>
+            </span>
           </div>
 
           <div className="swipe__result">
-            <span className="swipe__bubble" aria-hidden="true">{k.bubble}</span>
-            <span className="swipe__result-eyebrow">your spending kind</span>
+            <span className="swipe__result-eyebrow">Your spending kind</span>
             <h3 className="swipe__result-h">{k.name}</h3>
             <div className="swipe__result-mascot" aria-hidden="true">
               <picture>
@@ -145,14 +141,12 @@ export default function Swipe() {
             >
               <AppleIcon />
               Get Peek. Free on iOS.
-              <span className="arrow" aria-hidden="true">→</span>
             </a>
-            <button onClick={reset} className="swipe__reset">↺ try again</button>
+            <div>
+              <button onClick={reset} className="swipe__reset">↺ try again</button>
+            </div>
           </div>
 
-          <div className="forward">
-            <span>↓ people who get it</span>
-          </div>
           <div ref={confettiRoot} className="confetti" aria-hidden="true" />
         </div>
       </section>
@@ -169,12 +163,16 @@ export default function Swipe() {
     <section className="swipe" id="swipe">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="chapter">chapter seven. your turn.</span>
+          <span className="eyebrow">
+            <span className="eyebrow__num">07</span>
+            <span className="eyebrow__sep" aria-hidden="true" />
+            <span>Your turn</span>
+          </span>
           <h2 className="h-section sec__h">
             What kind of <em>spender</em> are you?
           </h2>
           <p className="lead sec__lead">
-            Five real moments. Swipe right "worth it", left "skip next time", up "add to a fund". The framework is yours after the fifth swipe.
+            Five real moments. Swipe right &ldquo;worth it&rdquo;, left &ldquo;skip next time&rdquo;, up &ldquo;add to a fund&rdquo;.
           </p>
         </div>
 
@@ -212,7 +210,6 @@ export default function Swipe() {
               <div className="swipe__merchant">{c.merchant}</div>
               <div className="swipe__when">{c.when}</div>
             </div>
-            <div className="swipe__hint">drag, or tap a button below</div>
           </div>
         </div>
 
@@ -226,14 +223,14 @@ export default function Swipe() {
         </div>
 
         <div className="swipe__buttons">
-          <button className="swipe__btn swipe__btn--left" onClick={(e) => onButton('left', e)} aria-label="skip next time">
-            ← skip
+          <button className="swipe__btn" onClick={(e) => onButton('left', e)} aria-label="skip next time">
+            ← Skip
           </button>
-          <button className="swipe__btn swipe__btn--up" onClick={(e) => onButton('up', e)} aria-label="add to a fund">
-            add to fund
+          <button className="swipe__btn" onClick={(e) => onButton('up', e)} aria-label="add to a fund">
+            ↑ Fund
           </button>
-          <button className="swipe__btn swipe__btn--right" onClick={(e) => onButton('right', e)} aria-label="worth it">
-            worth it →
+          <button className="swipe__btn" onClick={(e) => onButton('right', e)} aria-label="worth it">
+            Worth it →
           </button>
         </div>
 

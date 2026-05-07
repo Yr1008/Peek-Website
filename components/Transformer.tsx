@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
 
@@ -20,15 +20,11 @@ const TAG_DATA: Record<Tag, {
   convenience: { label: 'convenience',  pillBg: '#9DC8E8', pillFg: '#1F0E33', why: 'too tired to cook · friday late',  story: '"easiest option" · would skip next time', worth: 38 },
 }
 
-const COLORS = ['#FF7A50', '#F4D547', '#7DB880', '#9DC8E8', '#FF80AB']
-
 export default function Transformer() {
   const [active, setActive] = useState<Tag>('reward')
-  const confettiRoot = useRef<HTMLDivElement>(null)
 
-  const onTap = useCallback((tag: Tag, ev: React.MouseEvent<HTMLButtonElement>) => {
+  const onTap = useCallback((tag: Tag) => {
     setActive(tag)
-    burst(ev.currentTarget, confettiRoot.current)
   }, [])
 
   const t = TAG_DATA[active]
@@ -37,13 +33,17 @@ export default function Transformer() {
     <section className="tx" id="transformer">
       <div className="wrap">
         <div className="tx__head reveal">
-          <span className="chapter">chapter one. the why.</span>
-          <h2 className="h-section tx__h">
-            Your bank shows <em>what.</em><br />
+          <span className="eyebrow">
+            <span className="eyebrow__num">01</span>
+            <span className="eyebrow__sep" aria-hidden="true" />
+            <span>The why</span>
+          </span>
+          <h2 className="h-section tx__h" style={{ marginTop: 18 }}>
+            Your bank shows what.<br />
             Peek shows <em>why.</em>
           </h2>
           <p className="lead tx__lead">
-            Tap a tag below. Watch the <em>why</em> change live. The whole app, in one breath.
+            Tap a tag below. Watch the <em>why</em> change live. The whole product, in one breath.
           </p>
         </div>
 
@@ -109,7 +109,7 @@ export default function Transformer() {
         </div>
 
         <div className="tx__chips">
-          <span className="tx__chips-label">↓ what made this move?</span>
+          <span className="tx__chips-label">Tap any tag</span>
           <div className="tx__chips-row" role="radiogroup" aria-label="tag this transaction">
             {(Object.keys(TAG_DATA) as Tag[]).map(tag => (
               <button
@@ -118,7 +118,7 @@ export default function Transformer() {
                 data-tag={tag}
                 role="radio"
                 aria-checked={active === tag}
-                onClick={(ev) => onTap(tag, ev)}
+                onClick={() => onTap(tag)}
               >
                 <span className="hchip__dot" aria-hidden="true" />
                 {TAG_DATA[tag].label}
@@ -129,7 +129,7 @@ export default function Transformer() {
 
         <div className="tx__cta-row">
           <a
-            className="btn btn--white"
+            className="btn btn--primary"
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener"
@@ -137,45 +137,9 @@ export default function Transformer() {
           >
             <AppleIcon />
             Get Peek. Free on iOS.
-            <span className="arrow" aria-hidden="true">→</span>
           </a>
         </div>
-
-        <div className="forward">
-          <span>→ now guess your gap</span>
-        </div>
-
-        <div ref={confettiRoot} className="confetti" aria-hidden="true" />
       </div>
     </section>
   )
-}
-
-function burst(target: HTMLElement, root: HTMLElement | null) {
-  if (!root) return
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-  const rect = target.getBoundingClientRect()
-  const cx = rect.left + rect.width / 2
-  const cy = rect.top + rect.height / 2
-  const layer = document.createElement('div')
-  layer.style.position = 'fixed'
-  layer.style.left = `${cx}px`
-  layer.style.top = `${cy}px`
-  layer.style.pointerEvents = 'none'
-  layer.style.zIndex = '1000'
-  for (let i = 0; i < 10; i++) {
-    const dot = document.createElement('span')
-    dot.className = 'confetti__dot'
-    const angle = Math.random() * Math.PI * 2
-    const dist = 40 + Math.random() * 40
-    dot.style.setProperty('--dx', `${Math.cos(angle) * dist}px`)
-    dot.style.setProperty('--dy', `${Math.sin(angle) * dist - 30}px`)
-    dot.style.background = COLORS[i % COLORS.length]
-    dot.style.left = '-4px'
-    dot.style.top = '-4px'
-    dot.style.animationDelay = `${i * 12}ms`
-    layer.appendChild(dot)
-  }
-  root.appendChild(layer)
-  setTimeout(() => layer.remove(), 1200)
 }

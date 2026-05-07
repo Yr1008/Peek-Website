@@ -92,7 +92,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/images/optimized/p-portrait-blonde.webp"
+          href="/images/optimized/lifestyle-laugh.webp"
           type="image/webp"
           fetchPriority="high"
         />

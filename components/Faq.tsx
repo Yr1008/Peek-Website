@@ -55,8 +55,8 @@ const Q = [
     q: 'What if I just want to look around first?',
     a: (
       <>
-        Totally fine. The app has a guided tour mode, no bank connection required. You can poke
-        around, see the soft questions, read a sample insight, and decide if it feels like you.
+        Totally fine. The app has a guided tour mode, no bank connection required. Poke around,
+        see the soft questions, read a sample insight, and decide if it feels like you.
       </>
     ),
   },
@@ -86,9 +86,13 @@ export default function Faq() {
     <section className="faq" id="faq">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="chapter">chapter nine. the questions.</span>
+          <span className="eyebrow">
+            <span className="eyebrow__num">09</span>
+            <span className="eyebrow__sep" aria-hidden="true" />
+            <span>Questions</span>
+          </span>
           <h2 className="h-section sec__h">
-            The questions you'd ask <em>before downloading.</em>
+            The questions you&rsquo;d ask <em>before downloading.</em>
           </h2>
           <p className="lead sec__lead">
             No fluff. Real answers to the things people actually ask before they install.
@@ -102,10 +106,6 @@ export default function Faq() {
               <div className="faqi__body">{item.a}</div>
             </details>
           ))}
-        </div>
-
-        <div className="forward">
-          <span>↓ exhale</span>
         </div>
       </div>
     </section>

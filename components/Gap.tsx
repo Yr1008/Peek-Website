@@ -13,7 +13,7 @@ export default function Gap() {
   useEffect(() => {
     if (!revealed) return
     const start = performance.now()
-    const dur = 1100
+    const dur = 1200
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / dur)
       const eased = 1 - Math.pow(1 - p, 3)
@@ -30,74 +30,77 @@ export default function Gap() {
     <section className="gap" id="gap">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="chapter">chapter three. the gap.</span>
+          <span className="eyebrow">
+            <span className="eyebrow__num">03</span>
+            <span className="eyebrow__sep" aria-hidden="true" />
+            <span>The gap</span>
+          </span>
           <h2 className="h-section sec__h">
-            You're not bad at <em>budgeting.</em><br />
-            Budgeting is bad at <em>understanding you.</em>
+            You&rsquo;re not bad at budgeting.<br />
+            <em>Budgeting is bad at understanding you.</em>
           </h2>
           <p className="lead sec__lead">
-            Most apps tell you <em>what</em> you spent. They can't tell you why.
-            Here's the gap they leave you in.
+            Most apps tell you what you spent. They can&rsquo;t tell you why. Here&rsquo;s the gap they leave you in.
           </p>
         </div>
 
-        <div className="gap__demo reveal">
-          <span className="gap__demo-q">
-            guess your last 30 days on <em>coffee &amp; takeout</em>
-          </span>
-          <div className="gap__demo-amount" aria-live="polite">
-            <span className="gap__demo-prefix">$</span>
-            {guess}
-          </div>
-          <input
-            type="range"
-            min={40}
-            max={600}
-            step={5}
-            value={guess}
-            onChange={(e) => setGuess(Number(e.target.value))}
-            disabled={revealed}
-            className="gap__demo-slider"
-            aria-label="your guess for coffee and takeout in the last 30 days"
-          />
-          {!revealed && (
-            <button
-              className="gap__demo-reveal"
-              onClick={() => setRevealed(true)}
-              data-cta="gap-reveal"
-            >
-              show me what's actually there →
-            </button>
-          )}
-
-          {revealed && (
-            <div className="gap__panel" role="status">
-              <span className="gap__panel-lbl">btw — this is what peek users learn on day one:</span>
-              <div className="gap__panel-amount">
-                <span className="gap__demo-prefix" style={{ color: '#E85F30' }}>$</span>
-                {animatedActual}
-              </div>
-              <span className="gap__panel-diff">
-                {diff > 0 ? '+' : ''}${Math.abs(diff)} {diff > 0 ? 'more than you guessed' : 'less than you guessed'}
-              </span>
-              <p className="gap__panel-quote">
-                "i thought i was spending $80 on coffee. <em>it was $312.</em> not because i'm reckless. because no one ever showed me."
-                <span className="gap__panel-cite">— maya, 26, brooklyn</span>
-              </p>
+        <div className="gap__wrap">
+          <div className="gap__demo reveal">
+            <span className="gap__demo-q">
+              Guess your last 30 days on <em>coffee &amp; takeout</em>
+            </span>
+            <div className="gap__demo-amount" aria-live="polite">
+              <span className="gap__demo-prefix">$</span>
+              {guess}
             </div>
-          )}
+            <input
+              type="range"
+              min={40}
+              max={600}
+              step={5}
+              value={guess}
+              onChange={(e) => setGuess(Number(e.target.value))}
+              disabled={revealed}
+              className="gap__demo-slider"
+              aria-label="your guess for coffee and takeout in the last 30 days"
+            />
+            {!revealed && (
+              <button
+                className="gap__demo-reveal"
+                onClick={() => setRevealed(true)}
+                data-cta="gap-reveal"
+              >
+                Show me what&rsquo;s actually there →
+              </button>
+            )}
 
-          <div className="gap__polaroid" aria-hidden="true">
-            <picture>
-              <source srcSet="/images/optimized/p-portrait-blonde.webp" type="image/webp" />
-              <img src="/images/uploads/people/portrait-blonde.png" alt="" loading="lazy" />
-            </picture>
-            <span className="gap__polaroid-cap">maya · brooklyn</span>
+            {revealed && (
+              <div className="gap__panel" role="status">
+                <span className="gap__panel-lbl">Average peek user, week one</span>
+                <div className="gap__panel-amount">
+                  <span className="gap__demo-prefix" style={{ color: '#E85F30' }}>$</span>
+                  {animatedActual}
+                </div>
+                <span className="gap__panel-diff">
+                  {diff > 0 ? '+' : ''}${Math.abs(diff)} {diff > 0 ? 'more than you guessed' : 'less than you guessed'}
+                </span>
+                <p className="gap__panel-quote">
+                  &ldquo;I thought I was spending $80 on coffee. <em>It was $312.</em> Not because I&rsquo;m reckless. Because no one ever showed me.&rdquo;
+                  <span className="gap__panel-cite">Maya · Brooklyn</span>
+                </p>
+              </div>
+            )}
           </div>
-        </div>
 
-        <div className="forward">
-          <span>↓ here's how peek closes it</span>
+          <div className="gap__photo reveal">
+            <div className="gap__photo-img">
+              <picture>
+                <source srcSet="/images/optimized/p-portrait-blonde.webp" type="image/webp" />
+                <img src="/images/uploads/people/portrait-blonde.png" alt="Maya, a peek user from Brooklyn" loading="lazy" />
+              </picture>
+            </div>
+            <span className="gap__photo-cap">Maya · Brooklyn · joined March 2026</span>
+          </div>
         </div>
       </div>
     </section>
