@@ -89,7 +89,7 @@ export default function Voices() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            Real users · real receipts
+            06 / what people say
           </span>
           <h2 className="h-section sec__h">
             don't take our word <em>for it.</em>

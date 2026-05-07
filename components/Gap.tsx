@@ -43,7 +43,7 @@ export default function Gap() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            Most people guess wrong
+            02 / how big the gap is
           </span>
           <h2 className="h-section sec__h">
             you're off by <em>~$192</em> a month.<br/>

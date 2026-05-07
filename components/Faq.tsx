@@ -87,7 +87,7 @@ export default function Faq() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            Questions
+            07 / before you tap
           </span>
           <h2 className="h-section sec__h">
             the questions you'd ask <em>before downloading.</em>

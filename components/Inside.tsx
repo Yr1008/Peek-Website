@@ -4,13 +4,13 @@ export default function Inside() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            Inside Peek
+            04 / inside peek
           </span>
           <h2 className="h-section sec__h">
             the little moments <em>that change how money feels.</em>
           </h2>
           <p className="lead sec__lead">
-            three real moments inside the app. each one tuned to a single anxiety it lifts.
+            three real moments inside the app. each tuned to a single anxiety it lifts.
           </p>
         </div>
 
@@ -22,8 +22,8 @@ export default function Inside() {
           >
             <div className="phoneTile">
               <picture>
-                <source srcSet="/images/optimized/screen-blindbox.webp" type="image/webp" />
-                <img src="/images/uploads/screen-blindbox.png" alt="Peek revealing a weekly insight" loading="lazy" decoding="async" />
+                <source srcSet="/images/optimized/screen-patterns.webp" type="image/webp" />
+                <img src="/images/uploads/screen-patterns.png" alt="Peek revealing your spending story" loading="lazy" decoding="async" />
               </picture>
             </div>
           </article>
@@ -58,8 +58,8 @@ export default function Inside() {
           >
             <div className="phoneTile">
               <picture>
-                <source srcSet="/images/optimized/screen-caps.webp" type="image/webp" />
-                <img src="/images/uploads/screen-caps.png" alt="Peek showing a soft fund instead of a strict cap" loading="lazy" decoding="async" />
+                <source srcSet="/images/optimized/screen-checkin.webp" type="image/webp" />
+                <img src="/images/uploads/screen-checkin.png" alt="Peek showing a soft fund instead of a strict cap" loading="lazy" decoding="async" />
               </picture>
             </div>
           </article>
@@ -76,17 +76,29 @@ export default function Inside() {
             </p>
           </article>
 
-          {/* Mascot tile */}
+          {/* Small phone tile — AI coach */}
           <article
-            className="tile tile--mascot tile--sm reveal"
+            className="tile tile--phone tile--sm reveal"
             style={{ ['--rot' as string]: '1.2deg' } as React.CSSProperties}
           >
-            <picture>
-              <source srcSet="/images/optimized/peek-3d-left.webp" type="image/webp" />
-              <img src="/images/uploads/mascots/peek-3d-left.png" alt="" />
-            </picture>
-            <span className="tile__lbl" style={{ color: '#E85F30' }}>tap me · ai coach</span>
-            <p className="tile__p" style={{ textAlign: 'center' }}>money questions, answered like a friend would.</p>
+            <div className="phoneTile">
+              <picture>
+                <source srcSet="/images/optimized/screen-chat.webp" type="image/webp" />
+                <img src="/images/uploads/screen-chat.png" alt="Peek AI coach answering money questions" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+          </article>
+
+          {/* Sage AI coach quote tile */}
+          <article
+            className="tile tile--sage tile--wide reveal"
+            style={{ ['--rot' as string]: '-0.5deg' } as React.CSSProperties}
+          >
+            <span className="tile__lbl">ai reflection coach</span>
+            <h3 className="tile__h">money questions answered <em>like a friend would.</em></h3>
+            <p className="tile__p">
+              "can i afford this?" "why do i feel weird about that purchase?" "am i doing better this month?" peek answers in plain english, in your context.
+            </p>
           </article>
         </div>
       </div>

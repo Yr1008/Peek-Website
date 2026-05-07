@@ -34,7 +34,7 @@ export default function How() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            How it works
+            03 / how peek closes it
           </span>
           <h2 className="h-section sec__h">
             three soft steps. <em>zero spreadsheet.</em>

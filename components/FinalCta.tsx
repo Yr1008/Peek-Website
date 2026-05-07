@@ -6,25 +6,6 @@ export default function FinalCta() {
     <section className="final sec--peach" id="get">
       <div className="final__orbs" aria-hidden="true" />
 
-      <div className="final__sticker final__sticker--1" aria-hidden="true">
-        <picture>
-          <source srcSet="/images/optimized/st-croissant.webp" type="image/webp" />
-          <img src="/images/uploads/stickers/croissant.png" alt="" />
-        </picture>
-      </div>
-      <div className="final__sticker final__sticker--2" aria-hidden="true">
-        <picture>
-          <source srcSet="/images/optimized/st-flower.webp" type="image/webp" />
-          <img src="/images/uploads/stickers/flower.png" alt="" />
-        </picture>
-      </div>
-      <div className="final__sticker final__sticker--3" aria-hidden="true">
-        <picture>
-          <source srcSet="/images/optimized/st-tea.webp" type="image/webp" />
-          <img src="/images/uploads/stickers/tea.png" alt="" />
-        </picture>
-      </div>
-
       <div className="final__inner reveal">
         <div className="final__mascot" aria-hidden="true">
           <video
@@ -39,7 +20,6 @@ export default function FinalCta() {
             <img src="/images/optimized/peek-3d-left.webp" alt="" />
           </video>
         </div>
-        <span className="final__stamp" aria-hidden="true">you ready?</span>
 
         <h2 className="final__h">
           money that finally <em>reflects who you are.</em>

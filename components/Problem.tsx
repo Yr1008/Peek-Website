@@ -25,7 +25,7 @@ export default function Problem() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            What you'd say if a money app actually asked
+            01 / what you'd say if it asked
           </span>
           <h2 className="h-section sec__h">
             you're not bad at money.<br />

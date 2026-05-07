@@ -20,7 +20,7 @@ export default function Comparison() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            The difference
+            05 / the difference
           </span>
           <h2 className="h-section sec__h">
             other apps make you <em>manage.</em><br />
