@@ -4,58 +4,58 @@ import { useEffect } from 'react'
 
 const Q = [
   {
-    q: 'Is my financial data safe?',
+    q: 'is my financial data safe?',
     a: (
       <>
-        Yes. Peek connects through <em>Plaid</em>, the same encrypted bank connector that powers
-        Venmo, Robinhood, and Coinbase. Read-only access. We never see your bank password,
-        and we cannot move money. Your data is encrypted at rest and in transit.
+        yes. peek connects through <em>plaid</em>, the same encrypted bank connector that powers
+        venmo, robinhood, and coinbase. read-only access. we never see your bank password,
+        and we cannot move money. your data is encrypted at rest and in transit.
       </>
     ),
   },
   {
-    q: 'What does Peek cost?',
+    q: 'what does peek cost?',
     a: (
       <>
-        Free on iOS. The whole core experience (insights, soft questions, funds, reflection coach)
-        is included. We will be honest if that ever changes.
+        free on ios. the whole core experience (insights, soft questions, funds, reflection coach)
+        is included. we'll be honest if that ever changes.
       </>
     ),
   },
   {
-    q: 'How is this different from Mint, Monarch, or Copilot?',
+    q: 'how is this different from mint, monarch, or copilot?',
     a: (
       <>
-        Those apps categorize your transactions and show you charts. Peek asks <em>why</em> you spent,
-        and shows you the pattern in plain English. Mint and Copilot are about tracking. Peek is
+        those apps categorize your transactions and show you charts. peek asks <em>why</em> you spent,
+        and shows you the pattern in plain english. mint and copilot are about tracking. peek is
         about understanding.
       </>
     ),
   },
   {
-    q: 'Do I have to budget to use Peek?',
+    q: 'do i have to budget to use peek?',
     a: (
       <>
-        Nope. There are no rigid budgets, no zero-based math, no monthly plan to stick to. You can
-        use Peek as a soft journal for your money and never set a single rule. Most people find that
+        nope. there are no rigid budgets, no zero-based math, no monthly plan to stick to. you can
+        use peek as a soft journal for your money and never set a single rule. most people find that
         the patterns alone change how they spend.
       </>
     ),
   },
   {
-    q: 'Is Peek on Android?',
+    q: 'is peek on android?',
     a: (
       <>
-        iOS first. Android is coming. If you want to be on the early-access list, the App Store
+        ios first. android is coming. if you want to be on the early-access list, the app store
         listing has the most current update.
       </>
     ),
   },
   {
-    q: 'What if I just want to look around first?',
+    q: "what if i just want to look around first?",
     a: (
       <>
-        Totally fine. The app has a guided tour mode, no bank connection required. You can poke
+        totally fine. the app has a guided tour mode, no bank connection required. you can poke
         around, see the soft questions, read a sample insight, and decide if it feels like you.
       </>
     ),
@@ -83,15 +83,18 @@ export default function Faq() {
   }, [])
 
   return (
-    <section className="sec faq" id="faq">
+    <section className="faq" id="faq">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">FAQ</span>
+          <span className="eyebrow">
+            <span className="dot" aria-hidden="true" />
+            questions, plain answers
+          </span>
           <h2 className="h-section sec__h">
-            The questions you'd ask <em>before downloading.</em>
+            the questions you'd ask <em>before downloading.</em>
           </h2>
           <p className="lead sec__lead">
-            No fluff. Real answers to the things people actually ask before they install.
+            no fluff. real answers to the things people actually ask before they install.
           </p>
         </div>
 

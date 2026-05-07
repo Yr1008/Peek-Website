@@ -5,19 +5,20 @@ export default function Navbar() {
   return (
     <header className="nav" id="nav">
       <div className="nav__in">
-        <a className="nav__brand" href="#top" aria-label="Peek home">
+        <a className="nav__brand" href="#top" aria-label="peek home">
           <picture>
             <source srcSet="/images/optimized/peek-icon.webp" type="image/webp" />
             <img
+              className="nav__blob"
               src="/images/peek-icon.png"
               alt=""
-              width={30}
-              height={30}
+              width={34}
+              height={34}
               loading="eager"
               decoding="async"
             />
           </picture>
-          <span className="nav__word">Peek</span>
+          <span className="nav__word">peek</span>
         </a>
         <a
           className="nav__cta"
@@ -28,7 +29,7 @@ export default function Navbar() {
           rel="noopener"
         >
           <AppleIcon className="nav__cta-icon" />
-          Download
+          download
         </a>
       </div>
     </header>
