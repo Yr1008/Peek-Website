@@ -1269,3 +1269,313 @@ main, .nav, .foot, .sticky-cta { position: relative; z-index: 2; }
 /* ─────── Tagger result chip-aware mascot tilt ─────── */
 .tagger-sec__result-mascot{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
 .tagger-sec__result.is-on .tagger-sec__result-mascot{transform:scale(1.1)}
+
+/* ═══════════════ V3 — bento, confetti, count-up, kinetic, badge unlock ═══════════════ */
+
+/* ─── Kinetic H1 ─── */
+.kinetic{display:inline-block}
+.kinetic__letter{
+  display:inline-block;
+  opacity:0;transform:translateY(40%) rotate(8deg);
+  animation:kin-drop .55s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.kinetic__letter--space{width:.28em}
+@keyframes kin-drop{
+  to{opacity:1;transform:translateY(0) rotate(0)}
+}
+@media (prefers-reduced-motion: reduce){
+  .kinetic__letter{animation:none;opacity:1;transform:none}
+}
+
+/* ─── Count-up baseline (numbers stay tabular) ─── */
+.count-up{
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1;
+}
+
+/* ─── Confetti ─── */
+.confetti{
+  position:absolute;inset:0;pointer-events:none;
+  overflow:visible;
+  z-index:5;
+}
+.confetti__bit{
+  position:absolute;
+  width:8px;height:8px;
+  border-radius:2px;
+  opacity:0;
+  animation:conf 1.4s cubic-bezier(.2,.7,.3,1) forwards;
+}
+@keyframes conf{
+  0%{opacity:0;transform:translate(0,0) rotate(0) scale(.4)}
+  20%{opacity:1}
+  100%{opacity:0;transform:translate(var(--cx,0), var(--cy,-80px)) rotate(var(--cr,140deg)) scale(1)}
+}
+@media (prefers-reduced-motion: reduce){
+  .confetti__bit{display:none}
+}
+
+/* ─── Quiz multi-step ─── */
+.quiz-progress{
+  display:flex;justify-content:center;gap:8px;
+  margin:0 auto 22px;
+}
+.quiz-progress__dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,244,224,.18);
+  transition:background .25s, transform .25s;
+}
+.quiz-progress__dot.is-on{background:var(--peek);transform:scale(1.3)}
+.quiz-progress__dot.is-done{background:var(--peek-2)}
+
+.quiz-step-anim{
+  animation:qstep .5s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes qstep{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.quiz-badge{
+  display:inline-block;
+  background:var(--peek);color:#fff;
+  border-radius:999px;
+  padding:6px 14px;
+  font-family:var(--f-display);font-style:italic;font-weight:600;
+  font-size:14px;
+  margin-bottom:10px;
+  box-shadow:0 8px 18px -6px rgba(255,122,80,.5);
+  transform:scale(0);
+  animation:badge-pop .55s cubic-bezier(.34,1.56,.64,1) .2s forwards;
+}
+@keyframes badge-pop{
+  to{transform:scale(1)}
+}
+@media (prefers-reduced-motion: reduce){
+  .quiz-badge{transform:scale(1);animation:none}
+  .quiz-step-anim{animation:none;opacity:1;transform:none}
+}
+
+/* ─── Bento ─── */
+.bento-sec{
+  position:relative;
+  padding:84px 0;
+  background:var(--paper-3);
+}
+@media (min-width:900px){.bento-sec{padding:120px 0}}
+.bento-sec__head{text-align:center;max-width:780px;margin:0 auto 56px}
+.bento-sec__head .eyebrow{justify-content:center}
+.bento-sec__head .h-section{margin-top:14px}
+.bento-sec__head .lead{margin:18px auto 0}
+
+.bento{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  max-width:1180px;margin:0 auto;
+}
+@media (min-width:680px){
+  .bento{grid-template-columns:repeat(2,1fr);gap:16px}
+}
+@media (min-width:1080px){
+  .bento{grid-template-columns:repeat(4,1fr);gap:18px}
+}
+
+.bcell{
+  position:relative;
+  border-radius:24px;
+  padding:24px;
+  min-height:240px;
+  overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 18px 36px -16px rgba(31,14,51,.16), 0 1px 2px rgba(31,14,51,.04);
+  transition:transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s, rotate .35s;
+  cursor:default;
+}
+.bcell:hover{
+  transform:translateY(-4px);
+  rotate:.8deg;
+  box-shadow:0 24px 48px -16px rgba(31,14,51,.24);
+}
+.bcell--span2{grid-column:span 1}
+@media (min-width:1080px){.bcell--span2{grid-column:span 2}}
+.bcell--tall{min-height:240px}
+@media (min-width:1080px){.bcell--tall{min-height:300px}}
+
+/* color variants */
+.bcell--peek{background:#FFD9C4;color:var(--ink)}
+.bcell--peek .bcell__brow{color:var(--peek-2)}
+.bcell--sage{background:#D9E5C4;color:var(--ink)}
+.bcell--sage .bcell__brow{color:#3B7A3F}
+.bcell--sky{background:#C8DDF0;color:var(--ink)}
+.bcell--sky .bcell__brow{color:#3D6E9E}
+.bcell--yellow{background:#FBE790;color:var(--ink)}
+.bcell--yellow .bcell__brow{color:#8A6E1A}
+.bcell--aub{background:linear-gradient(155deg, var(--aub) 0%, var(--ink) 100%);color:var(--paper)}
+.bcell--aub .bcell__brow{color:var(--peek)}
+.bcell--aub .bcell__h{color:var(--paper)}
+.bcell--aub .bcell__h em{color:var(--peek)}
+.bcell--aub .bcell__p{color:rgba(244,236,219,.78)}
+.bcell--lilac{background:#E2D2EE;color:var(--ink)}
+.bcell--lilac .bcell__brow{color:#6B3D9E}
+.bcell--pink{background:#F8C7DA;color:var(--ink)}
+.bcell--pink .bcell__brow{color:#B23F6E}
+.bcell--cream{background:#F8F1DC;color:var(--ink);border:1.5px solid rgba(31,14,51,.08)}
+
+.bcell__brow{
+  font-family:var(--f-sans);
+  font-size:11px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  margin:0 0 10px;
+}
+.bcell__h{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(22px,2.4vw,28px);
+  line-height:1.05;letter-spacing:-0.02em;
+  margin:0 0 8px;color:var(--ink);
+  text-wrap:balance;
+}
+.bcell__h em{font-style:italic;font-weight:600;color:var(--peek-2)}
+.bcell__p{
+  font-size:13.5px;line-height:1.5;color:var(--ink-2);margin:0;
+}
+
+.bcell__viz{
+  margin-top:14px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+
+/* mini chips */
+.bchip{
+  display:inline-flex;align-items:center;
+  padding:6px 11px;border-radius:999px;
+  font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:rgba(31,14,51,.08);color:var(--ink);
+}
+.bcell--aub .bchip{background:rgba(255,255,255,.10);color:var(--paper)}
+.bchip--peek{background:var(--peek);color:#fff}
+.bchip--sage{background:var(--green);color:#1a3318}
+.bchip--pink{background:var(--pink);color:#fff}
+.bchip--sky{background:var(--sky);color:#0e3a5c}
+.bchip--yellow{background:var(--yellow);color:#3a2c08}
+
+/* mini progress bar (for caps card) */
+.bbar{
+  display:flex;height:10px;border-radius:999px;overflow:hidden;width:100%;
+  background:rgba(31,14,51,.08);
+}
+.bbar__seg{height:100%}
+.bbar__seg--ok{background:var(--green)}
+.bbar__seg--over{background:var(--peek-2)}
+
+/* mini sticker icons in bento */
+.bsticker-row{
+  display:flex;gap:6px;align-items:center;
+}
+.bsticker-row img{
+  width:34px;height:34px;object-fit:contain;
+  filter:drop-shadow(0 4px 6px rgba(31,14,51,.12));
+}
+.bsticker-row img:nth-child(2){transform:rotate(-8deg)}
+.bsticker-row img:nth-child(3){transform:rotate(6deg)}
+.bsticker-row img:nth-child(4){transform:rotate(-4deg)}
+
+/* mini "tap me" mock */
+.btap{
+  display:flex;gap:6px;align-items:center;
+}
+.btap__card{
+  width:38px;height:50px;border-radius:8px;
+  background:rgba(255,255,255,.10);
+  display:grid;place-items:center;
+  font-family:var(--f-script);font-size:11px;color:var(--paper);
+}
+.btap__card.is-on{
+  background:var(--peek);color:#fff;transform:scale(1.08)
+}
+
+/* mini chat bubble */
+.bbubble{
+  display:flex;flex-direction:column;gap:4px;
+}
+.bbubble__row{
+  display:flex;gap:6px;align-items:flex-end;
+  font-size:11px;line-height:1.3;
+}
+.bbubble__msg{
+  background:rgba(31,14,51,.08);color:var(--ink);
+  padding:6px 10px;border-radius:12px 12px 12px 4px;
+  max-width:80%;
+}
+.bbubble__msg--me{
+  background:var(--peek);color:#fff;
+  border-radius:12px 12px 4px 12px;
+  margin-left:auto;
+}
+
+/* numbered list mini */
+.blist{
+  display:grid;gap:5px;
+  font-family:var(--f-sans);font-size:12px;
+  color:var(--ink-2);
+}
+.blist__row{display:flex;gap:8px;align-items:center}
+.blist__row::before{
+  content:counter(b,decimal);
+  counter-increment:b;
+  display:grid;place-items:center;
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(31,14,51,.10);color:var(--ink);
+  font-weight:700;font-size:10px;
+}
+.blist{counter-reset:b}
+
+.bcell__bigword{
+  font-family:var(--f-display);font-style:italic;font-weight:700;
+  font-size:clamp(64px,8vw,108px);
+  line-height:.85;
+  margin:auto 0 -10px;
+  color:var(--ink);opacity:.16;
+}
+
+/* handwritten hint */
+.bhint{
+  font-family:var(--f-script);font-size:18px;font-weight:700;
+  color:var(--peek-2);
+  transform:rotate(-3deg);
+  display:inline-block;
+}
+.bcell--aub .bhint{color:var(--peek)}
+
+/* ─── Voices badges unlock + count-up ─── */
+.voices__badges{
+  display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;
+  margin-top:48px;
+}
+.voices__badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px 9px 12px;
+  border-radius:999px;
+  background:#fff;color:var(--ink);
+  font-size:13px;font-weight:700;
+  box-shadow:0 12px 24px -10px rgba(31,14,51,.2), 4px 4px 0 rgba(31,14,51,.06);
+  opacity:0;transform:scale(.6) translateY(10px);
+  transition:opacity .55s cubic-bezier(.34,1.56,.64,1), transform .55s cubic-bezier(.34,1.56,.64,1);
+}
+.voices__badge.is-on{opacity:1;transform:scale(1) translateY(0)}
+.voices__badge img{width:24px;height:24px;object-fit:contain}
+.voices__badge--reward{background:var(--peek);color:#fff}
+.voices__badge--ritual{background:var(--green);color:#1a3318}
+.voices__badge--social{background:var(--pink);color:#fff}
+.voices__badge--conv{background:var(--yellow);color:#3a2c08}
+.voices__badges-label{
+  width:100%;text-align:center;
+  font-family:var(--f-script);font-size:18px;color:var(--ink-3);
+  margin-bottom:6px;
+}
+@media (prefers-reduced-motion: reduce){
+  .voices__badge{opacity:1;transform:none}
+}
+
+/* ─── Final CTA confetti pulse ─── */
+.cta__banner{position:relative}

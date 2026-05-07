@@ -1,12 +1,43 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
 import PlaidMini from './PlaidMini'
+import Confetti from './Confetti'
 
 export default function FinalCta() {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [burstKey, setBurstKey] = useState(0)
+  const fired = useRef(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) return
+    if (typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && !fired.current) {
+            fired.current = true
+            setBurstKey((k) => k + 1)
+            io.disconnect()
+          }
+        }
+      },
+      { threshold: 0.4 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
-    <section className="cta">
+    <section className="cta" ref={ref}>
       <div className="wrap">
         <div className="cta__banner reveal-up">
+          <Confetti trigger={burstKey} count={20} />
           <span className="cta__brow">one more thing</span>
           <h2 className="cta__h">
             See <em>why</em> you spend.

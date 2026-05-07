@@ -1,5 +1,9 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
+import CountUp from './CountUp'
 
 const tks = [
   { src: '/images/tiktok/tiktok-1.jpg', handle: '@lindsay<3', rot: -3 },
@@ -8,7 +12,49 @@ const tks = [
   { src: '/images/tiktok/tiktok-4.jpg', handle: '@madison · #peekmoney', rot: 3, up: true },
 ]
 
+const badges = [
+  { cls: 'voices__badge--reward', icon: '/images/uploads/stickers/latest.png', icon_webp: '/images/optimized/st-latest.webp', label: 'self reward' },
+  { cls: 'voices__badge--ritual', icon: '/images/uploads/stickers/tea.png', icon_webp: '/images/optimized/st-tea.webp', label: 'ritual' },
+  { cls: 'voices__badge--social', icon: '/images/uploads/stickers/croissant.png', icon_webp: '/images/optimized/st-croissant.webp', label: 'social' },
+  { cls: 'voices__badge--conv', icon: '/images/uploads/stickers/pizza.png', icon_webp: '/images/optimized/st-pizza.webp', label: 'convenience' },
+]
+
 export default function Voices() {
+  const badgeRowRef = useRef<HTMLDivElement | null>(null)
+  const [unlocked, setUnlocked] = useState<number[]>([])
+
+  useEffect(() => {
+    const el = badgeRowRef.current
+    if (!el) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) {
+      setUnlocked(badges.map((_, i) => i))
+      return
+    }
+    if (typeof IntersectionObserver === 'undefined') {
+      setUnlocked(badges.map((_, i) => i))
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            badges.forEach((_, i) => {
+              window.setTimeout(() => {
+                setUnlocked((u) => (u.includes(i) ? u : [...u, i]))
+              }, 180 * i)
+            })
+            io.disconnect()
+            break
+          }
+        }
+      },
+      { threshold: 0.3 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <section className="proof" id="proof">
       <div className="proof__scatter" aria-hidden="true">
@@ -37,6 +83,7 @@ export default function Voices() {
           </picture>
         </span>
       </div>
+
       <div className="wrap">
         <div className="proof__head reveal-up">
           <span className="eyebrow" style={{ justifyContent: 'center' }}>
@@ -53,11 +100,17 @@ export default function Voices() {
 
         <div className="voices__stats reveal-up">
           <span>
-            <strong>47k+</strong> downloads
+            <strong>
+              <CountUp to={47000} format={(n) => (n / 1000).toFixed(0) + 'k'} />+
+            </strong>{' '}
+            downloads
           </span>
           <span>·</span>
           <span>
-            <strong>3M+</strong> monthly TikTok views
+            <strong>
+              <CountUp to={3} format={(n) => n.toString()} />M+
+            </strong>{' '}
+            monthly TikTok views
           </span>
           <span>·</span>
           <code>#peekapp</code>
@@ -78,6 +131,22 @@ export default function Voices() {
               />
               <div className="tk__handle">{t.handle}</div>
             </div>
+          ))}
+        </div>
+
+        <div ref={badgeRowRef} className="voices__badges">
+          <span className="voices__badges-label">stickers our users have collected this week</span>
+          {badges.map((b, i) => (
+            <span
+              key={b.label}
+              className={`voices__badge ${b.cls}${unlocked.includes(i) ? ' is-on' : ''}`}
+            >
+              <picture>
+                <source srcSet={b.icon_webp} type="image/webp" />
+                <img src={b.icon} alt="" loading="lazy" />
+              </picture>
+              {b.label}
+            </span>
           ))}
         </div>
 

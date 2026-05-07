@@ -3,18 +3,58 @@
 import { useState } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
+import Confetti from './Confetti'
 
-const chips = [
-  { tone: 'ritual', label: 'Ritual', name: 'part of my routine' },
-  { tone: 'treat', label: 'Self Reward', name: 'treating myself' },
-  { tone: 'social', label: 'Social', name: 'with someone' },
-  { tone: 'conv', label: 'Convenience', name: 'easiest option' },
-] as const
+type Tone = 'ritual' | 'treat' | 'social' | 'conv'
 
-const results: Record<
-  (typeof chips)[number]['tone'],
-  { kind: string; body: string }
-> = {
+type Question = {
+  prompt: string
+  amount: string
+  merchant: string
+  time: string
+  chips: { tone: Tone; label: string; name: string }[]
+}
+
+const questions: Question[] = [
+  {
+    prompt: 'a $5.75 latte',
+    amount: '$5.75',
+    merchant: 'Blank Street',
+    time: 'today · 8:42am',
+    chips: [
+      { tone: 'ritual', label: 'Ritual', name: 'every weekday' },
+      { tone: 'treat', label: 'Self Reward', name: 'the seasonal one' },
+      { tone: 'social', label: 'Social', name: 'with a friend' },
+      { tone: 'conv', label: 'Convenience', name: 'closest to me' },
+    ],
+  },
+  {
+    prompt: 'a pair of sambas',
+    amount: '$84',
+    merchant: 'Adidas',
+    time: 'last fri · 7:12pm',
+    chips: [
+      { tone: 'treat', label: 'Self Reward', name: 'hard week' },
+      { tone: 'ritual', label: 'Ritual', name: 'replace old pair' },
+      { tone: 'social', label: 'Social', name: 'matched a friend' },
+      { tone: 'conv', label: 'Convenience', name: 'on sale, just ordered' },
+    ],
+  },
+  {
+    prompt: '$22 doordash',
+    amount: '$22',
+    merchant: 'DoorDash',
+    time: 'tue · 9:18pm',
+    chips: [
+      { tone: 'conv', label: 'Convenience', name: 'too tired to cook' },
+      { tone: 'ritual', label: 'Ritual', name: 'tuesday thing' },
+      { tone: 'treat', label: 'Self Reward', name: 'long day' },
+      { tone: 'social', label: 'Social', name: 'split with roommate' },
+    ],
+  },
+]
+
+const kinds: Record<Tone, { kind: string; body: string }> = {
   ritual: {
     kind: 'a ritual person.',
     body: 'you spend on the same anchors every week. that is not a problem. that is a personality. peek shows the rituals worth keeping and the ones that quietly drift.',
@@ -34,62 +74,100 @@ const results: Record<
 }
 
 export default function Tagger() {
-  const [active, setActive] = useState<keyof typeof results | null>(null)
-  const r = active ? results[active] : null
+  const [step, setStep] = useState(0)
+  const [picks, setPicks] = useState<Tone[]>([])
+  const [burstKey, setBurstKey] = useState(0)
+
+  const done = step >= questions.length
+  const winner = (() => {
+    if (!picks.length) return null
+    const c: Record<Tone, number> = { ritual: 0, treat: 0, social: 0, conv: 0 }
+    picks.forEach((p) => (c[p] += 1))
+    return (Object.entries(c).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null) as Tone | null
+  })()
+
+  const onPick = (t: Tone) => {
+    setBurstKey((k) => k + 1)
+    setPicks((p) => [...p, t])
+    setStep((s) => s + 1)
+  }
+
+  const onReset = () => {
+    setStep(0)
+    setPicks([])
+  }
+
+  const q = !done ? questions[step] : null
 
   return (
     <section className="tagger-sec" id="tagger">
       <div className="wrap">
-        <div className="tagger-sec__inner reveal-up">
+        <div className="tagger-sec__inner reveal-up" style={{ position: 'relative' }}>
           <span className="eyebrow">
-            <span className="dot" /> try it · 3 seconds
+            <span className="dot" /> spending personality · 30 seconds
           </span>
           <h2 className="tagger-sec__h">
             What kind of <em>spender</em> are you?
           </h2>
           <p className="tagger-sec__sub">
-            One charge, four answers, three seconds. Tap the one that sounds
-            like you. Peek will tell you the rest.
+            Three questions. Tap the one that sounds like you. Peek will tell
+            you the rest.
           </p>
 
-          <div className="tagger-sec__prompt">
-            <span>
-              8:42am. <strong className="tagger-sec__prompt-amt">$5.75</strong>{' '}
-              at Blank Street. <em>why?</em>
-            </span>
-          </div>
-
-          <div className="tagger-sec__chips">
-            {chips.map((c) => (
-              <button
-                key={c.tone}
-                className={`tag-chip${active === c.tone ? ' is-on' : ''}`}
-                data-tone={c.tone}
-                onClick={() => setActive(c.tone)}
-                aria-pressed={active === c.tone}
-              >
-                <span className="tag-chip__lbl">{c.label}</span>
-                <span className="tag-chip__name">{c.name}</span>
-              </button>
+          <div className="quiz-progress" aria-hidden="true">
+            {questions.map((_, i) => (
+              <span
+                key={i}
+                className={`quiz-progress__dot${
+                  i === step ? ' is-on' : i < step ? ' is-done' : ''
+                }`}
+              />
             ))}
           </div>
 
-          <div className={`tagger-sec__result${r ? ' is-on' : ''}`} aria-live="polite">
-            {r && (
-              <>
-                <div className="tagger-sec__result-mascot">
-                  <picture>
-                    <source srcSet="/images/optimized/peek-3d-left.webp" type="image/webp" />
-                    <img src="/images/uploads/mascots/peek-3d-left.png" alt="" loading="lazy" />
-                  </picture>
-                </div>
-                <div className="tagger-sec__result-text">
-                  <p className="tagger-sec__result-kind">you&rsquo;re {r.kind}</p>
-                  <p className="tagger-sec__result-body">{r.body}</p>
+          {q && (
+            <div className="quiz-step-anim" key={step}>
+              <div className="tagger-sec__prompt">
+                <span>
+                  <strong className="tagger-sec__prompt-amt">{q.amount}</strong>{' '}
+                  at {q.merchant}, {q.time}. <em>why?</em>
+                </span>
+              </div>
+              <div className="tagger-sec__chips" style={{ position: 'relative' }}>
+                {q.chips.map((c) => (
+                  <button
+                    key={c.tone + c.label}
+                    className="tag-chip"
+                    data-tone={c.tone}
+                    onClick={() => onPick(c.tone)}
+                    aria-label={`${c.label}, ${c.name}`}
+                  >
+                    <span className="tag-chip__lbl">{c.label}</span>
+                    <span className="tag-chip__name">{c.name}</span>
+                  </button>
+                ))}
+                <Confetti trigger={burstKey} count={14} />
+              </div>
+            </div>
+          )}
+
+          {done && winner && (
+            <div className="tagger-sec__result is-on quiz-step-anim" key="result">
+              <div className="tagger-sec__result-mascot">
+                <picture>
+                  <source srcSet="/images/optimized/peek-3d-left.webp" type="image/webp" />
+                  <img src="/images/uploads/mascots/peek-3d-left.png" alt="" loading="lazy" />
+                </picture>
+              </div>
+              <div className="tagger-sec__result-text">
+                <span className="quiz-badge">badge unlocked</span>
+                <p className="tagger-sec__result-kind">you&rsquo;re {kinds[winner].kind}</p>
+                <p className="tagger-sec__result-body">{kinds[winner].body}</p>
+                <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
                   <a
                     href={APP_STORE_URL}
-                    id="cta-tagger-result"
-                    data-cta-placement="tagger"
+                    id="cta-quiz-result"
+                    data-cta-placement="quiz-result"
                     className="tagger-sec__result-cta"
                     target="_blank"
                     rel="noopener"
@@ -98,10 +176,24 @@ export default function Tagger() {
                     See your real spending kind on Peek
                     <span className="tagger-sec__result-cta-arrow">→</span>
                   </a>
+                  <button
+                    onClick={onReset}
+                    style={{
+                      fontSize: 13,
+                      color: 'rgba(244,236,219,.65)',
+                      textDecoration: 'underline',
+                      background: 'none',
+                      border: 0,
+                      cursor: 'pointer',
+                      padding: '4px 8px',
+                    }}
+                  >
+                    take it again
+                  </button>
                 </div>
-              </>
-            )}
-          </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

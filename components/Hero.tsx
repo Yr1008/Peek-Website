@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
 import PlaidMini from './PlaidMini'
+import KineticH1 from './KineticH1'
 
 const cycleWords: { tone: string; text: string }[] = [
   { tone: 'why', text: 'why?' },
@@ -33,11 +34,18 @@ export default function Hero() {
             not a budget. not a tracker. <em>a money clarity app.</em>
           </span>
 
-          <h1 className="hero__h1">
-            Your bank shows you <em>what</em>.
-            <br />
-            Peek shows you <em>why.</em>
-          </h1>
+          <KineticH1
+            className="hero__h1"
+            ariaLabel="Your bank shows you what. Peek shows you why."
+            parts={[
+              { text: 'Your bank shows you ' },
+              { text: 'what', accent: true },
+              { text: '.' },
+              { br: true },
+              { text: 'Peek shows you ' },
+              { text: 'why.', accent: true },
+            ]}
+          />
 
           <p className="hero__sub">
             you spent it. but{' '}
