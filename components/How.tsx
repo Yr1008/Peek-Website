@@ -1,49 +1,63 @@
 const STEPS = [
   {
     n: '01',
-    h: <>Connect your accounts.</>,
-    p: 'Bank-level encryption, read-only access through Plaid. The same connector your bank, Venmo, and Robinhood already use. We never see your password.',
-    hint: '30 seconds · bank-grade',
+    rot: -1.5,
+    canvas: 'sage',
+    emoji: '🔌',
+    h: <>connect your accounts.</>,
+    p: 'bank-level encryption, read-only access through plaid. the same connector your bank, venmo, and robinhood already use. we never see your password.',
+    stamp: '30 sec to connect',
   },
   {
     n: '02',
-    h: <>Peek asks the <em>soft questions.</em></>,
-    p: 'You spent $47 at Target. Was that planned, or autopilot? Did it feel worth it? Tap an answer. That is it. Three taps, three seconds.',
-    hint: '4 taps · no typing',
+    rot: 1,
+    canvas: 'sky',
+    emoji: '✨',
+    h: <>peek asks the <em>soft questions.</em></>,
+    p: 'you spent $47 at target. was that planned, or autopilot? did it feel worth it? tap an answer. that is it. four taps, three seconds.',
+    stamp: '4 taps · 3 seconds',
   },
   {
     n: '03',
-    h: <>Patterns reveal <em>themselves.</em></>,
-    p: 'After a week, you stop seeing transactions and start seeing yourself. The Sunday brunches you love. The doordash spiral you do not.',
-    hint: '5 minutes a day',
+    rot: -1,
+    canvas: 'lavender',
+    emoji: '🪞',
+    h: <>patterns reveal <em>themselves.</em></>,
+    p: 'after a week, you stop seeing transactions and start seeing yourself. the sunday brunches you love. the doordash spiral you do not.',
+    stamp: '5 min/day',
   },
 ]
 
 export default function How() {
   return (
-    <section className="how" id="how">
+    <section className="sec sec--cream-2" id="how">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="eyebrow__num">04</span>
-            <span className="eyebrow__sep" aria-hidden="true" />
-            <span>How it works</span>
+          <span className="eyebrow-pill eyebrow-pill--cream">
+            How it works
           </span>
           <h2 className="h-section sec__h">
-            Three soft steps. <em>Zero spreadsheet.</em>
+            three soft steps. <em>zero spreadsheet.</em>
           </h2>
           <p className="lead sec__lead">
-            No category dropdowns. No monthly budget you&rsquo;ll quietly abandon. Three small things you already wanted to do, made easier.
+            no category dropdowns. no monthly budget you'll quietly abandon. three small things you already wanted to do, made easier.
           </p>
         </div>
 
         <div className="how__grid">
           {STEPS.map((s) => (
-            <article key={s.n} className="howcard reveal">
-              <span className="howcard__num">Step {s.n}</span>
+            <article
+              key={s.n}
+              className={`howcard howcard--${s.canvas} reveal`}
+              style={{ ['--rot' as string]: `${s.rot}deg` } as React.CSSProperties}
+            >
+              <div className="howcard__icon" aria-hidden="true">
+                <span className="howcard__icon-emoji">{s.emoji}</span>
+              </div>
+              <span className="howcard__num">step {s.n}</span>
               <h3 className="howcard__h">{s.h}</h3>
               <p className="howcard__p">{s.p}</p>
-              <span className="howcard__hint">{s.hint}</span>
+              <span className="howcard__stamp">{s.stamp} ✦</span>
             </article>
           ))}
         </div>

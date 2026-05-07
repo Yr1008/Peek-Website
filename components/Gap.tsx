@@ -1,95 +1,66 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const ACTUAL = 312
+const TARGET = 192
 
 export default function Gap() {
-  const [guess, setGuess] = useState(120)
-  const [revealed, setRevealed] = useState(false)
-  const [animatedActual, setAnimatedActual] = useState(0)
-  const animFrame = useRef<number | null>(null)
+  const [count, setCount] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const fired = useRef(false)
 
   useEffect(() => {
-    if (!revealed) return
-    const start = performance.now()
-    const dur = 1200
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / dur)
-      const eased = 1 - Math.pow(1 - p, 3)
-      setAnimatedActual(Math.round(eased * ACTUAL))
-      if (p < 1) animFrame.current = requestAnimationFrame(tick)
+    if (typeof window === 'undefined') return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(TARGET)
+      return
     }
-    animFrame.current = requestAnimationFrame(tick)
-    return () => { if (animFrame.current) cancelAnimationFrame(animFrame.current) }
-  }, [revealed])
-
-  const diff = ACTUAL - guess
+    const node = ref.current
+    if (!node) return
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting && !fired.current) {
+          fired.current = true
+          const start = performance.now()
+          const dur = 1100
+          const tick = (now: number) => {
+            const p = Math.min(1, (now - start) / dur)
+            const eased = 1 - Math.pow(1 - p, 3)
+            setCount(Math.round(eased * TARGET))
+            if (p < 1) requestAnimationFrame(tick)
+          }
+          requestAnimationFrame(tick)
+          io.disconnect()
+        }
+      }
+    }, { threshold: 0.4 })
+    io.observe(node)
+    return () => io.disconnect()
+  }, [])
 
   return (
-    <section className="gap" id="gap">
+    <section className="sec sec--lavender" id="gap">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="eyebrow__num">03</span>
-            <span className="eyebrow__sep" aria-hidden="true" />
-            <span>The gap</span>
+          <span className="eyebrow-pill eyebrow-pill--cream">
+            Most people guess wrong
           </span>
           <h2 className="h-section sec__h">
-            You&rsquo;re not bad at budgeting.<br />
-            <em>Budgeting is bad at understanding you.</em>
+            you're off by <em>~$192</em> a month.<br/>
+            peek closes <em>that gap.</em>
           </h2>
           <p className="lead sec__lead">
-            Most apps tell you what you spent. They can&rsquo;t tell you why. Here&rsquo;s the gap they leave you in.
+            the average peek user, week one, finds out they were spending $192 more than they thought on coffee and takeout. not because they're reckless. because no one ever showed them.
           </p>
         </div>
 
         <div className="gap__wrap">
-          <div className="gap__demo reveal">
-            <span className="gap__demo-q">
-              Guess your last 30 days on <em>coffee &amp; takeout</em>
-            </span>
-            <div className="gap__demo-amount" aria-live="polite">
-              <span className="gap__demo-prefix">$</span>
-              {guess}
-            </div>
-            <input
-              type="range"
-              min={40}
-              max={600}
-              step={5}
-              value={guess}
-              onChange={(e) => setGuess(Number(e.target.value))}
-              disabled={revealed}
-              className="gap__demo-slider"
-              aria-label="your guess for coffee and takeout in the last 30 days"
-            />
-            {!revealed && (
-              <button
-                className="gap__demo-reveal"
-                onClick={() => setRevealed(true)}
-                data-cta="gap-reveal"
-              >
-                Show me what&rsquo;s actually there →
-              </button>
-            )}
-
-            {revealed && (
-              <div className="gap__panel" role="status">
-                <span className="gap__panel-lbl">Average peek user, week one</span>
-                <div className="gap__panel-amount">
-                  <span className="gap__demo-prefix" style={{ color: '#E85F30' }}>$</span>
-                  {animatedActual}
-                </div>
-                <span className="gap__panel-diff">
-                  {diff > 0 ? '+' : ''}${Math.abs(diff)} {diff > 0 ? 'more than you guessed' : 'less than you guessed'}
-                </span>
-                <p className="gap__panel-quote">
-                  &ldquo;I thought I was spending $80 on coffee. <em>It was $312.</em> Not because I&rsquo;m reckless. Because no one ever showed me.&rdquo;
-                  <span className="gap__panel-cite">Maya · Brooklyn</span>
-                </p>
-              </div>
-            )}
+          <div className="gap__stat reveal">
+            <span className="gap__stat-badge" ref={ref}>{count}</span>
+            <p className="gap__stat-quote">
+              &ldquo;i thought i was spending $80 on coffee. <em>it was $312.</em> not because i'm reckless. because no one ever showed me.&rdquo;
+              <span className="gap__stat-cite">Maya · Brooklyn</span>
+            </p>
           </div>
 
           <div className="gap__photo reveal">
@@ -99,7 +70,7 @@ export default function Gap() {
                 <img src="/images/uploads/people/portrait-blonde.png" alt="Maya, a peek user from Brooklyn" loading="lazy" />
               </picture>
             </div>
-            <span className="gap__photo-cap">Maya · Brooklyn · joined March 2026</span>
+            <span className="gap__photo-cap">maya · brooklyn</span>
           </div>
         </div>
       </div>

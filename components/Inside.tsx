@@ -1,24 +1,26 @@
 export default function Inside() {
   return (
-    <section className="inside" id="features">
+    <section className="sec sec--sky" id="features">
       <div className="wrap">
         <div className="sec__head reveal">
-          <span className="eyebrow">
-            <span className="eyebrow__num">05</span>
-            <span className="eyebrow__sep" aria-hidden="true" />
-            <span>Inside Peek</span>
+          <span className="eyebrow-pill eyebrow-pill--cream">
+            Inside Peek
           </span>
           <h2 className="h-section sec__h">
-            The little moments <em>that change how money feels.</em>
+            the little moments <em>that change how money feels.</em>
           </h2>
           <p className="lead sec__lead">
-            Three real moments inside the app. Each one tuned to a single anxiety it lifts.
+            three real moments inside the app. each one tuned to a single anxiety it lifts.
           </p>
         </div>
 
-        <div className="scatter">
-          <article className="tile tile--phone tile--big tile--tall reveal">
-            <div className="phone">
+        <div className="bento">
+          {/* Big phone tile — Insight reveals */}
+          <article
+            className="tile tile--phone tile--big tile--tall reveal"
+            style={{ ['--rot' as string]: '-1.5deg' } as React.CSSProperties}
+          >
+            <div className="phoneTile">
               <picture>
                 <source srcSet="/images/optimized/screen-blindbox.webp" type="image/webp" />
                 <img src="/images/uploads/screen-blindbox.png" alt="Peek revealing a weekly insight" loading="lazy" decoding="async" />
@@ -26,24 +28,35 @@ export default function Inside() {
             </div>
           </article>
 
-          <article className="tile tile--lavender tile--med reveal">
-            <span className="tile__lbl">Insight reveals</span>
-            <h3 className="tile__h">The weekly moment <em>that changes your week.</em></h3>
+          {/* Lavender quote tile */}
+          <article
+            className="tile tile--lavender tile--med reveal"
+            style={{ ['--rot' as string]: '1deg' } as React.CSSProperties}
+          >
+            <span className="tile__lbl">insight reveals</span>
+            <h3 className="tile__h">the weekly moment <em>that changes your week.</em></h3>
             <p className="tile__p">
-              Every Sunday Peek surfaces one tiny thing you didn&rsquo;t see coming. Not a chart. A small noticing.
+              every sunday peek surfaces one tiny thing you didn't see coming. not a chart. a small noticing.
             </p>
+            <span className="tile__stamp">sundays at 9am ✦</span>
           </article>
 
-          <article className="tile tile--peach tile--med reveal">
-            <span className="tile__lbl">Funds, not caps</span>
-            <h3 className="tile__h">Soft guardrails for <em>what you care about.</em></h3>
-            <p className="tile__p">
-              Caps feel like punishment. Funds feel like permission. Set one for the bookshop habit, the pottery class, the trip home.
-            </p>
+          {/* Yellow $ stat tile */}
+          <article
+            className="tile tile--yellow tile--sm reveal"
+            style={{ ['--rot' as string]: '-1deg' } as React.CSSProperties}
+          >
+            <span className="tile__lbl" style={{ color: '#8A6E1A' }}>saved this week</span>
+            <p className="tile__stat">$340</p>
+            <span className="tile__stat-cap">skipped impulse + caught a forgotten subscription</span>
           </article>
 
-          <article className="tile tile--phone tile--sm reveal">
-            <div className="phone">
+          {/* Small phone tile — Funds */}
+          <article
+            className="tile tile--phone tile--sm reveal"
+            style={{ ['--rot' as string]: '2deg' } as React.CSSProperties}
+          >
+            <div className="phoneTile">
               <picture>
                 <source srcSet="/images/optimized/screen-caps.webp" type="image/webp" />
                 <img src="/images/uploads/screen-caps.png" alt="Peek showing a soft fund instead of a strict cap" loading="lazy" decoding="async" />
@@ -51,21 +64,29 @@ export default function Inside() {
             </div>
           </article>
 
-          <article className="tile tile--sky tile--med reveal">
-            <span className="tile__lbl">AI reflection coach</span>
-            <h3 className="tile__h">Money questions answered <em>like a friend would.</em></h3>
+          {/* Peach quote tile — Funds */}
+          <article
+            className="tile tile--peach tile--med reveal"
+            style={{ ['--rot' as string]: '-0.8deg' } as React.CSSProperties}
+          >
+            <span className="tile__lbl">funds, not caps</span>
+            <h3 className="tile__h">soft guardrails for <em>what you care about.</em></h3>
             <p className="tile__p">
-              &ldquo;Can I afford this?&rdquo; &ldquo;Why do I feel weird about that purchase?&rdquo; Peek answers in plain English, in your context.
+              caps feel like punishment. funds feel like permission. set one for the bookshop habit, the pottery class, the trip home.
             </p>
           </article>
 
-          <article className="tile tile--phone tile--sm reveal">
-            <div className="phone">
-              <picture>
-                <source srcSet="/images/optimized/screen-chat.webp" type="image/webp" />
-                <img src="/images/uploads/screen-chat.png" alt="Peek AI coach answering a question" loading="lazy" decoding="async" />
-              </picture>
-            </div>
+          {/* Mascot tile */}
+          <article
+            className="tile tile--mascot tile--sm reveal"
+            style={{ ['--rot' as string]: '1.2deg' } as React.CSSProperties}
+          >
+            <picture>
+              <source srcSet="/images/optimized/peek-3d-left.webp" type="image/webp" />
+              <img src="/images/uploads/mascots/peek-3d-left.png" alt="" />
+            </picture>
+            <span className="tile__lbl" style={{ color: '#E85F30' }}>tap me · ai coach</span>
+            <p className="tile__p" style={{ textAlign: 'center' }}>money questions, answered like a friend would.</p>
           </article>
         </div>
       </div>

@@ -6,9 +6,9 @@ import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Peek. Less dread. More: oh, that makes sense.',
+  title: 'peek — stop tracking. start seeing why.',
   description:
-    'Peek isn\'t going to make you "good with money." It\'s going to make you a person who knows herself, including the spending part. The rest gets easier. Free on iOS, secured by Plaid.',
+    'the money app for people figuring out money. tag the why behind every dollar. five minutes a day, zero spreadsheets. free on ios, secured by plaid.',
   keywords: [
     'top budgeting apps',
     'money clarity app',
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Peek' }],
   openGraph: {
-    title: 'Peek. The calm side of money.',
+    title: 'peek — stop tracking. start seeing why.',
     description:
-      'Less dread. More: oh, that makes sense. The money app for people who want clarity without the spreadsheet. Free on iOS.',
+      'the money app for people figuring out money. tag the why behind every dollar. free on ios.',
     type: 'website',
     url: SITE_URL,
     siteName: 'Peek',
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peek. The calm side of money.',
+    title: 'peek — stop tracking. start seeing why.',
     description:
-      'Less dread. More: oh, that makes sense. Free on iOS.',
+      'the money app for people figuring out money. free on ios.',
   },
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Peek' },
   icons: { icon: '/images/peek-icon.png', apple: '/images/peek-icon.png' },
@@ -49,7 +49,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#FAF8F5',
+  themeColor: '#F4ECDB',
 }
 
 const mobileAppSchema = {
@@ -87,12 +87,12 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap"
         />
         <link
           rel="preload"
           as="image"
-          href="/images/optimized/lifestyle-laugh.webp"
+          href="/images/optimized/peek-3d-right.webp"
           type="image/webp"
           fetchPriority="high"
         />
