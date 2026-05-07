@@ -1,8 +1,10 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
+import Problem from '@/components/Problem'
 import Gap from '@/components/Gap'
+import How from '@/components/How'
 import Inside from '@/components/Inside'
-import Tagger from '@/components/Tagger'
+import Comparison from '@/components/Comparison'
 import Voices from '@/components/Voices'
 import Faq from '@/components/Faq'
 import FinalCta from '@/components/FinalCta'
@@ -14,9 +16,11 @@ export default function Home() {
       <Navbar />
       <main id="top">
         <Hero />
+        <Problem />
         <Gap />
+        <How />
         <Inside />
-        <Tagger />
+        <Comparison />
         <Voices />
         <Faq />
         <FinalCta />

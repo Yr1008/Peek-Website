@@ -774,6 +774,124 @@ button{font:inherit;cursor:pointer;background:none;border:0;color:inherit;paddin
 .final__meta .stars{color:var(--peek);letter-spacing:1px;font-size:14px}
 .final__meta .sep{opacity:.4}
 
+/* ═══════════════ PROBLEM (3 cards on sage) ═══════════════ */
+.problem{padding:96px 0 110px}
+.problem__grid{
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+@media (min-width:760px){.problem__grid{grid-template-columns:repeat(3,1fr)}}
+.probcard{
+  background:var(--aub-2);color:#FAF4E6;
+  border-radius:22px;padding:28px 26px;
+  box-shadow:0 22px 50px rgba(31,14,51,.20), 4px 4px 0 rgba(31,14,51,.10);
+  display:flex;flex-direction:column;gap:14px;
+  border:1px solid rgba(255,255,255,.06);
+  transform:rotate(var(--rot, -1deg));
+  transition:transform .3s, box-shadow .3s;
+  position:relative;
+}
+.probcard:hover{transform:rotate(0) translateY(-4px);box-shadow:0 28px 56px rgba(31,14,51,.26)}
+.probcard__icon{
+  width:48px;height:48px;border-radius:14px;
+  background:linear-gradient(160deg, var(--peek), var(--peek-2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  box-shadow:0 4px 12px rgba(232,95,48,.30);
+}
+.probcard__h{
+  font-family:var(--f-sans);font-weight:700;font-size:20px;line-height:1.25;
+  color:#fff;margin:0;text-transform:lowercase;
+}
+.probcard__p{
+  font-size:15px;line-height:1.55;color:rgba(255,255,255,.78);margin:0;
+}
+.probcard__p em{font-family:var(--f-display);font-style:italic;color:var(--peek);font-weight:500}
+
+/* ═══════════════ HOW (3 procedural steps on cream) ═══════════════ */
+.how{padding:96px 0 110px}
+.how__grid{
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+@media (min-width:880px){.how__grid{grid-template-columns:repeat(3,1fr);gap:22px}}
+.howcard{
+  background:#fff;border-radius:22px;
+  padding:30px 28px;
+  box-shadow:0 14px 32px rgba(31,14,51,.07), 4px 4px 0 rgba(31,14,51,.06);
+  border:1px solid var(--line-2);
+  display:flex;flex-direction:column;gap:14px;
+  transform:rotate(var(--rot, -1deg));
+  transition:transform .3s, box-shadow .3s;
+}
+.howcard:hover{transform:rotate(0) translateY(-4px);box-shadow:0 22px 44px rgba(31,14,51,.10)}
+.howcard__num{
+  font-family:var(--f-display);font-style:italic;font-weight:600;
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--peek-2);
+}
+.howcard__h{
+  font-family:var(--f-sans);font-weight:800;font-size:22px;line-height:1.18;
+  color:var(--aub);margin:0;text-transform:lowercase;letter-spacing:-0.015em;
+}
+.howcard__h em{font-family:var(--f-display);font-style:italic;color:var(--peek-2);font-weight:600}
+.howcard__p{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin:0}
+.howcard__hint{
+  margin-top:auto;padding-top:8px;
+  font-family:var(--f-script);font-size:14px;color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:6px;
+}
+.howcard__hint::before{content:"✦";color:var(--peek)}
+
+/* ═══════════════ COMPARISON (Them vs Us) ═══════════════ */
+.compare{padding:96px 0 110px}
+.compare__grid{
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+@media (min-width:760px){.compare__grid{grid-template-columns:1fr 1fr;gap:24px}}
+.col{
+  border-radius:24px;padding:32px 28px;
+  display:flex;flex-direction:column;gap:14px;
+  position:relative;
+}
+.col--them{
+  background:#F1EEE6;
+  border:1px solid rgba(0,0,0,.04);
+  color:var(--ink-3);
+  transform:rotate(-0.5deg);
+}
+.col--us{
+  background:var(--aub-2);
+  color:#FAF4E6;
+  border:1.5px solid var(--peek);
+  box-shadow:0 22px 50px rgba(31,14,51,.20), 4px 4px 0 rgba(31,14,51,.10);
+  transform:rotate(0.5deg);
+}
+.col__h{
+  font-family:var(--f-sans);font-weight:800;font-size:22px;line-height:1.2;
+  margin:0;text-transform:lowercase;letter-spacing:-0.015em;
+}
+.col--them .col__h{color:var(--ink-3)}
+.col--us .col__h{color:#fff}
+.col__sub{
+  font-family:var(--f-display);font-style:italic;font-size:14px;
+  margin:0 0 8px;font-weight:500;
+}
+.col--them .col__sub{color:var(--ink-3)}
+.col--us .col__sub{color:var(--peek)}
+.col__list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+  font-size:15px;line-height:1.45;
+}
+.col__list li{display:flex;align-items:flex-start;gap:10px}
+.col--them .col__list li::before{
+  content:"✕";color:#A8A39C;font-weight:700;flex-shrink:0;width:18px;text-align:center;
+}
+.col--us .col__list li::before{
+  content:"✓";color:var(--peek);font-weight:800;flex-shrink:0;width:18px;text-align:center;
+}
+.col--them .col__list li{color:var(--ink-3)}
+.col--us .col__list li{color:#fff}
+
 /* ═══════════════ FOOTER ═══════════════ */
 .foot{padding:48px 0 36px;border-top:1px solid var(--line);background:var(--c-cream)}
 .foot__row{

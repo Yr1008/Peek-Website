@@ -6,6 +6,7 @@ type Step = {
   stickerSrc: string
   stickerWebp: string
   stamp: string
+  eyebrow: string
   h: React.ReactNode
   p: string
   phoneSrc: string
@@ -20,12 +21,13 @@ const STEPS: Step[] = [
     rotL: false,
     stickerSrc: '/images/uploads/stickers/croissant.png',
     stickerWebp: '/images/optimized/st-croissant.webp',
-    stamp: '5 min/day',
-    h: <>peek surfaces what <em>slipped through.</em></>,
-    p: 'the impulse buy at temu, the doordash creeping up, the subscription you forgot about. peek pulls the moments worth noticing — not all of them, just the ones that matter.',
+    stamp: 'sundays at 9am',
+    eyebrow: 'insight reveals',
+    h: <>the weekly moment <em>that changes your week.</em></>,
+    p: 'every sunday peek surfaces one tiny thing you did not see coming. the $40 a month on apple stuff. the doordash creep. the week you actually saved without trying. not a chart. a small noticing.',
     phoneSrc: '/images/uploads/screen-blindbox.png',
     phoneWebp: '/images/optimized/screen-blindbox.webp',
-    phoneAlt: 'peek surfacing transactions to tag',
+    phoneAlt: 'peek revealing a weekly insight',
   },
   {
     num: '02',
@@ -34,12 +36,13 @@ const STEPS: Step[] = [
     rotL: true,
     stickerSrc: '/images/uploads/stickers/glasses.png',
     stickerWebp: '/images/optimized/st-glasses.webp',
-    stamp: "4 taps. that's it.",
-    h: <>it asks the questions <em>only you can answer.</em></>,
-    p: 'was this planned or impulse? did it feel worth it? do you want more of this or less? four taps, three seconds. peek learns. you stay in charge.',
-    phoneSrc: '/images/uploads/screen-checkin.png',
-    phoneWebp: '/images/optimized/screen-checkin.webp',
-    phoneAlt: 'peek asking a check-in question',
+    stamp: 'soft, not strict',
+    eyebrow: 'funds, not caps',
+    h: <>guardrails for <em>what you care about.</em></>,
+    p: "caps feel like punishment. funds feel like permission. peek lets you set a fund for what matters (the bookshop habit, the pottery class, the monthly trip home) and tells you when you're coasting, never when you're bad.",
+    phoneSrc: '/images/uploads/screen-caps.png',
+    phoneWebp: '/images/optimized/screen-caps.webp',
+    phoneAlt: 'peek showing a soft fund instead of a strict cap',
   },
   {
     num: '03',
@@ -47,29 +50,30 @@ const STEPS: Step[] = [
     rotL: false,
     stickerSrc: '/images/uploads/stickers/tea.png',
     stickerWebp: '/images/optimized/st-tea.webp',
-    stamp: 'sundays in plain english',
-    h: <>your spending becomes a story <em>you recognize.</em></>,
-    p: "one paragraph. plain english. no charts. no category breakdowns. just the pattern, named — so you know where your money's living its values, and where it's drifted.",
-    phoneSrc: '/images/uploads/screen-patterns.png',
-    phoneWebp: '/images/optimized/screen-patterns.webp',
-    phoneAlt: 'your spending story in plain english',
+    stamp: 'asks like a friend would',
+    eyebrow: 'ai reflection coach',
+    h: <>money questions answered <em>like a friend would.</em></>,
+    p: '"can i afford this?" "why do i feel weird about that purchase?" "am i doing better this month?" peek answers in plain english, in your context, without ever making you feel stupid for asking.',
+    phoneSrc: '/images/uploads/screen-chat.png',
+    phoneWebp: '/images/optimized/screen-chat.webp',
+    phoneAlt: 'peek ai coach answering a question',
   },
 ]
 
 export default function Inside() {
   return (
-    <section className="inside sec--cream" id="how">
+    <section className="inside sec--cream-2" id="features">
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow">
             <span className="dot" aria-hidden="true" />
-            five minutes a day. <em>that's it.</em>
+            inside peek
           </span>
           <h2 className="h-section sec__h">
-            peek closes the gap, <em>one tap at a time.</em>
+            the little moments <em>that change how money feels.</em>
           </h2>
           <p className="lead sec__lead">
-            no spreadsheets. no category dropdown. no monthly budget you'll quietly abandon.
+            not a feature list. three real moments inside the app, each tuned to one anxiety it lifts.
           </p>
         </div>
 
@@ -79,7 +83,7 @@ export default function Inside() {
             className={`inside__row inside__row--${s.canvas}${s.rev ? ' inside__row--rev' : ''} reveal`}
           >
             <div className="inside__copy">
-              <span className="inside__num">step {s.num}</span>
+              <span className="inside__num">{s.eyebrow}</span>
               <span className="stamp">{s.stamp}</span>
               <h3 className="inside__h-step">{s.h}</h3>
               <p className="inside__p">{s.p}</p>
