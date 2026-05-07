@@ -3,30 +3,15 @@ import AppleIcon from './AppleIcon'
 
 export default function FinalCta() {
   return (
-    <section className="final sec--peach" id="get">
+    <section className="final" id="get">
+      <div className="orb orb--peach" aria-hidden="true" />
       <div className="wrap">
         <div className="final__inner reveal">
-          <div className="final__mascot" aria-hidden="true">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster="/images/optimized/peek-3d-left.webp"
-            >
-              <source src="/images/optimized/peek-animated.webm" type="video/webm" />
-              <source src="/images/optimized/peek-animated.mp4" type="video/mp4" />
-              <img src="/images/optimized/peek-3d-left.webp" alt="" />
-            </video>
-          </div>
-
           <h2 className="final__h">
-            stop tracking.<br />
-            <em>start understanding yourself.</em>
+            Money that finally <em>reflects who you are.</em>
           </h2>
           <p className="final__p">
-            <em>30 seconds</em> to connect. <em>5 minutes</em> a day.{' '}
-            <em>0</em> spreadsheets.
+            Stop tracking. Start understanding. Free on iOS.
           </p>
 
           <a
@@ -34,18 +19,19 @@ export default function FinalCta() {
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener"
-            data-cta="cta-final"
+            id="cta-final"
+            data-cta="final"
           >
             <AppleIcon />
-            <span>download peek <em>free</em></span>
+            Download on the App Store
           </a>
 
           <div className="final__meta">
-            <span><span className="stars" aria-hidden="true">★★★★★</span> <strong>4.9</strong> · 1,240+ reviews</span>
+            <span><span className="stars" aria-hidden="true">★★★★★</span> Loved on the App Store</span>
             <span className="sep" aria-hidden="true">·</span>
-            <span>secured by <strong>plaid</strong></span>
+            <span>Free on iOS</span>
             <span className="sep" aria-hidden="true">·</span>
-            <span>free on ios</span>
+            <span>Secured by Plaid</span>
           </div>
         </div>
       </div>

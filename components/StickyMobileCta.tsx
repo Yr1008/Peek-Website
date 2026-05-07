@@ -7,14 +7,14 @@ export default function StickyMobileCta() {
       <a
         href={APP_STORE_URL}
         id="cta-sticky"
-        data-cta="cta-sticky"
+        data-cta="sticky"
         className="smcta__btn"
-        aria-label="get peek free on ios. opens app store."
+        aria-label="Get Peek. Free on iOS. Opens the App Store."
         target="_blank"
         rel="noopener"
       >
         <AppleIcon />
-        <span>download peek free</span>
+        Get Peek. Free on iOS.
       </a>
     </div>
   )

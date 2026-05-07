@@ -6,13 +6,11 @@ import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'peek — your bank shows what. peek shows why.',
+  title: 'Peek. Know the why behind every dollar.',
   description:
-    'peek closes the gap between what you spent and why you spent it. a money clarity app for people who hate money apps. free on ios, secured by plaid.',
+    'Your bank shows what you spent. Peek shows you why. The money app for people who want clarity without the spreadsheet. Free on iOS.',
   keywords: [
     'top budgeting apps',
-    'top budgeting apps in us',
-    'top budgeting apps canada',
     'money clarity app',
     'anti budgeting app',
     'spending awareness',
@@ -21,12 +19,13 @@ export const metadata: Metadata = {
     'mint alternative',
     'monarch alternative',
     'ynab alternative',
+    'copilot alternative',
   ],
   authors: [{ name: 'Peek' }],
   openGraph: {
-    title: 'peek — your bank shows what. peek shows why.',
+    title: 'Peek. Know the why behind every dollar.',
     description:
-      'a money clarity app for people who hate money apps. free on ios, secured by plaid.',
+      'Your bank shows what you spent. Peek shows you why. The money app for people who want clarity without the spreadsheet. Free on iOS.',
     type: 'website',
     url: SITE_URL,
     siteName: 'Peek',
@@ -37,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'peek — your bank shows what. peek shows why.',
+    title: 'Peek. Know the why behind every dollar.',
     description:
-      'tap one of four tags. three days in, the patterns finally make sense. free on ios.',
+      'Your bank shows what you spent. Peek shows you why. Free on iOS.',
   },
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Peek' },
   icons: { icon: '/images/peek-icon.png', apple: '/images/peek-icon.png' },
@@ -50,7 +49,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#F4ECDB',
+  themeColor: '#FFF9F6',
 }
 
 const mobileAppSchema = {
@@ -62,11 +61,10 @@ const mobileAppSchema = {
   applicationSubCategory: 'Personal Finance',
   operatingSystem: 'iOS',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', ratingCount: '1240' },
   url: SITE_URL,
   downloadUrl: APP_STORE_URL,
   description:
-    'Peek helps you understand your money habits, so you can reshape them around what you care about. Free on iOS, secured by Plaid.',
+    'Peek helps you understand your money habits, so you can reshape them around what you care about. Free on iOS.',
 }
 
 export default function RootLayout({
@@ -89,12 +87,12 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@400;500;600;700&display=swap"
         />
         <link
           rel="preload"
           as="image"
-          href="/images/optimized/peek-3d-right.webp"
+          href="/images/optimized/screen-tags.webp"
           type="image/webp"
           fetchPriority="high"
         />
