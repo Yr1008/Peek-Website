@@ -41,7 +41,20 @@ export default function Hero() {
 
           <p className="hero__sub">
             you spent it. but{' '}
-            <span className="hero__cycle" aria-live="polite">
+            <span
+              className="hero__cycle"
+              aria-live="polite"
+              role="button"
+              tabIndex={0}
+              aria-label="Cycle through reasons. Tap to advance."
+              onClick={() => setActive((i) => (i + 1) % cycleWords.length)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setActive((i) => (i + 1) % cycleWords.length)
+                }
+              }}
+            >
               {cycleWords.map((w, i) => (
                 <span
                   key={w.tone}
@@ -92,7 +105,7 @@ export default function Hero() {
         </div>
 
         <div className="hero__visual">
-          <div className="hero__phone-wrap">
+          <div className="hero__phone-wrap" data-parallax data-parallax-speed="-0.08">
             <div className="hero__phone">
               <picture>
                 <source srcSet="/images/optimized/screen-tags.webp" type="image/webp" />
@@ -145,6 +158,26 @@ export default function Hero() {
               </div>
               <span className="hero__receipt-why">brunch w/ tess</span>
             </div>
+
+            <div className="hero__sticker hero__sticker--croissant" aria-hidden="true">
+              <picture>
+                <source srcSet="/images/optimized/st-croissant.webp" type="image/webp" />
+                <img src="/images/uploads/stickers/croissant.png" alt="" loading="lazy" />
+              </picture>
+            </div>
+            <div className="hero__sticker hero__sticker--latest" aria-hidden="true">
+              <picture>
+                <source srcSet="/images/optimized/st-latest.webp" type="image/webp" />
+                <img src="/images/uploads/stickers/latest.png" alt="" loading="lazy" />
+              </picture>
+            </div>
+          </div>
+
+          <div className="hero__mascot-peek" aria-hidden="true">
+            <picture>
+              <source srcSet="/images/optimized/peek-3d-right.webp" type="image/webp" />
+              <img src="/images/uploads/mascots/peek-3d-right.png" alt="" loading="lazy" />
+            </picture>
           </div>
         </div>
       </div>

@@ -11,6 +11,32 @@ const tks = [
 export default function Voices() {
   return (
     <section className="proof" id="proof">
+      <div className="proof__scatter" aria-hidden="true">
+        <span className="proof__scatter-item proof__scatter-item--croissant">
+          <picture>
+            <source srcSet="/images/optimized/st-croissant.webp" type="image/webp" />
+            <img src="/images/uploads/stickers/croissant.png" alt="" loading="lazy" />
+          </picture>
+        </span>
+        <span className="proof__scatter-item proof__scatter-item--pizza">
+          <picture>
+            <source srcSet="/images/optimized/st-pizza.webp" type="image/webp" />
+            <img src="/images/uploads/stickers/pizza.png" alt="" loading="lazy" />
+          </picture>
+        </span>
+        <span className="proof__scatter-item proof__scatter-item--tea">
+          <picture>
+            <source srcSet="/images/optimized/st-tea.webp" type="image/webp" />
+            <img src="/images/uploads/stickers/tea.png" alt="" loading="lazy" />
+          </picture>
+        </span>
+        <span className="proof__scatter-item proof__scatter-item--latest">
+          <picture>
+            <source srcSet="/images/optimized/st-latest.webp" type="image/webp" />
+            <img src="/images/uploads/stickers/latest.png" alt="" loading="lazy" />
+          </picture>
+        </span>
+      </div>
       <div className="wrap">
         <div className="proof__head reveal-up">
           <span className="eyebrow" style={{ justifyContent: 'center' }}>

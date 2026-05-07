@@ -1012,3 +1012,260 @@ main, .nav, .foot, .sticky-cta { position: relative; z-index: 2; }
   .hero__phone{animation:none !important}
   .hero__cycle__word{transition:none !important}
 }
+
+/* ═══════════════ PARALLAX + STORY UPGRADES (v2) ═══════════════ */
+
+/* light parallax via CSS var set from scroll handler in Analytics */
+[data-parallax]{
+  will-change:transform;
+  transform:translate3d(0, var(--py, 0px), 0);
+  transition:transform .08s linear;
+}
+@media (prefers-reduced-motion: reduce){
+  [data-parallax]{transform:none !important}
+}
+
+/* hero peek mascot */
+.hero__mascot-peek{
+  position:absolute;
+  width:120px;
+  bottom:-20px;
+  left:6%;
+  z-index:2;
+  transform:rotate(8deg);
+  filter:drop-shadow(0 18px 24px rgba(255,122,80,.3));
+  animation:bobby 5.5s ease-in-out infinite;
+  pointer-events:none;
+}
+.hero__mascot-peek img{width:100%;height:auto;display:block}
+@media (max-width:760px){.hero__mascot-peek{display:none}}
+
+/* clickable cycling word — tiny visual cue */
+.hero__cycle{cursor:pointer}
+.hero__cycle::after{
+  content:"↻";
+  display:inline-block;margin-left:6px;
+  font-size:.5em;color:var(--ink-3);opacity:.6;
+  transition:transform .25s, opacity .25s;
+  vertical-align:middle;
+}
+.hero__cycle:hover::after{opacity:1;transform:rotate(60deg)}
+
+/* hero floating decorative stickers */
+.hero__sticker{
+  position:absolute;width:78px;height:auto;
+  filter:drop-shadow(0 12px 16px rgba(31,14,51,.18));
+  pointer-events:none;
+  z-index:2;
+}
+.hero__sticker--croissant{
+  top:-2%;right:-4%;
+  transform:rotate(-12deg);
+  animation:bobby 7s ease-in-out infinite;
+}
+.hero__sticker--latest{
+  bottom:-4%;right:8%;
+  width:64px;
+  transform:rotate(8deg);
+  animation:bobby 8s ease-in-out -3s infinite;
+}
+@media (max-width:899px){.hero__sticker{display:none}}
+
+/* ─────── Permission tint + flip cards ─────── */
+.permission{
+  background:linear-gradient(180deg, var(--paper) 0%, #ECE0F2 50%, var(--paper) 100%);
+}
+.permission__cards{
+  grid-template-columns:1fr;gap:18px;
+}
+@media (min-width:760px){
+  .permission__cards{grid-template-columns:repeat(3,1fr);gap:22px}
+}
+
+.flip{
+  perspective:1200px;
+  cursor:pointer;
+  height:auto;
+  min-height:240px;
+}
+.flip__inner{
+  position:relative;width:100%;height:100%;min-height:240px;
+  transition:transform .8s cubic-bezier(.2,.9,.3,1);
+  transform-style:preserve-3d;
+}
+.flip:hover .flip__inner,
+.flip:focus-within .flip__inner,
+.flip.is-flipped .flip__inner{
+  transform:rotateY(180deg);
+}
+.flip__face{
+  position:absolute;inset:0;
+  border-radius:22px;
+  padding:22px 22px 20px;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 16px 36px -14px rgba(31,14,51,.2), 0 1px 2px rgba(31,14,51,.05);
+}
+.flip__face--front{
+  background:#EDE6D2;
+  color:var(--ink-3);
+}
+.flip__face--back{
+  background:var(--paper-3);
+  border:1.5px solid rgba(255,122,80,.28);
+  transform:rotateY(180deg);
+  color:var(--ink);
+  box-shadow:0 22px 48px -12px rgba(255,122,80,.22), 0 1px 2px rgba(31,14,51,.08);
+}
+.flip__brow{
+  display:flex;justify-content:space-between;
+  font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.flip__face--front .flip__brow{color:var(--ink-3)}
+.flip__face--back  .flip__brow{color:var(--peek-2)}
+.flip__face--back  .flip__brow span:first-child{
+  display:inline-flex;align-items:center;gap:6px;
+}
+.flip__face--back  .flip__brow span:first-child::before{
+  content:"";width:7px;height:7px;border-radius:50%;background:var(--peek);
+  box-shadow:0 0 0 0 rgba(255,122,80,.5);animation:pulse 1.8s ease-out infinite;
+}
+.flip__merch{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.flip__avatar{
+  width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--f-display);font-weight:700;font-size:15px;
+  flex-shrink:0;
+}
+.flip__face--front .flip__avatar{background:#D9D0B8;color:var(--ink-3)}
+.flip__face--back  .flip__avatar{background:var(--peek);color:#fff}
+.flip__name{
+  font-family:var(--f-display);font-weight:600;font-size:16px;
+  letter-spacing:-0.01em;line-height:1.1;
+  margin:0;
+}
+.flip__face--front .flip__name{color:var(--ink-3)}
+.flip__face--back .flip__name{color:var(--ink)}
+.flip__cat{display:block;font-size:11px;color:var(--ink-3);margin-top:3px}
+.flip__face--back .flip__cat{
+  font-family:var(--f-display);font-style:italic;
+  color:var(--peek-2);font-weight:500;font-size:13px;
+}
+.flip__amount{
+  font-family:var(--f-display);font-weight:600;font-size:24px;
+  letter-spacing:-0.02em;margin-left:auto;
+}
+.flip__face--front .flip__amount{color:var(--ink-3)}
+.flip__face--back .flip__amount{color:var(--ink)}
+.flip__row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.flip__bottom{
+  margin-top:auto;padding-top:14px;
+  border-top:1px dashed rgba(31,14,51,.14);
+  font-size:11px;color:var(--ink-3);
+}
+.flip__face--back .flip__bottom{
+  display:flex;flex-direction:column;gap:8px;
+}
+.flip__pill{
+  display:inline-block;padding:3px 9px;border-radius:999px;
+  background:var(--peek-soft);color:var(--peek-2);
+  font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+}
+.flip__story{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.flip__story-text{
+  font-family:var(--f-display);font-style:italic;font-size:13px;
+  color:var(--ink-2);
+}
+.flip__story-text em{color:var(--peek-2);font-weight:500}
+.flip__feel{display:flex;flex-direction:column;gap:4px}
+.flip__feel-row{display:flex;justify-content:space-between;font-size:10.5px;font-weight:600;color:var(--ink-3)}
+.flip__feel-val{font-family:var(--f-display);font-style:italic;color:var(--peek-2);font-weight:500;font-size:12px}
+.flip__feel-bar{height:6px;background:rgba(31,14,51,.08);border-radius:999px;overflow:hidden}
+.flip__feel-fill{height:100%;border-radius:999px;background:linear-gradient(90deg, var(--peek), var(--peek-2))}
+
+.flip__hint{
+  position:absolute;bottom:12px;right:14px;
+  font-family:var(--f-script);font-size:14px;color:var(--ink-3);
+  pointer-events:none;
+}
+.flip__face--back .flip__hint{display:none}
+
+/* ─────── Inside step tinted backgrounds ─────── */
+.inside__step{
+  position:relative;
+  border-radius:32px;
+  margin:32px auto;
+  padding:48px 24px;
+}
+@media (min-width:900px){
+  .inside__step{padding:80px 56px}
+}
+.inside__step--1{background:#F8F1DC}
+.inside__step--2{background:#E8EEDA}  /* sage tint */
+.inside__step--3{background:#DCE6F2}  /* sky tint */
+
+/* big italic step number behind copy */
+.inside__step-bignum{
+  position:absolute;
+  font-family:var(--f-display);font-style:italic;font-weight:700;
+  font-size:clamp(120px, 18vw, 220px);
+  line-height:.85;
+  color:var(--ink);opacity:.04;
+  z-index:0;
+  pointer-events:none;
+  user-select:none;
+}
+.inside__step--1 .inside__step-bignum{top:-30px;left:-10px}
+.inside__step--2 .inside__step-bignum{top:-30px;right:-10px}
+.inside__step--3 .inside__step-bignum{top:-30px;left:-10px}
+@media (max-width:899px){.inside__step-bignum{font-size:140px;opacity:.05}}
+
+.inside__step-copy,.inside__step-shot{position:relative;z-index:1}
+
+/* ─────── Voices sticker scatter ─────── */
+.proof{position:relative;overflow:hidden}
+.proof__scatter{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+}
+.proof__scatter-item{
+  position:absolute;
+  filter:drop-shadow(0 12px 18px rgba(31,14,51,.16));
+  animation:bobby 8s ease-in-out infinite;
+}
+.proof__scatter-item img{width:100%;height:auto}
+.proof__scatter-item--croissant{top:8%;left:6%;width:80px;transform:rotate(-12deg);animation-delay:-2s}
+.proof__scatter-item--pizza{top:14%;right:8%;width:70px;transform:rotate(14deg);animation-delay:-5s}
+.proof__scatter-item--tea{bottom:24%;left:5%;width:74px;transform:rotate(8deg);animation-delay:-3s}
+.proof__scatter-item--latest{bottom:12%;right:6%;width:80px;transform:rotate(-10deg);animation-delay:-1s}
+.proof .wrap{position:relative;z-index:1}
+@media (max-width:760px){
+  .proof__scatter-item--croissant,.proof__scatter-item--latest{display:none}
+  .proof__scatter-item--pizza,.proof__scatter-item--tea{width:54px;opacity:.9}
+}
+
+/* ─────── FinalCta bigger mascots + sticker stamps ─────── */
+.cta__mascot{
+  width:170px;
+}
+.cta__mascot--l{bottom:-40px;left:-10px;transform:rotate(-15deg)}
+.cta__mascot--r{top:-30px;right:-10px;transform:rotate(18deg);animation-delay:-2.5s}
+@media (max-width:760px){.cta__mascot{width:110px}}
+
+.cta__stamp{
+  position:absolute;z-index:2;
+  font-family:var(--f-script);font-weight:700;
+  font-size:22px;line-height:1;
+  background:#fff;color:var(--ink);
+  padding:8px 14px;border-radius:999px;
+  box-shadow:4px 4px 0 rgba(31,14,51,.18);
+  pointer-events:none;
+}
+.cta__stamp--1{top:18%;left:6%;transform:rotate(-8deg)}
+.cta__stamp--2{bottom:16%;right:6%;transform:rotate(6deg);background:var(--ink);color:var(--peek)}
+@media (max-width:720px){.cta__stamp{font-size:16px;padding:6px 10px}}
+
+/* ─────── Tagger result chip-aware mascot tilt ─────── */
+.tagger-sec__result-mascot{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.tagger-sec__result.is-on .tagger-sec__result-mascot{transform:scale(1.1)}

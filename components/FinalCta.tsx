@@ -36,6 +36,13 @@ export default function FinalCta() {
             <PlaidMini light />
           </div>
 
+          <span className="cta__stamp cta__stamp--1" aria-hidden="true">
+            free on iOS ✦
+          </span>
+          <span className="cta__stamp cta__stamp--2" aria-hidden="true">
+            30 sec to connect
+          </span>
+
           <div className="cta__mascots" aria-hidden="true">
             <div className="cta__mascot cta__mascot--l">
               <picture>

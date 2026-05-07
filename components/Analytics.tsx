@@ -97,10 +97,41 @@ export default function Analytics() {
     window.addEventListener('scroll', onNavScroll, { passive: true })
     onNavScroll()
 
+    // 6. Parallax: shift [data-parallax] elements as they scroll past viewport
+    const reduceMotion2 = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const parallaxEls = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-parallax]')
+    )
+    let parallaxTicking = false
+    const updateParallax = () => {
+      if (parallaxTicking) return
+      parallaxTicking = true
+      requestAnimationFrame(() => {
+        const vh = window.innerHeight
+        for (const el of parallaxEls) {
+          const r = el.getBoundingClientRect()
+          // distance of the element's center from viewport center, normalized
+          const center = r.top + r.height / 2
+          const offset = center - vh / 2
+          const speed = parseFloat(el.dataset.parallaxSpeed || '0.15')
+          const py = offset * speed * -1
+          el.style.setProperty('--py', py.toFixed(1) + 'px')
+        }
+        parallaxTicking = false
+      })
+    }
+    if (!reduceMotion2 && parallaxEls.length) {
+      window.addEventListener('scroll', updateParallax, { passive: true })
+      window.addEventListener('resize', updateParallax)
+      updateParallax()
+    }
+
     return () => {
       document.removeEventListener('click', onClick)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('scroll', onNavScroll)
+      window.removeEventListener('scroll', updateParallax)
+      window.removeEventListener('resize', updateParallax)
       io?.disconnect()
       taggerChips.forEach((c) => c.removeEventListener('click', onChipClick))
     }
