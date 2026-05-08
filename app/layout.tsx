@@ -1,39 +1,70 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import LiquidBackground from '@/components/ui/LiquidBackground'
-import CursorGlow from '@/components/ui/CursorGlow'
-import Navbar from '@/components/Navbar'
+import { APP_STORE_URL, APP_STORE_ID, SITE_URL } from '@/lib/constants'
+import StickyMobileCta from '@/components/StickyMobileCta'
+import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
-  title: 'Peek - Stop wondering where your money went',
-  description: 'Peek shows you the real story behind your spending. No budgets. No judgment. Just clarity. Join 10,000+ people who finally get their money.',
-  keywords: ['personal finance', 'money habits', 'spending awareness', 'financial wellness', 'money app'],
-  authors: [{ name: 'Peek Technologies' }],
+  metadataBase: new URL(SITE_URL),
+  title: 'peek — stop tracking. start seeing why.',
+  description:
+    'the money app for people figuring out money. tag the why behind every dollar. five minutes a day, zero spreadsheets. free on ios, secured by plaid.',
+  keywords: [
+    'top budgeting apps',
+    'money clarity app',
+    'anti budgeting app',
+    'spending awareness',
+    'iPhone finance app',
+    'peek money',
+    'mint alternative',
+    'monarch alternative',
+    'ynab alternative',
+    'copilot alternative',
+  ],
+  authors: [{ name: 'Peek' }],
   openGraph: {
-    title: 'Peek - Stop wondering where your money went',
-    description: 'Peek shows you the real story behind your spending. No budgets. No judgment. Just clarity.',
+    title: 'peek — stop tracking. start seeing why.',
+    description:
+      'the money app for people figuring out money. tag the why behind every dollar. free on ios.',
     type: 'website',
-    locale: 'en_US',
+    url: SITE_URL,
     siteName: 'Peek',
+    locale: 'en_US',
+    images: [
+      { url: '/images/peek-logo-square.svg', width: 512, height: 512, alt: 'Peek' },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peek - Stop wondering where your money went',
-    description: 'Peek shows you the real story behind your spending. No budgets. No judgment. Just clarity.',
+    title: 'peek — stop tracking. start seeing why.',
+    description:
+      'the money app for people figuring out money. free on ios.',
   },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Peek',
-  },
+  appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Peek' },
+  icons: { icon: '/images/peek-icon.png', apple: '/images/peek-icon.png' },
+  alternates: { canonical: SITE_URL },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
   viewportFit: 'cover',
-  themeColor: '#FE875C',
+  themeColor: '#F4ECDB',
+}
+
+const mobileAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'Peek',
+  alternateName: ['Peek Money', 'Peek AI Personal Finance'],
+  applicationCategory: 'FinanceApplication',
+  applicationSubCategory: 'Personal Finance',
+  operatingSystem: 'iOS',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  url: SITE_URL,
+  downloadUrl: APP_STORE_URL,
+  description:
+    'Peek helps you understand your money habits, so you can reshape them around what you care about. Free on iOS.',
 }
 
 export default function RootLayout({
@@ -44,18 +75,36 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta
+          name="apple-itunes-app"
+          content={`app-id=${APP_STORE_ID}, app-argument=${SITE_URL}`}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700&display=swap" 
-          rel="stylesheet" 
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/optimized/peek-3d-right.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(mobileAppSchema) }}
         />
       </head>
-      <body className="font-body antialiased">
-        <LiquidBackground />
-        <CursorGlow />
-        <Navbar />
+      <body>
         {children}
+        <StickyMobileCta />
+        <Analytics />
       </body>
     </html>
   )

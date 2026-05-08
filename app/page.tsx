@@ -1,38 +1,31 @@
-import HeroVideo from '@/components/HeroVideo'
-import ProblemSection from '@/components/ProblemSection'
-import ComparisonSection from '@/components/ComparisonSection'
-import SocialBuzzSection from '@/components/SocialBuzzSection'
-import ImpactSection from '@/components/ImpactSection'
-import FeaturesSection from '@/components/FeaturesSection'
-import SocialProof from '@/components/SocialProof'
-import FinalCTA from '@/components/FinalCTA'
+import Navbar from '@/components/Navbar'
+import Hero from '@/components/Hero'
+import Problem from '@/components/Problem'
+import Gap from '@/components/Gap'
+import How from '@/components/How'
+import Inside from '@/components/Inside'
+import Comparison from '@/components/Comparison'
+import Voices from '@/components/Voices'
+import Faq from '@/components/Faq'
+import FinalCta from '@/components/FinalCta'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="pb-20 md:pb-0 overflow-x-hidden">
-      {/* Hero - Video background */}
-      <HeroVideo />
-      
-      {/* Problem/Solution comparison */}
-      <ProblemSection />
-      
-      {/* Comparison chart - Peek vs competitors */}
-      <ComparisonSection />
-      
-      {/* Impact - Money saved by day/week/month/year */}
-      <ImpactSection />
-      
-      {/* Features - How we help */}
-      <FeaturesSection />
-      
-      {/* Social Proof - You're not alone */}
-      <SocialProof />
-      
-      {/* Social Buzz - Going viral */}
-      <SocialBuzzSection />
-      
-      {/* Final CTA - Join the family */}
-      <FinalCTA />
-    </main>
+    <>
+      <Navbar />
+      <main id="top">
+        <Hero />
+        <Problem />
+        <Gap />
+        <How />
+        <Inside />
+        <Comparison />
+        <Voices />
+        <Faq />
+        <FinalCta />
+      </main>
+      <Footer />
+    </>
   )
 }
