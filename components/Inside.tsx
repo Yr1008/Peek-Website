@@ -4,7 +4,7 @@ export default function Inside() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            04 / inside peek
+            04 / inside Peek
           </span>
           <h2 className="h-section sec__h">
             the little moments <em>that change how money feels.</em>
@@ -36,19 +36,21 @@ export default function Inside() {
             <span className="tile__lbl">insight reveals</span>
             <h3 className="tile__h">the weekly moment <em>that changes your week.</em></h3>
             <p className="tile__p">
-              every sunday peek surfaces one tiny thing you didn't see coming. not a chart. a small noticing.
+              every sunday Peek surfaces one tiny thing you didn't see coming. not a chart. a small noticing.
             </p>
             <span className="tile__stamp">sundays at 9am ✦</span>
           </article>
 
-          {/* Yellow $ stat tile */}
+          {/* Mascot tile — playful "come in" entry */}
           <article
-            className="tile tile--yellow tile--sm reveal"
+            className="tile tile--mascot tile--sm reveal"
             style={{ ['--rot' as string]: '-1deg' } as React.CSSProperties}
           >
-            <span className="tile__lbl" style={{ color: '#8A6E1A' }}>saved this week</span>
-            <p className="tile__stat">$340</p>
-            <span className="tile__stat-cap">skipped impulse + caught a forgotten subscription</span>
+            <picture>
+              <source srcSet="/images/optimized/peek-3d-right.webp" type="image/webp" />
+              <img src="/images/uploads/mascots/peek-3d-right.png" alt="" />
+            </picture>
+            <span className="tile__stamp" style={{ alignSelf: 'center' }}>tap me ✨</span>
           </article>
 
           {/* Small phone tile — Funds */}
@@ -97,7 +99,7 @@ export default function Inside() {
             <span className="tile__lbl">ai reflection coach</span>
             <h3 className="tile__h">money questions answered <em>like a friend would.</em></h3>
             <p className="tile__p">
-              "can i afford this?" "why do i feel weird about that purchase?" "am i doing better this month?" peek answers in plain english, in your context.
+              "can i afford this?" "why do i feel weird about that purchase?" "am i doing better this month?" Peek answers in plain english, in your context.
             </p>
           </article>
         </div>

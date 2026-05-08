@@ -59,11 +59,11 @@ export default function Hero() {
 
           <h1 className="h-display hero__h1">
             your bank shows <em>what.</em><br />
-            peek shows <em>why.</em>
+            Peek shows <em>why.</em>
           </h1>
 
           <p className="hero__sub">
-            the money app for people figuring out money. <em>five minutes a day.</em> zero spreadsheets.
+            the money app that asks <em>why.</em> five minutes a day. zero spreadsheets, zero shame.
           </p>
 
           <div className="hero__cta-row">
@@ -85,9 +85,9 @@ export default function Hero() {
             <span className="stars" aria-hidden="true">★★★★★</span>
             <strong>loved on the app store</strong>
             <span className="sep" aria-hidden="true">·</span>
-            <span>free on ios</span>
+            <span>plaid-secured</span>
             <span className="sep" aria-hidden="true">·</span>
-            <span>47k+ downloads</span>
+            <span>free on ios</span>
           </span>
         </div>
 
@@ -127,12 +127,16 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Cycle dots indicator */}
-          <div className="hero__dots" aria-hidden="true">
-            {SCREENS.map((_, i) => (
-              <span
+          {/* Cycle dots — clickable, manual override */}
+          <div className="hero__dots" role="tablist" aria-label="cycle through peek app screens">
+            {SCREENS.map((s, i) => (
+              <button
                 key={i}
+                role="tab"
+                aria-selected={i === active}
+                aria-label={`show screen ${i + 1}: ${s.alt}`}
                 className={`hero__dot${i === active ? ' is-active' : ''}`}
+                onClick={() => setActive(i)}
               />
             ))}
           </div>

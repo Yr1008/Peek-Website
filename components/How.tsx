@@ -13,7 +13,7 @@ const STEPS = [
     rot: 1,
     canvas: 'sky',
     emoji: '✨',
-    h: <>peek asks the <em>soft questions.</em></>,
+    h: <>Peek asks the <em>soft questions.</em></>,
     p: 'you spent $47 at target. was that planned, or autopilot? did it feel worth it? tap an answer. that is it. four taps, three seconds.',
     stamp: '4 taps · 3 seconds',
   },
@@ -34,7 +34,7 @@ export default function How() {
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            03 / how peek closes it
+            03 / how Peek closes it
           </span>
           <h2 className="h-section sec__h">
             three soft steps. <em>zero spreadsheet.</em>

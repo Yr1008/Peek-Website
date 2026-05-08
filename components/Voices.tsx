@@ -1,91 +1,54 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
 import { APP_STORE_URL } from '@/lib/constants'
 import AppleIcon from './AppleIcon'
 
 const TESTIS = [
   {
-    name: 'sarah',
+    name: 'Sarah',
     age: 28,
     initial: 'S',
-    quote: 'i actually open this app. like, voluntarily. that has never happened with a finance app.',
+    quote: 'I actually open this app. Like, voluntarily. That has never happened with a finance app.',
     rot: -2,
   },
   {
-    name: 'marcus',
+    name: 'Marcus',
     age: 34,
     initial: 'M',
-    quote: 'found out i was spending $200 a month on subscriptions i forgot about. peek paid for itself day one.',
+    quote: 'Found out I was spending $200 a month on subscriptions I forgot about. Peek paid for itself day one.',
     rot: 1,
   },
   {
-    name: 'priya',
+    name: 'Priya',
     age: 26,
     initial: 'P',
-    quote: 'finally an app that does not make me feel like garbage about my spending. it just helps.',
+    quote: 'Finally an app that does not make me feel like garbage about my spending. It just helps.',
     rot: -1,
   },
   {
-    name: 'jake',
+    name: 'Jake',
     age: 31,
     initial: 'J',
-    quote: 'the ai coach is lowkey addicting. i ask it random money questions at 2am, lol.',
+    quote: 'The AI coach is lowkey addicting. I ask it random money questions at 2am, lol.',
     rot: 2,
   },
 ]
 
-type Stat = { num: number; suffix: string; label: string; isMoney?: boolean }
-
-const STATS: Stat[] = [
-  { num: 47, suffix: 'K+', label: 'downloads' },
-  { num: 3,  suffix: 'M+', label: 'monthly tiktok views' },
-  { num: 2.1, suffix: 'M', label: 'saved by users', isMoney: true },
-]
-
-function AnimatedStat({ stat }: { stat: Stat }) {
-  const [n, setN] = useState(0)
-  const ref = useRef<HTMLSpanElement>(null)
-  const fired = useRef(false)
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setN(stat.num)
-      return
-    }
-    const node = ref.current
-    if (!node) return
-    const io = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting && !fired.current) {
-          fired.current = true
-          const start = performance.now()
-          const dur = 1100
-          const tick = (now: number) => {
-            const p = Math.min(1, (now - start) / dur)
-            const eased = 1 - Math.pow(1 - p, 3)
-            setN(Number((eased * stat.num).toFixed(stat.num < 10 ? 1 : 0)))
-            if (p < 1) requestAnimationFrame(tick)
-          }
-          requestAnimationFrame(tick)
-          io.disconnect()
-        }
-      }
-    }, { threshold: 0.4 })
-    io.observe(node)
-    return () => io.disconnect()
-  }, [stat.num])
-
-  const display = stat.isMoney
-    ? `$${n}${stat.suffix}`
-    : `${stat.num >= 10 ? Math.round(n) : n}${stat.suffix}`
-
-  return <strong ref={ref}>{display}</strong>
-}
-
 export default function Voices() {
   return (
     <section className="sec sec--pink" id="voices">
+      <span className="sec__orb sec__orb--peach" aria-hidden="true" />
+      <span className="sec__sticker sec__sticker--tl" aria-hidden="true">
+        <picture>
+          <source srcSet="/images/optimized/st-flower.webp" type="image/webp" />
+          <img src="/images/uploads/stickers/flower.png" alt="" />
+        </picture>
+      </span>
+      <span className="sec__sticker sec__sticker--br" aria-hidden="true">
+        <picture>
+          <source srcSet="/images/optimized/st-tea.webp" type="image/webp" />
+          <img src="/images/uploads/stickers/tea.png" alt="" />
+        </picture>
+      </span>
+
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
@@ -95,17 +58,8 @@ export default function Voices() {
             don't take our word <em>for it.</em>
           </h2>
           <p className="lead sec__lead">
-            sarah, marcus, priya, jake. real people on real iphones, sharing what peek did for them.
+            real users. real iPhones. real receipts.
           </p>
-        </div>
-
-        <div className="voices__stats reveal">
-          {STATS.map((s) => (
-            <div key={s.label} className="voices__stat">
-              <AnimatedStat stat={s} />
-              <span>{s.label}</span>
-            </div>
-          ))}
         </div>
 
         <div className="voices__grid reveal">

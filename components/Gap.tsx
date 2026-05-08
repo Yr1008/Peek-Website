@@ -1,76 +1,63 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
-
-const TARGET = 192
-
 export default function Gap() {
-  const [count, setCount] = useState(0)
-  const ref = useRef<HTMLSpanElement>(null)
-  const fired = useRef(false)
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setCount(TARGET)
-      return
-    }
-    const node = ref.current
-    if (!node) return
-    const io = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting && !fired.current) {
-          fired.current = true
-          const start = performance.now()
-          const dur = 1100
-          const tick = (now: number) => {
-            const p = Math.min(1, (now - start) / dur)
-            const eased = 1 - Math.pow(1 - p, 3)
-            setCount(Math.round(eased * TARGET))
-            if (p < 1) requestAnimationFrame(tick)
-          }
-          requestAnimationFrame(tick)
-          io.disconnect()
-        }
-      }
-    }, { threshold: 0.4 })
-    io.observe(node)
-    return () => io.disconnect()
-  }, [])
-
   return (
     <section className="sec sec--lavender" id="gap">
+      <span className="sec__orb sec__orb--peach" aria-hidden="true" />
+      <span className="sec__orb sec__orb--pink" aria-hidden="true" />
+
       <div className="wrap">
         <div className="sec__head reveal">
           <span className="eyebrow-pill eyebrow-pill--cream">
-            02 / how big the gap is
+            02 / the gap
           </span>
           <h2 className="h-section sec__h">
-            you're off by <em>~$192</em> a month.<br/>
-            peek closes <em>that gap.</em>
+            anxiety isn't from spending too much.<br/>
+            it's from <em>not knowing where it went.</em>
           </h2>
           <p className="lead sec__lead">
-            the average peek user, week one, finds out they were spending $192 more than they thought on coffee and takeout. not because they're reckless. because no one ever showed them.
+            most apps tell you what you spent. Peek shows you why. that's the gap they leave you in,
+            and the one Peek closes.
           </p>
         </div>
 
         <div className="gap__wrap">
-          <div className="gap__stat reveal">
-            <span className="gap__stat-badge" ref={ref}>{count}</span>
-            <p className="gap__stat-quote">
-              &ldquo;i thought i was spending $80 on coffee. <em>it was $312.</em> not because i'm reckless. because no one ever showed me.&rdquo;
-              <span className="gap__stat-cite">Maya · Brooklyn</span>
-            </p>
+          <div className="gap__copy reveal">
+            <div className="gap__bullet">
+              <span className="gap__bullet-num">→</span>
+              <div>
+                <h3 className="gap__bullet-h">labels what was vague.</h3>
+                <p className="gap__bullet-p">"this is comfort spending. this is autopilot. this is a ritual you'd never give up."</p>
+              </div>
+            </div>
+            <div className="gap__bullet">
+              <span className="gap__bullet-num">→</span>
+              <div>
+                <h3 className="gap__bullet-h">surfaces patterns over time.</h3>
+                <p className="gap__bullet-p">"you tend to overbuy when stressed. you light up around your sister."</p>
+              </div>
+            </div>
+            <div className="gap__bullet">
+              <span className="gap__bullet-num">→</span>
+              <div>
+                <h3 className="gap__bullet-h">gives you a stable place to stand.</h3>
+                <p className="gap__bullet-p">your money changes month to month. how you understand it doesn't have to.</p>
+              </div>
+            </div>
+
+            <span className="stamp" style={{ marginTop: 12 }}>anxiety relief through clarity ✦</span>
           </div>
 
-          <div className="gap__photo reveal">
-            <div className="gap__photo-img">
-              <picture>
-                <source srcSet="/images/optimized/p-portrait-blonde.webp" type="image/webp" />
-                <img src="/images/uploads/people/portrait-blonde.png" alt="Maya, a peek user from Brooklyn" loading="lazy" />
-              </picture>
+          <div className="gap__phone reveal">
+            <div className="iphone iphone--still">
+              <div className="iphone__notch" aria-hidden="true" />
+              <div className="iphone__screen">
+                <picture>
+                  <source srcSet="/images/optimized/screen-patterns.webp" type="image/webp" />
+                  <img src="/images/uploads/screen-patterns.png" alt="Peek revealing your spending story over time" loading="lazy" decoding="async" />
+                </picture>
+                <div className="iphone__home" aria-hidden="true" />
+              </div>
             </div>
-            <span className="gap__photo-cap">maya · brooklyn</span>
+            <span className="gap__phone-cap">your spending story · in plain english</span>
           </div>
         </div>
       </div>

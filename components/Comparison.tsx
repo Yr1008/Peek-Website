@@ -24,7 +24,7 @@ export default function Comparison() {
           </span>
           <h2 className="h-section sec__h">
             other apps make you <em>manage.</em><br />
-            peek makes you <em>exhale.</em>
+            Peek makes you <em>exhale.</em>
           </h2>
           <p className="lead sec__lead">
             same data, two completely different conversations. one leaves you with a chart. one leaves you with clarity.
@@ -41,7 +41,7 @@ export default function Comparison() {
               </ul>
             </div>
             <div className="col col--us reveal">
-              <h3 className="col__h">peek</h3>
+              <h3 className="col__h">Peek</h3>
               <span className="col__sub">asks. reveals. <em>pays attention.</em></span>
               <ul className="col__list">
                 {US.map((u) => <li key={u}>{u}</li>)}
@@ -51,8 +51,8 @@ export default function Comparison() {
 
           <div className="compare__mascot" aria-hidden="true">
             <picture>
-              <source srcSet="/images/optimized/peek-3d-right.webp" type="image/webp" />
-              <img src="/images/uploads/mascots/peek-3d-right.png" alt="" />
+              <source srcSet="/images/optimized/Peek-3d-right.webp" type="image/webp" />
+              <img src="/images/uploads/mascots/Peek-3d-right.png" alt="" />
             </picture>
           </div>
           <span className="compare__mascot-label" aria-hidden="true">← that's us</span>

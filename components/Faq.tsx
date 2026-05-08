@@ -7,14 +7,14 @@ const Q = [
     q: 'is my financial data safe?',
     a: (
       <>
-        yes. peek connects through <em>plaid</em>, the same encrypted bank connector that powers
+        yes. Peek connects through <em>plaid</em>, the same encrypted bank connector that powers
         venmo, robinhood, and coinbase. read-only access. we never see your bank password,
         and we cannot move money. your data is encrypted at rest and in transit.
       </>
     ),
   },
   {
-    q: 'what does peek cost?',
+    q: 'what does Peek cost?',
     a: (
       <>
         <em>free on ios.</em> the whole core experience (insights, soft questions, funds, reflection coach)
@@ -26,24 +26,24 @@ const Q = [
     q: 'how is this different from mint, monarch, or copilot?',
     a: (
       <>
-        those apps categorize your transactions and show you charts. peek asks <em>why</em> you spent,
-        and shows you the pattern in plain english. mint and copilot are about tracking. peek is
+        those apps categorize your transactions and show you charts. Peek asks <em>why</em> you spent,
+        and shows you the pattern in plain english. mint and copilot are about tracking. Peek is
         about understanding.
       </>
     ),
   },
   {
-    q: 'do i have to budget to use peek?',
+    q: 'do i have to budget to use Peek?',
     a: (
       <>
         nope. there are no rigid budgets, no zero-based math, no monthly plan to stick to. you can
-        use peek as a soft journal for your money and never set a single rule. most people find that
+        use Peek as a soft journal for your money and never set a single rule. most people find that
         the patterns alone change how they spend.
       </>
     ),
   },
   {
-    q: 'is peek on android?',
+    q: 'is Peek on android?',
     a: (
       <>
         ios first. android is coming. if you want to be on the early-access list, the app store

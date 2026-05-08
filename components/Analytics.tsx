@@ -79,12 +79,19 @@ export default function Analytics() {
       document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-in'))
     }
 
-    // Nav scroll-state for shadow line
+    // Nav scroll-state for shadow line + scroll progress bar
     const nav = document.getElementById('nav')
+    const progress = document.getElementById('nav-progress')
     const onNavScroll = () => {
-      if (!nav) return
-      if (window.scrollY > 12) nav.classList.add('is-scrolled')
-      else nav.classList.remove('is-scrolled')
+      if (nav) {
+        if (window.scrollY > 12) nav.classList.add('is-scrolled')
+        else nav.classList.remove('is-scrolled')
+      }
+      if (progress) {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight
+        const pct = docHeight > 0 ? Math.min(100, (window.scrollY / docHeight) * 100) : 0
+        progress.style.width = `${pct}%`
+      }
     }
     window.addEventListener('scroll', onNavScroll, { passive: true })
     onNavScroll()

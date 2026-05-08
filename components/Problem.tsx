@@ -2,19 +2,19 @@ const CARDS = [
   {
     rot: -1.5,
     quote: 'i feel weird about brunch.',
-    answer: 'peek hears this. and it does not roast you for it.',
+    answer: 'Peek hears this. and it does not roast you for it.',
     sticker: { src: '/images/uploads/stickers/croissant.png', webp: '/images/optimized/st-croissant.webp' },
   },
   {
     rot: 1.2,
     quote: 'my card declined for $6 and i have $4,200 in checking.',
-    answer: 'peek closes the gap between your balance and your brain.',
+    answer: 'Peek closes the gap between your balance and your brain.',
     sticker: { src: '/images/uploads/stickers/glasses.png', webp: '/images/optimized/st-glasses.webp' },
   },
   {
     rot: -1,
     quote: "i've started a budget every january since 2020.",
-    answer: 'peek is not a budget. that is the whole point.',
+    answer: 'Peek is not a budget. that is the whole point.',
     sticker: { src: '/images/uploads/stickers/tea.png', webp: '/images/optimized/st-tea.webp' },
   },
 ]
@@ -32,7 +32,7 @@ export default function Problem() {
             <em>money apps are bad at understanding you.</em>
           </h2>
           <p className="lead sec__lead">
-            most apps treat you like a spreadsheet. peek treats you like a person who happens to spend money. that's the whole difference.
+            most apps treat you like a spreadsheet. Peek treats you like a person who happens to spend money. that's the whole difference.
           </p>
         </div>
 
